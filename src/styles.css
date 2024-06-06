@@ -12,12 +12,16 @@ body{
     padding-top: 70px; 
 }
 .active-link{
-    background-color:#46d89f;
+    background-color:#309df0;
     border-radius: 5px;
-    border: 1px solid #46d89f;
+    border: 1px solid #309df0;
     transition: box-shadow .3s;
 }
 .custom-button {
     width: 100px;
     height: 40px;
+}
+
+.custom-img{
+    margin: 50px;
 }

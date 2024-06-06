@@ -17,6 +17,8 @@ import { HomeComponent } from './Components/home/home.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthLayoutComponent } from './Components/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './Components/blank-layout/blank-layout.component';
+import { UserAccountTypeComponent } from './Components/user-account-type/user-account-type.component';
+import { UserAccountTypeLayoutComponent } from './Components/user-account-type-layout/user-account-type-layout.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { BlankLayoutComponent } from './Components/blank-layout/blank-layout.com
     HomeComponent,
     LogoutComponent,
     AuthLayoutComponent,
-    BlankLayoutComponent
+    BlankLayoutComponent,
+    UserAccountTypeComponent,
+    UserAccountTypeLayoutComponent
   ],
   imports: [
     BrowserModule,
