@@ -1,0 +1,36 @@
+<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="custom-title">LogIn</h1>
+        <form [formGroup]="logInForm" (ngSubmit)="handleForm()">
+          <div class="mb-2">
+            <label for="email">Email:</label>
+            <input formControlName="email" id="email" type="email" class="form-control" #EmailInput>
+            <div class="alert alert-danger" *ngIf="logInForm.get('email')?.errors && (logInForm.get('email')?.touched || EmailInput.value.length>0)">
+              <p *ngIf="logInForm.get('email')?.getError('required')">Email is required</p>
+              <p *ngIf="logInForm.get('email')?.getError('email')">Email is invalid</p>
+            </div>
+          </div>
+  
+          <div class="mb-2">
+            <label for="password">Password:</label>
+            <input formControlName="password" id="password" type="password" class="form-control" #InputPassword>
+            <div class="alert alert-danger" *ngIf="logInForm.get('password')?.errors && (logInForm.get('password')?.touched || InputPassword.value.length>0)">
+              <p *ngIf="logInForm.get('password')?.getError('required')">Password is required</p>
+              <p *ngIf="logInForm.get('password')?.getError('pattern')">Password is invalid</p>
+            </div>
+          </div>
+  
+          <button [disabled]="logInForm.invalid" class="active-link custom-button">
+            <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+            LogIn
+          </button>
+          <p class="alert alert-danger" *ngIf="msgError">{{msgError}}</p>
+        </form>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="./assets/Images/1.jpg" class="img-fluid custom-img" alt="Login Image">
+      </div>
+    </div>
+  </section>
+  

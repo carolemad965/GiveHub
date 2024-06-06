@@ -1,0 +1,64 @@
+<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="custom-title">Register Now</h1>
+        <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
+          <div class="mb-2">
+            <label for="name">Name:</label>
+            <input type="text" formControlName="name" id="name" class="form-control" #InputName>
+            <div class="alert alert-danger" *ngIf="registerForm.get('name')?.errors && (registerForm.get('name')?.touched ||InputName.value.length>0)">
+              <p *ngIf="registerForm.get('name')?.getError('required')">Name is required</p>
+              <p *ngIf="registerForm.get('name')?.getError('minlength')">Name Min length is 3</p>
+              <p *ngIf="registerForm.get('name')?.getError('maxlength')">Name Max length is 20</p>
+            </div>
+          </div>
+  
+          <div class="mb-2">
+            <label for="email">Email:</label>
+            <input type="email" formControlName="email" id="email" class="form-control" #InputEmail>
+            <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors &&( registerForm.get('email')?.touched || InputEmail.value.length>0)">
+              <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
+              <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
+            </div>
+          </div>
+  
+          <div class="mb-2">
+            <label for="confirmEmail">Confirm Email:</label>
+            <input type="email" formControlName="confirmEmail" id="confirmEmail" class="form-control" #InputConfirmemial>
+            <div class="alert alert-danger" *ngIf="registerForm.get('confirmEmail')?.errors && (registerForm.get('confirmEmail')?.touched||InputConfirmemial.value.length>0)">
+              <p *ngIf="registerForm.get('confirmEmail')?.getError('required')">Confirm Email is required</p>
+              <p *ngIf="registerForm.get('confirmEmail')?.getError('mismatch')">Confirm Email not match email</p>
+            </div>
+          </div>
+  
+          <div class="mb-2">
+            <label for="password">Password:</label>
+            <input type="password" formControlName="password" id="password" class="form-control" #InputPass>
+            <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched||InputPass.value.length>0)">
+              <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
+              <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
+            </div>
+          </div>
+  
+          <div class="mb-2">
+            <label for="rePassword">RePassword:</label>
+            <input type="password" formControlName="rePassword" id="rePassword" class="form-control" #InputrePass>
+            <div class="alert alert-danger" *ngIf="registerForm.get('rePassword')?.errors && (registerForm.get('rePassword')?.touched||InputrePass.value.length>0)">
+              <p *ngIf="registerForm.get('rePassword')?.getError('required')">RePassword is required</p>
+              <p *ngIf="registerForm.get('rePassword')?.getError('mismatch')">RePassword not match password</p>
+            </div>
+          </div>
+  
+          <button class="active-link custom-button">
+            <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+            Register
+          </button>
+          <p class="alert alert-danger" *ngIf="msgError">{{msgError}}</p>
+        </form>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="./assets/Images/2.jpg" class="img-fluid custom-img" alt="Register Image">
+      </div>
+    </div>
+  </section>
+  

@@ -3,14 +3,45 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthNavbarComponent } from './Components/auth-navbar/auth-navbar.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { BlankNavbarComponent } from './Components/blank-navbar/blank-navbar.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './Components/home/home.component';
+import { LogoutComponent } from './Components/logout/logout.component';
+import { AuthLayoutComponent } from './Components/auth-layout/auth-layout.component';
+import { BlankLayoutComponent } from './Components/blank-layout/blank-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthNavbarComponent,
+    FooterComponent,
+    LoginComponent,
+    RegisterComponent,
+    NotFoundComponent,
+    BlankNavbarComponent,
+    HomeComponent,
+    LogoutComponent,
+    AuthLayoutComponent,
+    BlankLayoutComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()
