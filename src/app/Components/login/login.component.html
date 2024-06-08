@@ -4,12 +4,13 @@
         <h1 class="custom-title">LogIn</h1>
         <form [formGroup]="logInForm" (ngSubmit)="handleForm()">
           <div class="mb-2">
-            <label for="email">Email:</label>
-            <input formControlName="email" id="email" type="email" class="form-control" #EmailInput>
-            <div class="alert alert-danger" *ngIf="logInForm.get('email')?.errors && (logInForm.get('email')?.touched || EmailInput.value.length>0)">
-              <p *ngIf="logInForm.get('email')?.getError('required')">Email is required</p>
-              <p *ngIf="logInForm.get('email')?.getError('email')">Email is invalid</p>
-            </div>
+            <label for="userName">userName:</label>
+          <input type="text" formControlName="userName" id="userName" class="form-control" #InputName>
+          <div class="alert alert-danger" *ngIf="logInForm.get('userName')?.errors && (logInForm.get('userName')?.touched || InputName.value.length > 0)">
+            <p *ngIf="logInForm.get('userName')?.getError('required')">Name is required</p>
+            <p *ngIf="logInForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
+            <p *ngIf="logInForm.get('userName')?.getError('maxlength')">Name Max length is 20</p>
+          </div>
           </div>
   
           <div class="mb-2">

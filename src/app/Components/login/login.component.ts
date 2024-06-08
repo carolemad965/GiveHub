@@ -14,8 +14,8 @@ export class LoginComponent {
   isLoading:boolean =false;
   msgError:string="";
   logInForm :FormGroup =new FormGroup({
-    email:new FormControl ('',[Validators.required,Validators.email]),
-    password:new FormControl('',[Validators.required,Validators.pattern(/^\w{6,20}$/)])
+    userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[\d])(?=.*[!@#$%^&*()_+\-=\[\]{}|;':"\\,.<>\/?]).{6,20}$/)]),
   });
 
 handleForm():void
@@ -25,13 +25,12 @@ handleForm():void
       this.isLoading=true;
       this._AuthService.setLogIn(this.logInForm.value).subscribe({
         next:(response)=>{
-          this.isLoading=false
-          if(response.message=='success')
-            {
-              localStorage.setItem('eToken',response.token);
+          console.log(response);
+          this.isLoading=false;
+              localStorage.setItem('eToken',response.message.token);
               this._AuthService.decodeUserData();
               this._Router.navigate(['/home']);
-            }
+            
         },
         error:(err:HttpErrorResponse)=>{
           this.isLoading=false;

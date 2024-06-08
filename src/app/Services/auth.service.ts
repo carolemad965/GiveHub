@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
@@ -12,16 +12,13 @@ userData:any;
   constructor(private _HttpClient:HttpClient,private _Router:Router) { }
 
   setRegister(userData:any):Observable<any>{
-    if (userData.token) {
-      return this._HttpClient.post(`https://ecommerce.routemisr.com/api/v1/auth/google-signup`, { token: userData.token });
-    } else {
-      return this._HttpClient.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, userData);
-    }
+      return this._HttpClient.post(`https://localhost:44377/api/Account/register`,userData);
+    
   }
 
-  setLogIn(userData:object):Observable<any>
+  setLogIn(userData:any):Observable<any>
   {
-    return this._HttpClient.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`,userData)
+    return this._HttpClient.post(`https://localhost:44377/api/Account/log-in`, userData)
   }
 
   decodeUserData()
