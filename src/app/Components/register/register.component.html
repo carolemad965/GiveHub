@@ -5,7 +5,7 @@
       <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
         <div class="mb-2">
           <label for="userName">userName:</label>
-          <input type="text" formControlName="userName" id="userName" class="form-control" #InputName>
+          <input type="text" formControlName="userName" id="userName" class="form-control" [(ngModel)]="userData.userName" #InputName>
           <div class="alert alert-danger" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
             <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
             <p *ngIf="registerForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
@@ -15,7 +15,7 @@
 
         <div class="mb-2">
           <label for="email">Email:</label>
-          <input type="email" formControlName="email" id="email" class="form-control" #InputEmail>
+          <input type="email" formControlName="email" id="email" class="form-control" [(ngModel)]="userData.email" #InputEmail>
           <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || InputEmail.value.length > 0)">
             <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
             <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
@@ -33,7 +33,7 @@
 
         <div class="mb-2">
           <label for="password">Password:</label>
-          <input type="password" formControlName="password" id="password" class="form-control" #InputPass>
+          <input type="password" formControlName="password" id="password" class="form-control" [(ngModel)]="userData.password" #InputPass>
           <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched || InputPass.value.length > 0)">
             <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
             <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
@@ -52,7 +52,7 @@
 
         <div class="mb-2">
           <label for="accountType">accountType:</label>
-          <input type="text" formControlName="accountType" id="accountType" class="form-control" >
+          <input type="text" formControlName="accountType" id="accountType" class="form-control" [(ngModel)]="userData.accountType">
         </div>
 
 

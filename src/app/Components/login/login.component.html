@@ -5,7 +5,7 @@
         <form [formGroup]="logInForm" (ngSubmit)="handleForm()">
           <div class="mb-2">
             <label for="userName">userName:</label>
-          <input type="text" formControlName="userName" id="userName" class="form-control" #InputName>
+          <input type="text" formControlName="userName" id="userName" class="form-control" [(ngModel)]="userData.userName" #InputName>
           <div class="alert alert-danger" *ngIf="logInForm.get('userName')?.errors && (logInForm.get('userName')?.touched || InputName.value.length > 0)">
             <p *ngIf="logInForm.get('userName')?.getError('required')">Name is required</p>
             <p *ngIf="logInForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
@@ -15,7 +15,7 @@
   
           <div class="mb-2">
             <label for="password">Password:</label>
-            <input formControlName="password" id="password" type="password" class="form-control" #InputPassword>
+            <input formControlName="password" id="password" type="password" class="form-control" [(ngModel)]="userData.password" #InputPassword>
             <div class="alert alert-danger" *ngIf="logInForm.get('password')?.errors && (logInForm.get('password')?.touched || InputPassword.value.length>0)">
               <p *ngIf="logInForm.get('password')?.getError('required')">Password is required</p>
               <p *ngIf="logInForm.get('password')?.getError('pattern')">Password is invalid</p>

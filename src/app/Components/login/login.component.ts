@@ -10,6 +10,10 @@ import { AuthService } from '../../Services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  userData: any = {
+    userName: '',
+    password: ''
+  }
   constructor(private _AuthService:AuthService , private _Router:Router)  {}
   isLoading:boolean =false;
   msgError:string="";
@@ -23,7 +27,7 @@ handleForm():void
   if(this.logInForm.valid)
     {
       this.isLoading=true;
-      this._AuthService.setLogIn(this.logInForm.value).subscribe({
+      this._AuthService.setLogIn(this.userData).subscribe({
         next:(response)=>{
           console.log(response);
           this.isLoading=false;

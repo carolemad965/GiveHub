@@ -59,7 +59,7 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.isLoading = true;
       console.log(this.registerForm.value);
-      this._AuthService.setRegister(this.registerForm.value).subscribe({
+      this._AuthService.setRegister(this.userData).subscribe({
         next: (response) => {
           console.log(response)
           this.isLoading = false;
