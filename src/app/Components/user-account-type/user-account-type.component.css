@@ -80,7 +80,7 @@
 .solution_card .solu_description button {
   border: 0;
   border-radius: 15px;
-  background: linear-gradient(140deg, #309df0 0%, #309df0 50%, #309df0 75%) !important;
+  background: linear-gradient(140deg, #2980F2 0%, #2980F2 50%, #2980F2 75%) !important;
   color: #fff;
   font-weight: 500;
   font-size: 0.8rem;

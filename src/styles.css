@@ -12,9 +12,9 @@ body{
     padding-top: 70px; 
 }
 .active-link{
-    background-color:#309df0;
+    background-color:#77d986;
     border-radius: 5px;
-    border: 1px solid #309df0;
+    border: 1px solid #77d986;
     transition: box-shadow .3s;
 }
 .custom-button {

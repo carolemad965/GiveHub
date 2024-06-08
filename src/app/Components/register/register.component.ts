@@ -63,14 +63,24 @@ export class RegisterComponent {
         next: (response) => {
           console.log(response)
           this.isLoading = false;
-            this._Router.navigate(['/login']);
+          if(response.isPass==true)
+            {
+              this._Router.navigate(['/login']);
+            }
+            
         },
         error: (err: HttpErrorResponse) => {
           this.isLoading = false;
-          this.msgError = err.error.message;
+          if(err.status==400)
+            {
+              this.msgError = err.error.message.errors[0].errorMessage;
+            }
+         console.log(err);
         }
       });
+      
     }
+    
     else {
       this.registerForm.markAllAsTouched();
     }

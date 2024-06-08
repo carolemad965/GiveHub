@@ -1,76 +1,60 @@
-<section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
-  <div class="row">
-    <div class="col-md-6">
-      <h1 class="custom-title">Register Now</h1>
-      <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
-        <div class="mb-2">
-          <label for="userName">userName:</label>
-          <input type="text" formControlName="userName" id="userName" class="form-control" [(ngModel)]="userData.userName" #InputName>
-          <div class="alert alert-danger" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
-            <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
-            <p *ngIf="registerForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
-            <p *ngIf="registerForm.get('userName')?.getError('maxlength')">Name Max length is 20</p>
-          </div>
+<div class="container-fluid">
+    <section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+        <div class="row">
+            <div class="col-md-6 form-section">
+                <h1 class="custom-title">Register Now</h1>
+                <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
+                    <div class="mb-2">
+                        <label for="userName">User Name:</label>
+                        <input type="text" formControlName="userName" id="userName" class="form-control styled-input" [(ngModel)]="userData.userName" #InputName>
+                        <div class="alert alert-danger" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
+                            <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
+                            <p *ngIf="registerForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
+                            <p *ngIf="registerForm.get('userName')?.getError('maxlength')">Name Max length is 20</p>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="email">Email:</label>
+                        <input type="email" formControlName="email" id="email" class="form-control styled-input" [(ngModel)]="userData.email" #InputEmail>
+                        <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || InputEmail.value.length > 0)">
+                            <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
+                            <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="password">Password:</label>
+                        <input type="password" formControlName="password" id="password" class="form-control styled-input" [(ngModel)]="userData.password" #InputPass>
+                        <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched || InputPass.value.length > 0)">
+                            <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
+                            <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <input type="hidden" formControlName="accountType" id="accountType" class="form-control" [(ngModel)]="userData.accountType">
+                    </div>
+                    <button class="active-link custom-button">
+                        <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+                        Register
+                    </button>
+                    <p class="alert alert-danger" *ngIf="msgError">{{msgError}}</p>
+                </form>
+            </div>
+            <div class="col-md-6 sidebar-section">
+                <div class="custom-layout">
+                    <p>
+                        Small team? Limited Resources? We can help!
+                        At Donately, we're more than just a software provider - we're your trusted partner in fundraising success. Our team is here to support you every step of the way, with expert guidance, training, and resources ensuring you hit the ground running and achieve your goals in record time.
+                    </p>
+                    <ul>
+                        <li>Expert guidance through personalized 1:1 onboarding</li>
+                        <li>Seamless testing and launch of embedded forms and widgets</li>
+                        <li>Tailored integration and analytics setup</li>
+                        <li>Dedicated support for importing data from any platform</li>
+                    </ul>
+                    <button class="support-button">Talk to Our Support Team</button>
+                </div>
+            </div>
         </div>
+    </section>
+</div>
 
-        <div class="mb-2">
-          <label for="email">Email:</label>
-          <input type="email" formControlName="email" id="email" class="form-control" [(ngModel)]="userData.email" #InputEmail>
-          <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || InputEmail.value.length > 0)">
-            <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
-            <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
-          </div>
-        </div>
-
-        <!-- <div class="mb-2">
-          <label for="confirmEmail">Confirm Email:</label>
-          <input type="email" formControlName="confirmEmail" id="confirmEmail" class="form-control" #InputConfirmemial>
-          <div class="alert alert-danger" *ngIf="registerForm.get('confirmEmail')?.errors && (registerForm.get('confirmEmail')?.touched || InputConfirmemial.value.length > 0)">
-            <p *ngIf="registerForm.get('confirmEmail')?.getError('required')">Confirm Email is required</p>
-            <p *ngIf="registerForm.get('confirmEmail')?.getError('mismatch')">Confirm Email not match email</p>
-          </div>
-        </div> -->
-
-        <div class="mb-2">
-          <label for="password">Password:</label>
-          <input type="password" formControlName="password" id="password" class="form-control" [(ngModel)]="userData.password" #InputPass>
-          <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched || InputPass.value.length > 0)">
-            <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
-            <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
-          </div>
-        </div>
-
-        <!-- <div class="mb-2">
-          <label for="rePassword">RePassword:</label>
-          <input type="password" formControlName="rePassword" id="rePassword" class="form-control" #InputrePass>
-          <div class="alert alert-danger" *ngIf="registerForm.get('rePassword')?.errors && (registerForm.get('rePassword')?.touched || InputrePass.value.length > 0)">
-            <p *ngIf="registerForm.get('rePassword')?.getError('required')">RePassword is required</p>
-            <p *ngIf="registerForm.get('rePassword')?.getError('mismatch')">RePassword not match password</p>
-          </div>
-        </div> -->
-
-
-        <div class="mb-2">
-          <label for="accountType">accountType:</label>
-          <input type="text" formControlName="accountType" id="accountType" class="form-control" [(ngModel)]="userData.accountType">
-        </div>
-
-
-        <button class="active-link custom-button">
-          <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
-          Register
-        </button>
-        <p class="alert alert-danger" *ngIf="msgError">{{msgError}}</p>
-      </form>
-
-      <div class="text-center mt-3">
-        <button (click)="handleGoogleSignIn()" >
-          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Sign-In" style="width: 20px; margin-right: 10px;">
-        </button>
-      </div>
-    </div>
-    <div class="col-md-6 text-center">
-      <img src="./assets/Images/2.jpg" class="img-fluid custom-img" alt="Register Image">
-    </div>
-  </div>
-</section>
