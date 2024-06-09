@@ -1,3 +1,44 @@
+
+/* @import "styles/custom-theme"; */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+/* Set the custom fonts */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', serif;
+}
+
+:root {
+    --bs-primary: #77d986;
+    --bs-secondary: #2980f2;
+    --bs-accent:#f2e085;
+    --bs-success: #4caf50;
+    --bs-info: #00bcd4;
+    --bs-warning: #ffeb3b;
+    --bs-danger: #f44336;
+    --bs-light: #eeeeee;
+    --bs-dark: #1c1c1c;
+  }
+  
+
+  /* Override Bootstrap classes if needed */
+  .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+  
+  .btn-secondary {
+    background-color: var(--bs-secondary);
+    border-color: var(--bs-secondary);
+  }
+  
+  /* Continue overriding other Bootstrap classes as needed */
+  
+
 body{
     color: var(--black);
     letter-spacing: .03rem;
