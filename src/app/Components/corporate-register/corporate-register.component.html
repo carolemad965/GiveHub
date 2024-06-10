@@ -1,4 +1,4 @@
-<app-auth-navbar></app-auth-navbar>
+<app-nav-corporate-register></app-nav-corporate-register>
 <div class="container-fluid">
     <section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
         <div class="row">
@@ -6,7 +6,7 @@
                 <h1 class="custom-title">Register Now</h1>
                 <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
                     <div class="mb-2">
-                        <label for="userName">User Name:</label>
+                        <label for="userName">Corporate Name:</label>
                         <input type="text" formControlName="userName" id="userName" class="form-control styled-input" [(ngModel)]="userData.userName" #InputName>
                         <div class="alert alert-danger" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
                             <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="mb-2">
-                        <label for="email">Email:</label>
+                        <label for="email">Corporate Email:</label>
                         <input type="email" formControlName="email" id="email" class="form-control styled-input" [(ngModel)]="userData.email" #InputEmail>
                         <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || InputEmail.value.length > 0)">
                             <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="mb-2">
-                        <label for="password">Password:</label>
+                        <label for="password">Corporate Password:</label>
                         <input type="password" formControlName="password" id="password" class="form-control styled-input" [(ngModel)]="userData.password" #InputPass>
                         <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched || InputPass.value.length > 0)">
                             <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>

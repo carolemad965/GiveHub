@@ -9,6 +9,8 @@ import { BlankLayoutComponent } from './Components/blank-layout/blank-layout.com
 import { AuthLayoutComponent } from './Components/auth-layout/auth-layout.component';
 import { UserAccountTypeComponent } from './Components/user-account-type/user-account-type.component';
 import { UserAccountTypeLayoutComponent } from './Components/user-account-type-layout/user-account-type-layout.component';
+import { CharityRegisterComponent } from './Components/charity-register/charity-register.component';
+import { CorporateRegisterComponent } from './Components/corporate-register/corporate-register.component';
 
 const routes: Routes = [
   {path:'',component:UserAccountTypeLayoutComponent,children:[
@@ -18,6 +20,8 @@ const routes: Routes = [
   {path:'',component:AuthLayoutComponent,children:[
     {path:'login',component:LoginComponent},
     {path:'register',component:RegisterComponent},
+    {path:'charityregister',component:CharityRegisterComponent},
+    {path:'corporateregister',component:CorporateRegisterComponent}
    ]},
   {path:'',component:BlankLayoutComponent,children:[
     {path:'home',component:HomeComponent},

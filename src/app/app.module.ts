@@ -19,6 +19,10 @@ import { AuthLayoutComponent } from './Components/auth-layout/auth-layout.compon
 import { BlankLayoutComponent } from './Components/blank-layout/blank-layout.component';
 import { UserAccountTypeComponent } from './Components/user-account-type/user-account-type.component';
 import { UserAccountTypeLayoutComponent } from './Components/user-account-type-layout/user-account-type-layout.component';
+import { CharityRegisterComponent } from './Components/charity-register/charity-register.component';
+import { CorporateRegisterComponent } from './Components/corporate-register/corporate-register.component';
+import { NavCorporateRegisterComponent } from './Components/nav-corporate-register/nav-corporate-register.component';
+import { NavCharityRegisterComponent } from './Components/nav-charity-register/nav-charity-register.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { UserAccountTypeLayoutComponent } from './Components/user-account-type-l
     AuthLayoutComponent,
     BlankLayoutComponent,
     UserAccountTypeComponent,
-    UserAccountTypeLayoutComponent
+    UserAccountTypeLayoutComponent,
+    CharityRegisterComponent,
+    CorporateRegisterComponent,
+    NavCorporateRegisterComponent,
+    NavCharityRegisterComponent
   ],
   imports: [
     BrowserModule,

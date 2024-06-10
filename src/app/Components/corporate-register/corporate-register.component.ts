@@ -1,21 +1,20 @@
-import { Component ,NgZone} from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
-import { Router } from '@angular/router';
-import { FormControl, FormControlOptions, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { response } from 'express';
-declare var gapi: any;
+import { Component, NgZone } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormControlOptions } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
+
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  selector: 'app-corporate-register',
+  templateUrl: './corporate-register.component.html',
+  styleUrl: './corporate-register.component.css'
 })
-export class RegisterComponent {
+export class CorporateRegisterComponent {
   userData: any = {
     userName: '',
     password: '',
     email: '',
-    accountType:'donner'
+    accountType:'corporate'
   };
   msgError: string = '';
   isLoading: boolean = false;
@@ -86,45 +85,4 @@ export class RegisterComponent {
     }
   }
 
-
-
-
-
-  initializeGoogleSignIn(): void {
-    gapi.load('auth2', () => {
-      gapi.auth2.init({
-        client_id: 'YOUR_GOOGLE_CLIENT_ID'
-      });
-    });
-  }
-
-  handleGoogleSignIn(): void {
-    const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signIn().then((googleUser: any) => {
-      const profile = googleUser.getBasicProfile();
-      const idToken = googleUser.getAuthResponse().id_token;
-
-      const user = {
-        name: profile.getName(),
-        email: profile.getEmail(),
-        token: idToken
-      };
-
-      this._ngZone.run(() => {
-        this.isLoading = true;
-        this._AuthService.setRegister(user).subscribe({
-          next: (response) => {
-            this.isLoading = false;
-            if (response.message == 'success') {
-              this._Router.navigate(['/login']);
-            }
-          },
-          error: (err: HttpErrorResponse) => {
-            this.isLoading = false;
-            this.msgError = err.error.message;
-          }
-        });
-      });
-    });
-  }
 }
