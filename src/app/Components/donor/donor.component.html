@@ -1,0 +1,37 @@
+<div class="mt-5">
+    <div class="container" style="padding-bottom: 50px;">
+      <div class="row">
+        <div class="col-md-6">
+          <h1  style="width: 700;font-size:50px;">Donation Page</h1>
+        </div>
+        <div class="col-md-6">
+          <p >Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
+        </div>
+      </div>
+    </div>
+    
+  
+    <div style="background-color: rgba(229, 234, 235, 0.447);">
+      <div class="container" style="padding-top: 20px;">
+        <div class="row">
+          <div class="col-md-4 mb-4" *ngFor="let project of projects">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">{{ project.title }}</h5>
+              </div>
+              <div class="card-body">
+                <img class="card-img-top" [src]="convertBinaryToBase64(project.img)" alt="Project Image">
+                <p class="card-text">{{ project.description }}</p>
+                <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
+                <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
+                <p class="card-text">State: {{ getStateString(project.state) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
