@@ -8,8 +8,8 @@ describe('BlankNavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BlankNavbarComponent]
-    })
+    imports: [BlankNavbarComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(BlankNavbarComponent);

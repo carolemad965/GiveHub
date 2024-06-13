@@ -8,8 +8,8 @@ describe('UserAccountTypeLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserAccountTypeLayoutComponent]
-    })
+    imports: [UserAccountTypeLayoutComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(UserAccountTypeLayoutComponent);

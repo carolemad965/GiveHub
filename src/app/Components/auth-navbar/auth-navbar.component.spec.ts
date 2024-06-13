@@ -8,8 +8,8 @@ describe('AuthNavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AuthNavbarComponent]
-    })
+    imports: [AuthNavbarComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(AuthNavbarComponent);

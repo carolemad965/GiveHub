@@ -1,14 +1,18 @@
 import { Component ,NgZone} from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
-import { FormControl, FormControlOptions, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormControlOptions, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { response } from 'express';
+import { NgIf } from '@angular/common';
+import { AuthNavbarComponent } from '../auth-navbar/auth-navbar.component';
 declare var gapi: any;
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css',
+    standalone: true,
+    imports: [AuthNavbarComponent, ReactiveFormsModule, NgIf]
 })
 export class RegisterComponent {
   userData: any = {

@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
-import { FormControl, FormControlOptions, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormControlOptions, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { NgIf } from '@angular/common';
+import { NavCharityRegisterComponent } from '../nav-charity-register/nav-charity-register.component';
 
 @Component({
-  selector: 'app-charity-register',
-  templateUrl: './charity-register.component.html',
-  styleUrl: './charity-register.component.css'
+    selector: 'app-charity-register',
+    templateUrl: './charity-register.component.html',
+    styleUrl: './charity-register.component.css',
+    standalone: true,
+    imports: [NavCharityRegisterComponent, ReactiveFormsModule, NgIf]
 })
 export class CharityRegisterComponent {
   userData: any = {

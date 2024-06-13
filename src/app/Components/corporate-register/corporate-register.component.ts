@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormControlOptions } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormControlOptions, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { NgIf } from '@angular/common';
+import { NavCorporateRegisterComponent } from '../nav-corporate-register/nav-corporate-register.component';
 
 @Component({
-  selector: 'app-corporate-register',
-  templateUrl: './corporate-register.component.html',
-  styleUrl: './corporate-register.component.css'
+    selector: 'app-corporate-register',
+    templateUrl: './corporate-register.component.html',
+    styleUrl: './corporate-register.component.css',
+    standalone: true,
+    imports: [NavCorporateRegisterComponent, ReactiveFormsModule, NgIf]
 })
 export class CorporateRegisterComponent {
   userData: any = {
