@@ -10,6 +10,8 @@ import { UserAccountTypeComponent } from './Components/user-account-type/user-ac
 import { UserAccountTypeLayoutComponent } from './Components/user-account-type-layout/user-account-type-layout.component';
 import { CharityRegisterComponent } from './Components/charity-register/charity-register.component';
 import { CorporateRegisterComponent } from './Components/corporate-register/corporate-register.component';
+import { DonorComponent } from './Components/donor/donor.component';
+import { CharityComponent } from './Components/charity/charity.component';
 
 
 export const routes: Routes = [
@@ -22,7 +24,9 @@ export const routes: Routes = [
         {path:'login',component:LoginComponent},
         {path:'register',component:RegisterComponent},
         {path:'charityregister',component:CharityRegisterComponent},
-        {path:'corporateregister',component:CorporateRegisterComponent}
+        {path:'corporateregister',component:CorporateRegisterComponent},
+        {path:'donor',component:DonorComponent},
+        {path:'charity/:id',component:CharityComponent}
        ]},
       {path:'',component:BlankLayoutComponent,children:[
         {path:'home',component:HomeComponent},
