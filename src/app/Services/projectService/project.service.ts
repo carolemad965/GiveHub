@@ -21,4 +21,8 @@ export class ProjectService {
   {
     return this._httpClient.get(`https://localhost:44377/api/project/charity/${id}`)
   }
+  getProjectsByPage(page: number):Observable<any>
+  {
+   return this._httpClient.get(`https://localhost:44377/api/project/page?page=${page}`);
+ }
 }
