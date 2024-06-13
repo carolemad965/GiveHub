@@ -31,6 +31,9 @@ export class CharityComponent {
     });
     
   }
+  getFullImageUrl(relativePath: string): string {
+    return `https://localhost:44377${relativePath}`;
+  }
   getProjects(): void {
     if (this.charityId !== null) {
       this._projectService.getAllprojectForCharityId(this.charityId).subscribe({
@@ -44,9 +47,9 @@ export class CharityComponent {
       });
     }
   }
-  convertBinaryToBase64(binary: string): string {
-    return `data:image/png;base64,${binary}`;
-  }
+  // convertBinaryToBase64(binary: string): string {
+  //   return `data:image/png;base64,${binary}`;
+  // }
   getStatusString(state: ProjectState): string {
     switch (state) {
       case ProjectState.Initiated:

@@ -1,37 +1,44 @@
 <div class="mt-5">
-    <div class="container" style="padding-bottom: 50px;">
-      <div class="row">
-        <div class="col-md-6">
-          <h1  style="width: 700;font-size:50px;">Donation Page</h1>
-        </div>
-        <div class="col-md-6">
-          <p >Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
-        </div>
+  <div class="container" style="padding-bottom: 50px;">
+    <div class="row">
+      <div class="col-md-6">
+        <h1 style="width: 700; font-size: 50px;">Donation Page</h1>
+      </div>
+      <div class="col-md-6">
+        <p>Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
       </div>
     </div>
-    
-  
-    <div style="background-color: rgba(229, 234, 235, 0.447);">
-      <div class="container" style="padding-top: 20px;">
-        <div class="row">
-          <div class="col-md-4 mb-4" *ngFor="let project of projects">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title">{{ project.title }}</h5>
-              </div>
-              <div class="card-body">
-                <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
-                <p class="card-text">{{ project.description }}</p>
-                <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
-                <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
-                <p class="card-text">State: {{ getStateString(project.state) }}</p>
-              </div>
+  </div>
+  <div style="background-color: rgba(229, 234, 235, 0.447);">
+    <div class="container" style="padding-top: 20px;">
+      <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let project of projects; let last = last">
+          <div class="card" [ngClass]="{'last-card': last}">
+            <div class="card-header">
+              <h5 class="card-title">{{ project.title }}</h5>
+            </div>
+            <div class="card-body">
+              <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
+              <p class="card-text">{{ project.description }}</p>
+              <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
+              <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
+              <p class="card-text">State: {{ getStateString(project.state) }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  
-  
+</div>
+<div class="pagination-container mt-5 mb-5">
+  <nav aria-label="Project pagination">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage - 1)" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="!PagesAvailable">
+        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
