@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../Services/projectService/project.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
 enum ProjectState {
   Initiated,
   Completed,
@@ -13,31 +14,48 @@ enum ProjectState {
 @Component({
   selector: 'app-donor',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './donor.component.html',
-  styleUrl: './donor.component.css'
-  
+  styleUrls: ['./donor.component.css']
 })
-export class DonorComponent {
+export class DonorComponent implements OnInit {
   projects: any[] = [];
+  currentPage: number = 1;
+  PagesAvailable: boolean = true;
 
-  constructor(private _projectService:ProjectService){}
+  constructor(private _projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.getProjects();
-    
+    this.getProjects(this.currentPage);
   }
 
-  getProjects(): void {
-    this._projectService.getAllProjects().subscribe({
+  getProjects(page: number): void {
+    this._projectService.getProjectsByPage(page).subscribe({
       next: (response) => {
-        //console.log(response);
-        this.projects = response.message;
+        console.log(response);
+        if (response.message.length > 0) {
+          this.projects = response.message;
+        
+          this.PagesAvailable = response.message.length === 3; 
+        } else {
+          this.PagesAvailable = false;
+        }
       },
       error: (err) => {
-        //console.log(err);
+        console.error('Error fetching projects:', err);
       }
     });
+  }
+
+  getFullImageUrl(relativePath: string): string {
+    return `https://localhost:44377${relativePath}`;
+  }
+
+  onPageChange(page: number): void {
+    if (page > 0) {
+      this.currentPage = page;
+      this.getProjects(page);
+    }
   }
 
   getStateString(state: ProjectState): string {
@@ -56,10 +74,4 @@ export class DonorComponent {
         return 'Unknown';
     }
   }
-
-  convertBinaryToBase64(binary: string): string {
-    return `data:image/png;base64,${binary}`;
-  }
 }
-
-
