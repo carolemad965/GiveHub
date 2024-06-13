@@ -31,13 +31,16 @@ export class DonorComponent {
   getProjects(): void {
     this._projectService.getAllProjects().subscribe({
       next: (response) => {
-        //console.log(response);
+        console.log(response);
         this.projects = response.message;
       },
       error: (err) => {
         //console.log(err);
       }
     });
+  }
+  getFullImageUrl(relativePath: string): string {
+    return `https://localhost:44377${relativePath}`;
   }
 
   getStateString(state: ProjectState): string {

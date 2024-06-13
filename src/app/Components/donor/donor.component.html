@@ -20,7 +20,7 @@
                 <h5 class="card-title">{{ project.title }}</h5>
               </div>
               <div class="card-body">
-                <img class="card-img-top" [src]="convertBinaryToBase64(project.img)" alt="Project Image">
+                <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
                 <p class="card-text">{{ project.description }}</p>
                 <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
                 <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
