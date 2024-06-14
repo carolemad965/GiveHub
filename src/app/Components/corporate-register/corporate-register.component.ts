@@ -28,21 +28,22 @@ export class CorporateRegisterComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     // confirmEmail: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[\d])(?=.*[!@#$%^&*()_+\-=\[\]{}|;':"\\,.<>\/?]).{6,20}$/)]),
-   // rePassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[\d])(?=.*[!@#$%^&*()_+\-=\[\]{}|;':"\\,.<>\/?]).{6,20}$/)])
+    rePassword: new FormControl(''),
    accountType:new FormControl('')
   },{validators:[this.confirmPassword,this.confirmEmail]} as FormControlOptions );
 
 
-  confirmPassword(group: FormGroup): void {
-    let password = group.get('password');
-    let rePassword = group.get('rePassword');
-    if(rePassword?.value == ' ')
+  confirmPassword(group:FormGroup):void{
+    const password =group.get('password');
+    const rePassword=group.get('rePassword');
+    if(rePassword?.value==null||rePassword?.value=='')
       {
-        rePassword?.setErrors({required:true});
+        rePassword?.setErrors({required:true})
       }
-    else if(password?.value != rePassword?.value){
-      rePassword?.setErrors({mismatch:true});
-    }
+    else if(password?.value != rePassword?.value)
+      {
+        rePassword?.setErrors({mismatch:true})
+      }
   }
 
 
