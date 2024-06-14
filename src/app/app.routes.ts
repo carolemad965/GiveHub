@@ -13,6 +13,7 @@ import { CorporateRegisterComponent } from './Components/corporate-register/corp
 import { DonorComponent } from './Components/donor/donor.component';
 import { CharityComponent } from './Components/charity/charity.component';
 import { ProjectComponent } from './Components/project/project.component';
+import { CharitiesComponent } from './Components/charities/charities.component';
 
 
 export const routes: Routes = [
@@ -28,8 +29,9 @@ export const routes: Routes = [
         {path:'corporateregister',component:CorporateRegisterComponent},
         {path:'donor',component:DonorComponent},
         {path:'charity/:id',component:CharityComponent}
-
         ,{path:'project',component:ProjectComponent}
+        ,{path:'charities',component:CharitiesComponent}
+
        ]},
       {path:'',component:BlankLayoutComponent,children:[
         {path:'home',component:HomeComponent},

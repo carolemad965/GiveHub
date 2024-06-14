@@ -30,6 +30,15 @@
                             <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
                         </div>
                     </div>
+
+                    <div class="mb-2">
+                        <label for="rePassword">Confirm Password:</label>
+                        <input formControlName="rePassword" type="password" class="form-control" id="rePassword">
+                        <div class="alert alert-danger" *ngIf="registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched">
+                            <p *ngIf="registerForm.get('rePassword')?.getError('required')">Confirm Password is required</p>
+                            <p *ngIf="registerForm.get('rePassword')?.getError('mismatch')">Confirm rePassword must match the Password</p>
+                        </div>
+                    </div>
                     <div class="mb-2">
                         <input type="hidden" formControlName="accountType" id="accountType" class="form-control" [(ngModel)]="userData.accountType">
                     </div>
