@@ -1,8 +1,76 @@
-<app-auth-navbar></app-auth-navbar>
-<div class="container-fluid">
-    <section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
+<!-- <app-auth-navbar></app-auth-navbar> -->
+<div class="flex min-h-screen ">
+   
+        <div class="row h-100">
+          <!-- Left Side -->
+          <!-- <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center "> -->
+          <div class="flex-1 items-center text-grey-darkest min-h-screen h-full p-6 sm:p-6 md:p-12 lg:p-20 flex">
+            <div class="w-75">
+              <h1 class="mb-4 custom-title">Get Started</h1>
+              <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
+                <div class="mb-2">
+                    <label for="userName">User Name:</label>
+                    <input type="text" formControlName="userName" id="userName" class="form-control styled-input" [(ngModel)]="userData.userName" #InputName>
+                    <div class="alert alert-danger" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
+                        <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
+                        <p *ngIf="registerForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
+                        <p *ngIf="registerForm.get('userName')?.getError('maxlength')">Name Max length is 20</p>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="email">Email:</label>
+                    <input type="email" formControlName="email" id="email" class="form-control styled-input" [(ngModel)]="userData.email" #InputEmail>
+                    <div class="alert alert-danger" *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched || InputEmail.value.length > 0)">
+                        <p *ngIf="registerForm.get('email')?.getError('required')">Email is required</p>
+                        <p *ngIf="registerForm.get('email')?.getError('email')">Email is invalid</p>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="password">Password:</label>
+                    <input type="password" formControlName="password" id="password" class="form-control styled-input" [(ngModel)]="userData.password" #InputPass>
+                    <div class="alert alert-danger" *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched || InputPass.value.length > 0)">
+                        <p *ngIf="registerForm.get('password')?.getError('required')">Password is required</p>
+                        <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <input type="hidden" formControlName="accountType" id="accountType" class="form-control" [(ngModel)]="userData.accountType">
+                </div>
+                <button class="active-link custom-button">
+                    <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+                    Register
+                </button>
+                <p class="alert alert-danger" *ngIf="msgError">{{msgError}}</p>
+            </form>
+               
+              <div class="mt-3">
+                <a href="#">Already have a Donately account? Log in instead</a>
+              </div>
+              <div class="mt-3">
+                <a href="#">Go Back</a>
+              </div>
+            </div>
+          </div>
+          <!-- Right Side -->
+          <div class="col-lg-6 col-md-12 d-none d-lg-flex flex-column align-items-center justify-content-center bg-primary text-white custom-layout">
+            <div class="p-5">
+              <h2 class="mb-4">Small team? Limited Resources? We can help!</h2>
+              <p>At Donately, we're more than just a software provider - we're your trusted partner in fundraising success. Our team is here to support you every step of the way, with expert guidance, training, and resources ensuring you hit the ground running and achieve your goals in record time.</p>
+              <ul class="list-unstyled">
+                <li>✔ Expert guidance through personalized 1:1 onboarding</li>
+                <li>✔ Seamless testing and launch of embedded forms and widgets</li>
+                <li>✔ Tailored integration and analytics setup</li>
+                <li>✔ Dedicated support for importing data from any platform</li>
+              </ul>
+              <button class="btn btn-light mt-3">Talk to Our Support Team</button>
+            </div>
+          </div>
+        </div>
+    
+      
+    <!-- <section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
         <div class="row">
-            <div class="col-md-6 form-section">
+            <div class="col-md-6 ">
                 <h1 class="custom-title">Register Now</h1>
                 <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
                     <div class="mb-2">
@@ -56,6 +124,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 </div>
 
