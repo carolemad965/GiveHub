@@ -30,7 +30,8 @@ export const routes: Routes = [
         {path:'donor',component:DonorComponent},
         {path:'charity/:id',component:CharityComponent}
         ,{path:'project',component:ProjectComponent}
-        ,{path:'charities',component:CharitiesComponent}
+        ,{path:'charities',component:CharitiesComponent},
+        
 
        ]},
       {path:'',component:BlankLayoutComponent,children:[
