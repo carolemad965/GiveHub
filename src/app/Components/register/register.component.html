@@ -4,7 +4,7 @@
         <div class="flex-1 items-center text-grey-darkest min-h-screen h-full p-6 sm:p-12 md:p-12 lg:p-20 flex">
             <div class="w-full md:w-4/5 mx-auto">
                 <h1 class="mb-4 custom-title dntly_header">Get Started</h1>
-                <form class="custom-form">
+                <form [formGroup]="registerForm" (ngSubmit)="handleForm()" class="custom-form">
                     <div class="form-floating mb-2 mt-2 ">
                         <input type="text" formControlName="userName" id="userName" class="form-control styled-input"
                             placeholder=" " [(ngModel)]="userData.userName" #InputName>
