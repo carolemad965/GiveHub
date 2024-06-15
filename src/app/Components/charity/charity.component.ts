@@ -27,6 +27,7 @@ export class CharityComponent {
       this.charityId = Number(params.get('id')); 
       if (this.charityId !== null) {
         this.getProjects();
+    
       }
     });
     
@@ -38,7 +39,8 @@ export class CharityComponent {
     if (this.charityId !== null) {
       this._projectService.getAllprojectForCharityId(this.charityId).subscribe({
         next: (response) => {
-         // console.log(response);
+          console.log(response);
+          console.log(this.charityId)
           this.projects = response.message;
         },
         error: (err) => {
