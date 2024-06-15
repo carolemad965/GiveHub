@@ -3,11 +3,12 @@ import { ProjectService } from '../../Services/projectService/project.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,BlankNavbarComponent],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
@@ -80,18 +81,5 @@ export class ProjectComponent {
       });
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
