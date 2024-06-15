@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
   /* Override Bootstrap classes if needed */
  /* Custom theme overrides for Bootstrap button classes */
 .btn-primary {
-  --bs-btn-color: #fff;
+  --bs-btn-color: #fff !important;
   --bs-btn-bg: var(--bs-primary);
   --bs-btn-border-color: var(--bs-primary);
   --bs-btn-hover-color: #fff;
@@ -239,30 +239,7 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(var(--bs-success-rgb), 0.65);
   font-family: 'Poppins', sans-serif;
 }
-/* .form-floating .form-control {
-  height: calc(3.5rem + 2px); 
-  padding: 1rem .75rem; 
-}
 
-.form-floating label {
-  padding: 1 .75rem !important;
-}
-.form-floating > .form-control:-webkit-autofill ~ label {
- 
-  transform: scale(.85) translateY(-1.5rem) translateX(.15rem);
-  color: rgba(var(--bs-success-rgb), 0.65);
-  font-family: 'Poppins', sans-serif;
-  padding: 1rem .75rem; 
-}
-.form-floating > .form-control-plaintext ~ label,
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label,
-.form-floating > .form-select ~ label {
-  transform: scale(.85) translateY(-1.5rem) translateX(.15rem);
-  color: rgba(var(--bs-dark-rgb), 0.65);
-  font-family: 'Poppins', sans-serif;
-  padding: 1rem .75rem; 
-} */
   /* Continue overriding other Bootstrap classes as needed */
   
 
