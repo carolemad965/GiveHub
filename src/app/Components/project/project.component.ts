@@ -72,7 +72,7 @@ export class ProjectComponent {
       this._ProjectService.postProject(formData).subscribe({
         next: (response) => {
           console.log(response);
-          this._Router.navigate(['/home']);
+          this._Router.navigate([`/charity/${response.message.charityId}`]);
         },
         error: (err) => {
           console.log(err);
