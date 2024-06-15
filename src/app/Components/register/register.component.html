@@ -4,7 +4,7 @@
         <div class="flex-1 items-center text-grey-darkest min-h-screen h-full p-6 sm:p-12 md:p-12 lg:p-20 flex">
             <div class="w-full md:w-4/5 mx-auto">
                 <h1 class="mb-4 custom-title dntly_header">Get Started</h1>
-                <form class="custom-form">
+                <form class="custom-form"  [formGroup]="registerForm" (ngSubmit)="handleForm()">
                     <div class="form-floating mb-2 mt-2 ">
                         <input type="text" formControlName="userName" id="userName" class="form-control styled-input"
                             placeholder=" " [(ngModel)]="userData.userName" #InputName>
@@ -37,6 +37,17 @@
                             <p *ngIf="registerForm.get('password')?.getError('pattern')">Password is invalid</p>
                         </div>
                     </div>
+
+                    <div class="form-floating  mb-2 mt-2">
+                        
+                        <input formControlName="rePassword" type="password"  class="form-control styled-input" placeholder=" " class="form-control" id="rePassword">
+                        <label for="rePassword">Confirm Password</label>
+                        <div class="alert alert-danger styled-input" *ngIf="registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched">
+                            <p *ngIf="registerForm.get('rePassword')?.getError('required')">Confirm Password is required</p>
+                            <p *ngIf="registerForm.get('rePassword')?.getError('mismatch')">Confirm rePassword must match the Password</p>
+                        </div>
+                    </div>
+
                     <div class="form-floating  mb-2">
                         <input type="hidden" formControlName="accountType" id="accountType" class="form-control"
                             [(ngModel)]="userData.accountType">
