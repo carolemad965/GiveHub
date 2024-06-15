@@ -31,6 +31,7 @@ h1, h2, h3, h4, h5, h6 {
   --bs-danger-rgb: 244, 67, 54;
   --bs-light-rgb: 238, 238, 238;
   --bs-dark-rgb: 28, 28, 28;
+
   }
   
 
@@ -19883,4 +19884,11 @@ tr:last-child td {
   .xl\:z-auto {
     z-index: auto;
   }
+  .navbar {
+    height: var(--navbar-height);
+}
+.content-container {
+  margin-top: var(--navbar-height);
+}
+
 }
