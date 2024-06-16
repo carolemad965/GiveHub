@@ -41,7 +41,7 @@
 
                     <div class="form-floating  mb-2 mt-2">
                         
-                        <input formControlName="rePassword" type="password"  class="form-control styled-input" placeholder=" " class="form-control" id="rePassword">
+                        <input formControlName="rePassword" type="password"  class="form-control styled-input" placeholder=" " id="rePassword">
                         <label for="rePassword">Confirm Password</label>
                         <div class="text-danger styled-input" *ngIf="registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched">
                             <p *ngIf="registerForm.get('rePassword')?.getError('required')">Confirm Password is required</p>
