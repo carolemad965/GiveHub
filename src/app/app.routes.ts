@@ -14,6 +14,7 @@ import { DonorComponent } from './Components/donor/donor.component';
 import { CharityComponent } from './Components/charity/charity.component';
 import { ProjectComponent } from './Components/project/project.component';
 import { CharitiesComponent } from './Components/charities/charities.component';
+import { authGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -27,15 +28,13 @@ export const routes: Routes = [
         {path:'register',component:RegisterComponent},
         {path:'charityregister',component:CharityRegisterComponent},
         {path:'corporateregister',component:CorporateRegisterComponent},
-        {path:'donor',component:DonorComponent},
-        {path:'charity/:id',component:CharityComponent}
-        ,{path:'project',component:ProjectComponent}
-        ,{path:'charities',component:CharitiesComponent},
-        
-
+        {path:'donor',component:DonorComponent,canActivate:[authGuard]},
+        {path:'charity/:id',component:CharityComponent,canActivate:[authGuard]}
+        ,{path:'project',component:ProjectComponent,canActivate:[authGuard]}
+        ,{path:'charities',component:CharitiesComponent,canActivate:[authGuard]},
        ]},
       {path:'',component:BlankLayoutComponent,children:[
-        {path:'home',component:HomeComponent},
+        {path:'home',component:HomeComponent,canActivate:[authGuard]},
         {path:'logout',component:LogoutComponent},
       ]},
      {path:'**',component:NotFoundComponent}
