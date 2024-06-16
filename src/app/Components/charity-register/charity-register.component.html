@@ -8,7 +8,7 @@
                 <div class="form-floating mb-2 mt-2 ">
                    
                     <input type="text" formControlName="userName" id="userName" class="form-control styled-input"  placeholder=" "  [(ngModel)]="userData.userName" #InputName>
-                    <label for="userName">Corporate Name</label>
+                    <label for="userName">Organization Name</label>
                     <div class="text-danger" *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
                         <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
                         <p *ngIf="registerForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
