@@ -29,7 +29,7 @@
 }
 
 .solution_cards_box .solution_card:hover {
-  background: #309df0;
+  background: #77d986;
   color: #fff;
   transform: scale(1.1);
   z-index: 9;
@@ -59,7 +59,7 @@
 
 .solution_cards_box .solution_card:hover .solu_description button {
   background: #fff !important;
-  color: #309df0;
+  color: #77d986;
 }
 
 .solution_card .so_top_icon {
@@ -80,7 +80,7 @@
 .solution_card .solu_description button {
   border: 0;
   border-radius: 15px;
-  background: linear-gradient(140deg, #2980F2 0%, #2980F2 50%, #2980F2 75%) !important;
+  background: linear-gradient(140deg, #77d986 0%, #77d986 50%, #77d986 75%) !important;
   color: #fff;
   font-weight: 500;
   font-size: 0.8rem;

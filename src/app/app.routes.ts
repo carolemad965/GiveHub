@@ -14,17 +14,16 @@ import { DonorComponent } from './Components/donor/donor.component';
 import { CharityComponent } from './Components/charity/charity.component';
 import { ProjectComponent } from './Components/project/project.component';
 import { CharitiesComponent } from './Components/charities/charities.component';
+import { HomeAuthComponent } from './Components/home-auth/home-auth.component';
 
 
 export const routes: Routes = [
-    
-    {path:'',component:UserAccountTypeLayoutComponent,children:[
-        {path:'',redirectTo:'useraccounttype',pathMatch:'full'},
-        {path:'useraccounttype',component:UserAccountTypeComponent}
-      ]},
+    {path:'',redirectTo:'homeauth',pathMatch:'full'},
       {path:'',component:AuthLayoutComponent,children:[
+        {path:'homeauth',component:HomeAuthComponent},
         {path:'login',component:LoginComponent},
-        {path:'register',component:RegisterComponent},
+        {path:'register',component:UserAccountTypeComponent},
+        {path:'donnerregister',component:RegisterComponent},
         {path:'charityregister',component:CharityRegisterComponent},
         {path:'corporateregister',component:CorporateRegisterComponent},
         {path:'donor',component:DonorComponent},
