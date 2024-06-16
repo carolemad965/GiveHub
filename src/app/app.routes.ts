@@ -15,6 +15,8 @@ import { CharityComponent } from './Components/charity/charity.component';
 import { ProjectComponent } from './Components/project/project.component';
 import { CharitiesComponent } from './Components/charities/charities.component';
 import { HomeAuthComponent } from './Components/home-auth/home-auth.component';
+import { HomecharityComponent } from './Components/homecharity/homecharity.component';
+import { LogincharityComponent } from './Components/logincharity/logincharity.component';
 
 
 export const routes: Routes = [
@@ -22,20 +24,20 @@ export const routes: Routes = [
       {path:'',component:AuthLayoutComponent,children:[
         {path:'homeauth',component:HomeAuthComponent},
         {path:'login',component:LoginComponent},
+        {path:'logincharity',component:LogincharityComponent},
         {path:'register',component:UserAccountTypeComponent},
         {path:'donnerregister',component:RegisterComponent},
         {path:'charityregister',component:CharityRegisterComponent},
         {path:'corporateregister',component:CorporateRegisterComponent},
+       ]},
+      {path:'',component:BlankLayoutComponent,children:[
+        {path:'home',component:HomeComponent},
+        {path:'homecharity',component:HomecharityComponent},
+        {path:'logout',component:LogoutComponent},
         {path:'donor',component:DonorComponent},
         {path:'charity/:id',component:CharityComponent}
         ,{path:'project',component:ProjectComponent}
         ,{path:'charities',component:CharitiesComponent},
-        
-
-       ]},
-      {path:'',component:BlankLayoutComponent,children:[
-        {path:'home',component:HomeComponent},
-        {path:'logout',component:LogoutComponent},
       ]},
      {path:'**',component:NotFoundComponent}
 
