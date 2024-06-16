@@ -33,6 +33,7 @@ userData:any;
 
   logOut():void{
     localStorage.removeItem('eToken');
+    //localStorage.removeItem('token');
     this._Router.navigate(['/login']);
   }
 }
