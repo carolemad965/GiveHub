@@ -8,7 +8,7 @@
         <h1 class="mb-4 custom-title dntly_header">Add project</h1>
         <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-2 mt-2">
-            <input type="text" id="title"  placeholder=" " class="form-control styled-input" formControlName="title">
+            <input type="text" id="title" [(ngModel)]="nweProj.title" placeholder=" " class="form-control styled-input" formControlName="title">
             <label for="title">Title</label>
             <div *ngIf="projectForm.get('title')?.invalid && projectForm.get('title')?.touched" class="text-danger">
               Title is required.
@@ -16,7 +16,7 @@
           </div>
 
           <div class="form-floating mb-2 mt-2 ">
-            <textarea id="description" placeholder=" " class="form-control styled-input" formControlName="description"></textarea>
+            <textarea id="description" placeholder=" " [(ngModel)]="nweProj.description" class="form-control styled-input" formControlName="description"></textarea>
             <label for="description">Description</label>
             <div *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched"
               class="text-danger">
@@ -25,7 +25,7 @@
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <input type="number" id="fundingGoal" placeholder=" " class="form-control styled-input" formControlName="fundingGoal">
+            <input type="number" id="fundingGoal" placeholder=" "  [(ngModel)]="nweProj.fundingGoal" class="form-control styled-input" formControlName="fundingGoal">
             <label for="fundingGoal">Funding Goal</label>
             <div *ngIf="projectForm.get('fundingGoal')?.invalid && projectForm.get('fundingGoal')?.touched"
               class="text-danger">
@@ -34,23 +34,23 @@
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <input type="number" id="amountRaised" placeholder=" " class="form-control styled-input" formControlName="amountRaised">
-            <label for="amountRaised">Amount Raised</label>
-            <div *ngIf="projectForm.get('amountRaised')?.invalid && projectForm.get('amountRaised')?.touched"
+            <input type="hidden" id="amountRaised" placeholder=" " [(ngModel)]="nweProj.amountRaised" class="form-control styled-input" formControlName="amountRaised">
+            <!-- <label for="amountRaised">Amount Raised</label> -->
+            <!-- <div *ngIf="projectForm.get('amountRaised')?.invalid && projectForm.get('amountRaised')?.touched"
               class="text-danger">
               Amount Raised is required.
-            </div>
+            </div> -->
           </div>
 
           <div class="form-group mb-3">
             <label for="imgPath">Image Path</label>
-            <input type="file" id="imgPath" placeholder=" " class="form-control styled-input" (change)="onFileSelected($event)">
+            <input type="file" id="imgPath" placeholder=" " [(ngModel)]="nweProj.imgPath" class="form-control styled-input" (change)="onFileSelected($event)">
             <span *ngIf="projectForm.get('imgPath')?.value">{{ projectForm.get('imgPath')?.value }}</span>
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <select id="state" class="form-control styled-input" placeholder=" " formControlName="state">
-              <option *ngFor="let i of range(5)" [value]="i">
+            <input id="state" type="hidden" class="form-control styled-input" [(ngModel)]="nweProj.state" placeholder=" " formControlName="state">
+              <!-- <option *ngFor="let i of range(5)" [value]="i">
                 {{ getStateLabel(i) }}
               </option>
            
@@ -58,11 +58,11 @@
             <label for="state">State</label>
             <div *ngIf="projectForm.get('state')?.invalid && projectForm.get('state')?.touched" class="text-danger">
               State is required.
-            </div>
+            </div> -->
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <input type="text" id="charityId" placeholder=" " class="form-control styled-input" formControlName="charityId">
+            <input type="text" id="charityId" placeholder=" " class="form-control styled-input"  [(ngModel)]="nweProj.charityId" formControlName="charityId">
             <label for="charityId">Charity ID</label>
             <div *ngIf="projectForm.get('charityId')?.invalid && projectForm.get('charityId')?.touched"
               class="text-danger">
@@ -86,3 +86,9 @@
 
 
 </div>
+
+
+
+
+
+
