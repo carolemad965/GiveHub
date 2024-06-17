@@ -33,6 +33,7 @@ handleForm():void
       this._AuthService.setLogIn(this.userData).subscribe({
         next:(response)=>{
           console.log(response);
+          localStorage.setItem('token', response.message.token)
           this.isLoading=false;
               localStorage.setItem('eToken',response.message.token);
               this._AuthService.decodeUserData();
