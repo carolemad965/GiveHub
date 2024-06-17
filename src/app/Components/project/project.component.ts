@@ -23,9 +23,9 @@ export class ProjectComponent {
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     fundingGoal: new FormControl('', [Validators.required]),
-    amountRaised: new FormControl('', [Validators.required]),
+    amountRaised: new FormControl(0, [Validators.required]),
     imgPath: new FormControl('', [Validators.required]),
-    state: new FormControl('', [Validators.required]),
+    state: new FormControl(0, [Validators.required]),
     charityId: new FormControl('', [Validators.required])
   });
 
