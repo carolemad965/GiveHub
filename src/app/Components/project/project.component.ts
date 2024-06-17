@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-project',
@@ -15,15 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ProjectComponent {
   selectedFile: any;
-  nweProj: any = {
-    title: '',
-    description: '',
-    fundingGoal: '',
-    amountRaised:'0',
-    imgPath :'',
-    state:'Initiated',
-    charityId:'1'
-  };
   
   constructor(private _ProjectService: ProjectService, private _Router: Router) {}
   
@@ -51,46 +41,42 @@ export class ProjectComponent {
     return Array.from({ length: size }, (_, i) => i);
   }
 
-  //  getStateLabel(value: number): string {
-  //   switch (value) {
-  //     case 0:
-  //       return 'Initiated';
-  //     case 1:
-  //       return 'Completed';
-  //     case 2:
-  //       return 'InProgress';
-  //     case 3:
-  //       return 'Paused';
-  //     case 4:
-  //       return 'Canceled';
-  //     default:
-  //       return 'Unknown';
-  //   }
-  // }
+  getStateLabel(value: number): string {
+    switch (value) {
+      case 0:
+        return 'Initiated';
+      case 1:
+        return 'Completed';
+      case 2:
+        return 'InProgress';
+      case 3:
+        return 'Paused';
+      case 4:
+        return 'Canceled';
+      default:
+        return 'Unknown';
+    }
+  }
 
   onSubmit() {
     if (this.projectForm.valid && this.selectedFile) {
-       const formData = new FormData();
-      // formData.append('title', this.projectForm.get('title')?.value);
-      // formData.append('description', this.projectForm.get('description')?.value);
-      // formData.append('fundingGoal', this.projectForm.get('fundingGoal')?.value);
-      // formData.append('amountRaised', this.projectForm.get('amountRaised')?.value);
-      // formData.append('imgPath', this.selectedFile); // Append the actual file
-      // formData.append('state', this.projectForm.get('state')?.value);
-      // formData.append('charityId', this.projectForm.get('charityId')?.value);
+      const formData = new FormData();
+      formData.append('title', this.projectForm.get('title')?.value);
+      formData.append('description', this.projectForm.get('description')?.value);
+      formData.append('fundingGoal', this.projectForm.get('fundingGoal')?.value);
+      formData.append('amountRaised', this.projectForm.get('amountRaised')?.value);
+      formData.append('imgPath', this.selectedFile); // Append the actual file
+      formData.append('state', this.projectForm.get('state')?.value);
+      formData.append('charityId', this.projectForm.get('charityId')?.value);
   
-      console.log(this.projectForm.value);
-      this._ProjectService.postProject(this.nweProj).subscribe({
+      console.log(this.projectForm);
+      this._ProjectService.postProject(formData).subscribe({
         next: (response) => {
           console.log(response);
           this._Router.navigate([`/charity/${response.message.charityId}`]);
-          
         },
-        error: (err: HttpErrorResponse) => {
-          if(err.status==400)
-            {
-              console.log(err);
-            }
+        error: (err) => {
+          console.log(err);
         }
       });
     }
