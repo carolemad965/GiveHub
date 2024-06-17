@@ -2147,7 +2147,9 @@ tr:last-child td {
 .bg-transparent {
   background-color: transparent;
 }
-
+.bg-accent{
+  background-color: rgba(var(--bs-accent-rgb), 0.75);
+}
 .bg-black {
   background-color: #0d1a20;
 }
