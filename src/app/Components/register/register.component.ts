@@ -1,6 +1,6 @@
 import { Component ,NgZone} from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormControlOptions, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { response } from 'express';
@@ -12,7 +12,7 @@ declare var gapi: any;
     templateUrl: './register.component.html',
     styleUrl: './register.component.css',
     standalone: true,
-    imports: [AuthNavbarComponent, ReactiveFormsModule, NgIf]
+    imports: [AuthNavbarComponent, ReactiveFormsModule, NgIf,RouterLink]
 })
 export class RegisterComponent {
   userData: any = {
