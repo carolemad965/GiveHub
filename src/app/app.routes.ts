@@ -19,6 +19,7 @@ import { authGuard } from './guards/auth.guard';
 import { HomeAuthComponent } from './Components/home-auth/home-auth.component';
 import { HomecharityComponent } from './Components/homecharity/homecharity.component';
 import { LogincharityComponent } from './Components/logincharity/logincharity.component';
+import { DonorProfileComponent } from './Components/donor-profile/donor-profile.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,7 @@ export const routes: Routes = [
         {path:'charity/:id',component:CharityComponent,canActivate:[authGuard]}
         ,{path:'project',component:ProjectComponent,canActivate:[authGuard]}
         ,{path:'charities',component:CharitiesComponent,canActivate:[authGuard]},
+        {path:"profile/:id",component:DonorProfileComponent}
        ]},
       {path:'',component:BlankLayoutComponent,children:[
         {path:'home',component:HomeComponent,canActivate:[authGuard]},
@@ -44,7 +46,7 @@ export const routes: Routes = [
         {path:'homecharity',component:HomecharityComponent},
         {path:'logout',component:LogoutComponent},
         {path:'donor',component:DonorComponent},
-        {path:'charity/:id',component:CharityComponent}
+        {path:'charity/id',component:CharityComponent}
         ,{path:'project',component:ProjectComponent}
         ,{path:'charities',component:CharitiesComponent},
       ]},
