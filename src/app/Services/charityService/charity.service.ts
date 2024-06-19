@@ -17,5 +17,13 @@ export class CharityService {
 
   getcharityById(id:number){
     return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${id}`)
+ 
+  }
+
+
+
+  getCharityID(id:string)
+  {
+    return this._httpClient.get<number>(`https://localhost:44377/api/charity/getCharityID/${id}`);
   }
 }
