@@ -5,8 +5,9 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 overflow-auto" style="max-height: 100vh; width: 100%;">
         <div class="col" *ngFor="let charity of charities">
             <div class="card h-100">
+                <a [routerLink]="'/charity-details/' + charity.id" routerLinkActive="active">
                 <img *ngIf="charity.profileImg" class="card-img-top" [src]="getFullImageUrl(charity.profileImg )" [alt]="charity.name">
-
+                 </a>
                 <div class="card-body">
                     <h5 class="card-title">{{ charity.name }}</h5>
                     <p class="card-text">{{ charity.description }}</p>

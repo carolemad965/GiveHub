@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
 import { FormControl, FormControlOptions, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { NgIf } from '@angular/common';
 import { NavCharityRegisterComponent } from '../nav-charity-register/nav-charity-register.component';
@@ -11,7 +11,7 @@ import { NavCharityRegisterComponent } from '../nav-charity-register/nav-charity
     templateUrl: './charity-register.component.html',
     styleUrl: './charity-register.component.css',
     standalone: true,
-    imports: [NavCharityRegisterComponent, ReactiveFormsModule, NgIf]
+    imports: [NavCharityRegisterComponent, ReactiveFormsModule, NgIf,RouterLink]
 })
 export class CharityRegisterComponent {
   userData: any = {
@@ -70,7 +70,7 @@ export class CharityRegisterComponent {
           this.isLoading = false;
           if(response.isPass==true)
             {
-              this._Router.navigate(['/login']);
+              this._Router.navigate(['/logincharity']);
             }
             
         },

@@ -1,3 +1,24 @@
+/* container */
+.responsive-three-columns {
+  display:flex;
+  flex-wrap:wrap;
+  height: 100vh;
+}
+
+/* columns */
+.responsive-three-columns > * {
+  width:100%;
+  padding:1rem;
+}
+
+/* tablet breakpoint */
+@media (min-width:768px) {
+  .responsive-three-columns > * {
+      width:calc(100% / 3);
+  }
+}
+
+
 .section_our_solution .row {
   align-items: center;
 }
@@ -29,7 +50,7 @@
 }
 
 .solution_cards_box .solution_card:hover {
-  background: #309df0;
+  background: #77d986;
   color: #fff;
   transform: scale(1.1);
   z-index: 9;
@@ -59,11 +80,12 @@
 
 .solution_cards_box .solution_card:hover .solu_description button {
   background: #fff !important;
-  color: #309df0;
+  color: #77d986;
 }
 
-.solution_card .so_top_icon {
-}
+/* .solution_card .so_top_icon {
+
+} */
 
 .solution_card .solu_title h3 {
   color: #212121;
@@ -80,7 +102,7 @@
 .solution_card .solu_description button {
   border: 0;
   border-radius: 15px;
-  background: linear-gradient(140deg, #2980F2 0%, #2980F2 50%, #2980F2 75%) !important;
+  background: linear-gradient(140deg, #77d986 0%, #77d986 50%, #77d986 75%) !important;
   color: #fff;
   font-weight: 500;
   font-size: 0.8rem;
@@ -93,8 +115,8 @@
   font-size: 2.5rem;
 }
 
-.our_solution_content p {
-}
+/* .our_solution_content p {
+} */
 
 .hover_color_bubble {
   position: absolute;
