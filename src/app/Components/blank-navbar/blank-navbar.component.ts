@@ -16,5 +16,10 @@ export class BlankNavbarComponent {
   logOutUser():void{
     this._AuthService.logOut();
   }
+
+  ngOnInit() {
+
+
+  }
 }
 
