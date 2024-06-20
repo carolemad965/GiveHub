@@ -1,7 +1,10 @@
+
+
+
 <div class="container mt-5">
   <div class="row">
     <div class="col">
-      <h1 style="font-size: 50px;">Projects of Our Charity</h1>
+      <h1 style="font-size: 50px;" class="mb-5">Projects of Ouer Charity</h1>
     </div>
   </div>
 
@@ -16,20 +19,24 @@
           <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
           <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
           <p class="card-text">Status: {{ getStatusString(project.state) }}</p>
-
           <img *ngIf="project.imgUrl" class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
+          <button class="donate-button ">Donate Now</button>
+
         </div>
       </div>
     </div>
   </div>
+</div>
 
- 
-  
-  <div class="row">
-    <div class="col">
-      <a [routerLink]="['/project']" class="btn btn-dark">Add New Project</a>
-    </div>
-  </div>
-
-
+<div class="pagination-container mt-5 mb-5">
+  <nav aria-label="Project pagination">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage - 1)" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="!PagesAvailable">
+        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>

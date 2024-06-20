@@ -14,7 +14,7 @@ import { DonorComponent } from './Components/donor/donor.component';
 import { CharityComponent } from './Components/charity/charity.component';
 import { ProjectComponent } from './Components/project/project.component';
 import { CharitiesComponent } from './Components/charities/charities.component';
-import {authGuard} from './guards/auth.guard';
+
 import { HomeAuthComponent } from './Components/home-auth/home-auth.component';
 import { HomecharityComponent } from './Components/homecharity/homecharity.component';
 import { LogincharityComponent } from './Components/logincharity/logincharity.component';
@@ -22,6 +22,7 @@ import { LogincharityComponent } from './Components/logincharity/logincharity.co
 import { CharityDetailsComponent } from './Components/charity-details/charity-details.component';
 
 import { DonorProfileComponent } from './Components/donor-profile/donor-profile.component';
+import { authGuard } from './Guards/auth.guard';
 
 
 

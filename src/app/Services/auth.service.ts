@@ -8,33 +8,33 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-userData:any;
-  constructor(private _HttpClient:HttpClient,private _Router:Router) { }
+  userData: any;
+  accountType: string | null = null;
 
-  setRegister(userData:any):Observable<any>{
-      return this._HttpClient.post(`https://localhost:44377/api/Account/register`,userData);
-    
+  constructor(private _HttpClient: HttpClient, private _Router: Router) { }
+
+
+  setRegister(userData: any): Observable<any> {
+    return this._HttpClient.post(`https://localhost:44377/api/Account/register`, userData);
+
   }
 
-  setLogIn(userData:any):Observable<any>
-  {
+  setLogIn(userData: any): Observable<any> {
     return this._HttpClient.post(`https://localhost:44377/api/Account/log-in`, userData)
   }
 
-  decodeUserData()
-  {
-    if(localStorage.getItem('eToken') !=null)
-      {
-        let encodeToken:any = localStorage.getItem('eToken');
-        let decodeToken= jwtDecode(encodeToken);
-        this.userData=decodeToken;
-console.log(decodeToken);
+  decodeUserData() {
+    if (localStorage.getItem('eToken') != null) {
+      let encodeToken: any = localStorage.getItem('eToken');
+      let decodeToken = jwtDecode(encodeToken);
+      this.userData = decodeToken;
+      console.log(decodeToken);
 
-let userId=this.getUserId();
-let userAccountType=this.getUserAccountType();
-console.log(userId);
-console.log(userAccountType);
-      }
+      let userId = this.getUserId();
+      let userAccountType = this.getUserAccountType();
+      console.log(userId);
+      console.log(userAccountType);
+    }
   }
 
 
@@ -53,12 +53,14 @@ console.log(userAccountType);
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken: JwtPayload & { [key: string]: any } = jwtDecode(token);
+      console.log(token);
       return decodedToken["AccountType"] || null;
+
     }
     return null;
   }
 
-  logOut():void{
+  logOut(): void {
     localStorage.removeItem('eToken');
     //localStorage.removeItem('token');
     this._Router.navigate(['/login']);
