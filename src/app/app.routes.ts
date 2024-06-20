@@ -19,11 +19,10 @@ import { authGuard } from './Guards/auth.guard';
 import { HomeAuthComponent } from './Components/home-auth/home-auth.component';
 import { HomecharityComponent } from './Components/homecharity/homecharity.component';
 import { LogincharityComponent } from './Components/logincharity/logincharity.component';
-<<<<<<< HEAD
+
 import { CharityDetailsComponent } from './Components/charity-details/charity-details.component';
-=======
-import { DonorProfileComponent } from './Components/donor-profile/donor-profile.component';
->>>>>>> 70dfbacb8f946d71367914895d4a58b84b401b93
+import { CharityAccountComponent } from './Components/charity-account/charity-account.component';
+
 
 
 export const routes: Routes = [
@@ -40,11 +39,10 @@ export const routes: Routes = [
         {path:'charity/:id',component:CharityComponent,canActivate:[authGuard]}
         ,{path:'project',component:ProjectComponent,canActivate:[authGuard]}
         ,{path:'charities',component:CharitiesComponent,canActivate:[authGuard]},
-<<<<<<< HEAD
+
         { path: 'charity-details/:id', component: CharityDetailsComponent }
-=======
-        {path:"profile/:id",component:DonorProfileComponent}
->>>>>>> 70dfbacb8f946d71367914895d4a58b84b401b93
+,{path:"charityAccount",component:CharityAccountComponent}
+
        ]},
       {path:'',component:BlankLayoutComponent,children:[
         {path:'home',component:HomeComponent,canActivate:[authGuard]},
