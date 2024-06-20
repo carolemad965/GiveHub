@@ -14,7 +14,7 @@ export class ProjectService {
   }
   postProject(projecData:any):Observable<any>
   {
-    console.log(projecData);
+    
     return this._httpClient.post(`https://localhost:44377/api/project`,projecData)
   }
   getAllprojectForCharityId(id:number):Observable<any>

@@ -21,6 +21,9 @@ import { LogincharityComponent } from './Components/logincharity/logincharity.co
 
 import { CharityDetailsComponent } from './Components/charity-details/charity-details.component';
 
+import { CharityAccountComponent } from './Components/charity-account/charity-account.component';
+
+
 import { DonorProfileComponent } from './Components/donor-profile/donor-profile.component';
 
 
@@ -40,6 +43,9 @@ export const routes: Routes = [
         {path:'charity/:id',component:CharityComponent,canActivate:[authGuard]}
         ,{path:'project',component:ProjectComponent,canActivate:[authGuard]}
         ,{path:'charities',component:CharitiesComponent,canActivate:[authGuard]},
+
+
+,{path:"charityAccount",component:CharityAccountComponent}
 
         { path: 'charity-details/:id', component: CharityDetailsComponent },
 
