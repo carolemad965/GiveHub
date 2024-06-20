@@ -15,10 +15,11 @@ import { CharityComponent } from './Components/charity/charity.component';
 import { ProjectComponent } from './Components/project/project.component';
 import { CharitiesComponent } from './Components/charities/charities.component';
 
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './Guards/auth.guard';
 import { HomeAuthComponent } from './Components/home-auth/home-auth.component';
 import { HomecharityComponent } from './Components/homecharity/homecharity.component';
 import { LogincharityComponent } from './Components/logincharity/logincharity.component';
+import { CharityDetailsComponent } from './Components/charity-details/charity-details.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,7 @@ export const routes: Routes = [
         {path:'charity/:id',component:CharityComponent,canActivate:[authGuard]}
         ,{path:'project',component:ProjectComponent,canActivate:[authGuard]}
         ,{path:'charities',component:CharitiesComponent,canActivate:[authGuard]},
+        { path: 'charity-details/:id', component: CharityDetailsComponent }
        ]},
       {path:'',component:BlankLayoutComponent,children:[
         {path:'home',component:HomeComponent,canActivate:[authGuard]},

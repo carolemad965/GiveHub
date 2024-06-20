@@ -3,11 +3,12 @@ import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 import { CharityService } from '../../Services/charityService/charity.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-charities',
   standalone: true,
-  imports: [BlankNavbarComponent,CommonModule],
+  imports: [BlankNavbarComponent,CommonModule,RouterLink],
   templateUrl: './charities.component.html',
   styleUrl: './charities.component.css'
 })

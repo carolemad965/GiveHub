@@ -13,4 +13,10 @@ export class CharityService {
     return this._httpClient.get(`https://localhost:44377/api/charity`);
 
   }
+
+  getCharityByID(IdInt:Number):Observable<any>
+  {
+    return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${IdInt}`);
+
+  }
 }
