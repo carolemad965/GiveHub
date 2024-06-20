@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +14,33 @@ export class CharityService {
 
   }
 
-
   getCharityByID(IdInt:Number):Observable<any>
   {
     return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${IdInt}`);
-  }
+
+
 
   getcharityById(id:number){
     return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${id}`)
- 
-  }
+ }
 
 
 
   getCharityID(id:string)
   {
     return this._httpClient.get<number>(`https://localhost:44377/api/charity/getCharityID/${id}`);
+
+
+  }
+
+
+  addcharity(charity:any):Observable<any>{
+return this._httpClient.post(`https://localhost:44377/api/charity`,charity);
+  }
+
+
+  getAccountID(name:string){
+    return this._httpClient.get<string>(`https://localhost:44377/api/charity/getAccountID`);
+
   }
 }
