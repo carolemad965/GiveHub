@@ -14,9 +14,23 @@ export class CharityService {
 
   }
 
+<<<<<<< HEAD
   getCharityByID(IdInt:Number):Observable<any>
   {
     return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${IdInt}`);
 
+=======
+
+  getcharityById(id:number){
+    return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${id}`)
+ 
+  }
+
+
+
+  getCharityID(id:string)
+  {
+    return this._httpClient.get<number>(`https://localhost:44377/api/charity/getCharityID/${id}`);
+>>>>>>> 70dfbacb8f946d71367914895d4a58b84b401b93
   }
 }
