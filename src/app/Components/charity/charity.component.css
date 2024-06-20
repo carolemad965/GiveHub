@@ -30,6 +30,17 @@
   .card-text {
     margin-bottom: 10px;
   }
+  .donate-button {
+    background-color: hsla(134, 50%, 50%, 0.856);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
   
   
   
