@@ -31,7 +31,9 @@ userData:any;
 console.log(decodeToken);
 
 let userId=this.getUserId();
+let userAccountType=this.getUserAccountType();
 console.log(userId);
+console.log(userAccountType);
       }
   }
 
@@ -43,6 +45,15 @@ console.log(userId);
     if (token) {
       const decodeToken: JwtPayload & { [key: string]: any } = jwtDecode(token);
       return decodeToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] || null;
+    }
+    return null;
+  }
+
+  getUserAccountType(): string | null {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken: JwtPayload & { [key: string]: any } = jwtDecode(token);
+      return decodedToken["AccountType"] || null;
     }
     return null;
   }
