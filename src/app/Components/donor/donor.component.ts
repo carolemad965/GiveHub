@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../Services/projectService/project.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 
 enum ProjectState {
   Initiated,
@@ -14,7 +15,7 @@ enum ProjectState {
 @Component({
   selector: 'app-donor',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,BlankNavbarComponent, RouterOutlet],
   templateUrl: './donor.component.html',
   styleUrls: ['./donor.component.css']
 })

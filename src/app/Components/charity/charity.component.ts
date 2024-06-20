@@ -19,14 +19,16 @@ enum ProjectState {
 export class CharityComponent {
   projects: any[] = [];
   charityId: number | null = null;
-
+  currentPage: number = 1;
+  PagesAvailable: boolean = true;
   constructor(private _projectService:ProjectService, private _route:ActivatedRoute){}
 
   ngOnInit(): void {
     this._route.paramMap.subscribe(params => {
       this.charityId = Number(params.get('id')); 
       if (this.charityId !== null) {
-        this.getProjects();
+        this.getProjects(this.currentPage);
+    
       }
     });
     
@@ -34,22 +36,30 @@ export class CharityComponent {
   getFullImageUrl(relativePath: string): string {
     return `https://localhost:44377${relativePath}`;
   }
-  getProjects(): void {
-    if (this.charityId !== null) {
-      this._projectService.getAllprojectForCharityId(this.charityId).subscribe({
-        next: (response) => {
-         // console.log(response);
+  getProjects(page: number): void {
+    this._projectService.getProjectsByPage(page).subscribe({
+      next: (response) => {
+        console.log(response);
+        if (response.message.length > 0) {
           this.projects = response.message;
-        },
-        error: (err) => {
-         // console.log(err);
+        
+          this.PagesAvailable = response.message.length === 3; 
+        } else {
+          this.PagesAvailable = false;
         }
-      });
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    });
+  }
+
+  onPageChange(page: number): void {
+    if (page > 0) {
+      this.currentPage = page;
+      this.getProjects(page);
     }
   }
-  // convertBinaryToBase64(binary: string): string {
-  //   return `data:image/png;base64,${binary}`;
-  // }
   getStatusString(state: ProjectState): string {
     switch (state) {
       case ProjectState.Initiated:

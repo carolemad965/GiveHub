@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { FirstVisitService } from './Services/first-visitService/first-visit.service';
 
 @Component({
     selector: 'app-root',
