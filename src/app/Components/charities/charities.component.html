@@ -1,9 +1,29 @@
 <app-blank-navbar></app-blank-navbar>
-
+<br>
+<br>
+<br>
+<br>
+<div class="container" >
+    <br>
+   
+   
+    <div class="row" >
+      <div class="col-md-6">
+        <h1 style="width: 700; font-size: 50px;">Charities</h1>
+      </div>
+      <div class="col-md-6">
+        <p>Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
+      </div>
+    </div>
+  </div>
+  <br>
 <!-- Add a class to apply the top margin to the container -->
-<div class="content-container container d-flex align-items-center justify-content-center" style="height: 100vh;">
+<div class="content-container container d-flex align-items-center justify-content-center" style="height: 100vh; background-color: rgba(229, 234, 235, 0.447);"  >
+    
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 overflow-auto" style="max-height: 100vh; width: 100%;">
+       
         <div class="col" *ngFor="let charity of charities">
+           
             <div class="card h-100">
                 <a [routerLink]="'/charity-details/' + charity.id" routerLinkActive="active">
                 <img *ngIf="charity.profileImg" class="card-img-top" [src]="getFullImageUrl(charity.profileImg )" [alt]="charity.name">

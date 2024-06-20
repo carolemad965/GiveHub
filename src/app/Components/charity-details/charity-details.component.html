@@ -1,5 +1,17 @@
+
+
+
+<app-blank-navbar></app-blank-navbar>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 <div class="navbar-container">
-    <app-blank-navbar></app-blank-navbar>
+   
   </div>
   <div class="charity-details-container">
     <div class="hero-section" [style.backgroundImage]="'url(' + getFullImageUrl(charityData_DB.profileImg) + ')'">
@@ -8,6 +20,7 @@
         <a [href]="'http://' + charityData_DB.websiteUrl" target="_blank" class="visit-website-button">Visit Website</a>
       </div>
     </div>
+    
     <div class="content-section">
       <div class="charity-description">
         <h2>About Us</h2>
@@ -16,7 +29,7 @@
       <div class="donate-section">
         <h2>Support Our Cause</h2>
         <p>Your generous donations help us to achieve our goals and continue our mission.</p>
-        <button class="donate-button">Donate Now</button>
+        
       </div>
     </div>
     <app-charity></app-charity>

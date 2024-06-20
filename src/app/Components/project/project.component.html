@@ -34,12 +34,7 @@
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <input type="number" id="amountRaised" placeholder=" " class="form-control styled-input" formControlName="amountRaised">
-            <label for="amountRaised">Amount Raised</label>
-            <div *ngIf="projectForm.get('amountRaised')?.invalid && projectForm.get('amountRaised')?.touched"
-              class="text-danger">
-              Amount Raised is required.
-            </div>
+            <input type="hidden" id="amountRaised" placeholder=" " [(ngModel)]="nweProj.amountRaised" class="form-control styled-input" formControlName="amountRaised">            
           </div>
 
           <div class="form-group mb-3">
@@ -49,16 +44,8 @@
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <select id="state" class="form-control styled-input" placeholder=" " formControlName="state">
-              <option *ngFor="let i of range(5)" [value]="i">
-                {{ getStateLabel(i) }}
-              </option>
+            <input id="state" type="hidden" class="form-control styled-input" [(ngModel)]="nweProj.state" placeholder=" " formControlName="state">
 
-            </select>
-            <label for="state">State</label>
-            <div *ngIf="projectForm.get('state')?.invalid && projectForm.get('state')?.touched" class="text-danger">
-              State is required.
-            </div>
           </div>
 
           <div class="form-floating mb-2 mt-2">
