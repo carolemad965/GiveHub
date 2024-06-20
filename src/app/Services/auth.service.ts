@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,7 +28,23 @@ userData:any;
         let encodeToken:any = localStorage.getItem('eToken');
         let decodeToken= jwtDecode(encodeToken);
         this.userData=decodeToken;
+console.log(decodeToken);
+
+let userId=this.getUserId();
+console.log(userId);
       }
+  }
+
+
+
+
+  getUserId(): string | null {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodeToken: JwtPayload & { [key: string]: any } = jwtDecode(token);
+      return decodeToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] || null;
+    }
+    return null;
   }
 
   logOut():void{

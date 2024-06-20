@@ -53,7 +53,7 @@
               <option *ngFor="let i of range(5)" [value]="i">
                 {{ getStateLabel(i) }}
               </option>
-           
+
             </select>
             <label for="state">State</label>
             <div *ngIf="projectForm.get('state')?.invalid && projectForm.get('state')?.touched" class="text-danger">
@@ -62,12 +62,7 @@
           </div>
 
           <div class="form-floating mb-2 mt-2">
-            <input type="text" id="charityId" placeholder=" " class="form-control styled-input" formControlName="charityId">
-            <label for="charityId">Charity ID</label>
-            <div *ngIf="projectForm.get('charityId')?.invalid && projectForm.get('charityId')?.touched"
-              class="text-danger">
-              Charity ID is required.
-            </div>
+            <input type="hidden" id="charityId" placeholder=" " class="form-control styled-input" formControlName="charityId" [value]="nweProj.charityId">
           </div>
 
           <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Submit</button>
