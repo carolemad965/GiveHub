@@ -64,6 +64,8 @@ export class CharityRegisterComponent {
   handleForm(): void {
     if (this.registerForm.valid) {
       this.isLoading = true;
+      localStorage.setItem('charityName', this.registerForm.get('userName')?.value);
+      console.log(localStorage.getItem('charityName'));
       console.log(this.registerForm.value);
       this._AuthService.setRegister(this.userData).subscribe({
         next: (response) => {

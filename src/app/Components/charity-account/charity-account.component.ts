@@ -17,7 +17,7 @@ export class CharityAccountComponent {
   id: string = "";
   selectedFile: File | null = null;  // Changed type to File | null
   charityData = {
-    name: '',
+    name: localStorage.getItem('charityName') ?? '',
     description: '',
     websiteUrl: '',
     imgUrl: '',
@@ -30,12 +30,15 @@ export class CharityAccountComponent {
               private authservice: AuthService) { }
 
               ngOnInit() {
-                this._CharityService.getAccountID("sero").subscribe({
+                this._CharityService.getAccountID(this.charityData.name).subscribe({
                   next: (res) => {
+                    console.log(this.charityData.name);
                     console.log("Account ID:", res);  // Log the actual account ID
                   },
                   error: (err) => {
-                    console.log(err.error);
+                    console.log(this.charityData.name);
+                    console.log(this.charityData);
+                    console.log('error :',err);
                   }
                 });
               }
