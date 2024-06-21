@@ -18,6 +18,8 @@
           <p class="card-text">Description: {{ project.description }}</p>
           <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
           <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
+          <p class="card-text">Location: {{ project.location }}</p>
+          <p class="card-text">Category: {{ project.category }}</p>
           <p class="card-text">Status: {{ getStatusString(project.state) }}</p>
           <img *ngIf="project.imgUrl" class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
           <button class="donate-button ">Donate Now</button>
