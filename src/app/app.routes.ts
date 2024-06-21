@@ -26,9 +26,8 @@ import { CharityAccountComponent } from './Components/charity-account/charity-ac
 
 import { DonorProfileComponent } from './Components/donor-profile/donor-profile.component';
 import { authGuard } from './Guards/auth.guard';
+
 import { DonorAccountComponent } from './donor-account/donor-account.component';
-
-
 
 
 export const routes: Routes = [

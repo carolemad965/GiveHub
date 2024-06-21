@@ -6,10 +6,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
+
 .card-header {
   background-color: #77d986;
   color: white;
@@ -31,7 +28,13 @@
   margin-bottom: 10px;
 }
 
-
-/* .last-card {
-  min-height: 400px;
-} */
+.donate-button {
+  background-color: hsla(134, 50%, 50%, 0.856);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
