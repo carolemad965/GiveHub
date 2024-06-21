@@ -121,7 +121,7 @@ export class RegisterComponent {
           next: (response) => {
             this.isLoading = false;
             if (response.message == 'success') {
-              this._Router.navigate(['/login']);
+              this._Router.navigate(['/donorAccount']);
             }
           },
           error: (err: HttpErrorResponse) => {
