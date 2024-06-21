@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProjectService } from '../../Services/projectService/project.service';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
+import { NavWithSearchComponent } from '../nav-with-search/nav-with-search.component';
 enum ProjectState {
   Initiated,
   Completed,
@@ -13,7 +14,7 @@ enum ProjectState {
 @Component({
   selector: 'app-charity',
   standalone: true,
-  imports: [CommonModule, RouterModule,BlankNavbarComponent],
+  imports: [CommonModule, RouterModule,NavWithSearchComponent],
   templateUrl: './charity.component.html',
   styleUrl: './charity.component.css'
 })
