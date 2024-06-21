@@ -29,17 +29,16 @@ export class CharityAccountComponent {
               private _Router: Router,
               private authservice: AuthService) { }
 
-  ngOnInit() {
-    this._CharityService.getAccountID("sero").subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err.error);
-      }
-    });
-  }
-
+              ngOnInit() {
+                this._CharityService.getAccountID("sero").subscribe({
+                  next: (res) => {
+                    console.log("Account ID:", res);  // Log the actual account ID
+                  },
+                  error: (err) => {
+                    console.log(err.error);
+                  }
+                });
+              }
   charityForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -57,26 +56,63 @@ export class CharityAccountComponent {
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.charityForm.valid && this.selectedFile) {
-      const charityData = {
-        name: this.charityForm.get('name')?.value,
-        description: this.charityForm.get('description')?.value,
-        websiteUrl: this.charityForm.get('websiteUrl')?.value,
-        imgUrl: this.selectedFile.name
-      };
+      const charityName = this.charityForm.get('name')?.value;
+  
+      // Subscribe to the getAccountID method
+      this._CharityService.getAccountID(charityName).subscribe(
+        (accountId: any) => {
+          console.log("The iddddddddddddddd",accountId.message);
+          // After successfully getting the account ID, proceed with the rest of the form submission logic
+          const charityData = {
+            name: this.charityForm.get('name')?.value,
+            description: this.charityForm.get('description')?.value,
+            websiteUrl: this.charityForm.get('websiteUrl')?.value,
+            imgUrl: this.selectedFile,
+            applicationUserId: accountId.message
+          };
+  
+          const formData = new FormData();
+          formData.append('name', this.charityForm.get('name')?.value);
+          formData.append('description', this.charityForm.get('description')?.value);
+          formData.append('websiteUrl', this.charityForm.get('websiteUrl')?.value);
+          if (this.selectedFile) {
+            formData.append('imgUrl', this.selectedFile, this.selectedFile.name);
+          }
+          formData.append('applicationUserId', accountId.message);
 
-      console.log("the charity form data", charityData);
 
-      this._CharityService.addcharity(charityData).subscribe({
-        next: (response) => {
-          console.log(response.message);
-          this._Router.navigate([`/charity/${response.message.charityId}`]);
+
+
+
+
+
+          // Log the charity data
+          console.log("The charity form data", charityData);
+  
+          
+          
+          
+          
+          
+          //Submit the charity data
+          this._CharityService.addcharity(formData).subscribe({
+            next: (response) => {
+              console.log(response.message);
+        this._Router.navigate([`/charity/${response.message.charityId}`]);  // Assuming route structure
+            },
+            error: (error) => {
+              console.error('Error saving charity data:', error.error);
+            }
+          });
         },
-        error: (err) => {
-          console.error(err);
+        (error) => {
+          console.error('Error fetching account ID:', error);
+          // Handle error
         }
-      });
+      );
+    } else {
+      console.error('Form is invalid or file is not selected');
     }
-  }
-}
+  }}

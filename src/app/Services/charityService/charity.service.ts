@@ -18,7 +18,7 @@ export class CharityService {
   {
     return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${IdInt}`);
 
-
+  }
 
   getcharityById(id:number){
     return this._httpClient.get(`https://localhost:44377/api/charity/getByCharityId/${id}`)
@@ -39,8 +39,10 @@ return this._httpClient.post(`https://localhost:44377/api/charity`,charity);
   }
 
 
-  getAccountID(name:string){
-    return this._httpClient.get<string>(`https://localhost:44377/api/charity/getAccountID`);
+  getAccountID(name:string): Observable<string>{
+    let id=this._httpClient.get<string>(`https://localhost:44377/api/charity/getAccountID/${name}`);
+   console.log("the id is ",id)
+    return id;
 
   }
 }
