@@ -46,8 +46,8 @@ export class InkindDonationComponent {
    
     projectId: new FormControl(''),
     charityId: new FormControl(''),
-    itemDescription: new FormControl(''),
-    quantity: new FormControl(0, [Validators.required])
+    itemDescription: new FormControl('',[Validators.required]),
+    quantity: new FormControl('', [Validators.required])
     
   });
 
