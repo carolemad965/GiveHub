@@ -85,8 +85,9 @@ export class DonorComponent implements OnInit {
   // }
 
 
-  onMoneyDonate(projectId: number, charityId: number): void {
+  onMoneyDonate(projectId: number, projecttitle: string ,charityId: number): void {
     this.sharedService.setProjectId(projectId);
+    this.sharedService.setProjectName(projecttitle)
     this.sharedService.setCharityId(charityId);
     this.router.navigate(['/moneyDonation']);
   }

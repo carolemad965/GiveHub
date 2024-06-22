@@ -9,12 +9,7 @@ export class MoneyDonationService {
 
   constructor(private _httpClient:HttpClient) { }
 
-  postMoneyDonation(moneyDonation: any): Observable<any> {
-   
+  postMoneyDonation(moneyDonation: FormData): Observable<any> {
     return this._httpClient.post(`https://localhost:44377/api/MoneyDonation`, moneyDonation);
   }
-
-  // postMoneyDonation(moneyDonation: FormData): Observable<any> {
-  //   return this._httpClient.post(`https://localhost:44377/api/MoneyDonation`, moneyDonation);
-  // }
 }

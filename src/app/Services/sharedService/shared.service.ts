@@ -6,9 +6,15 @@ import { Injectable } from '@angular/core';
 export class SharedService {
   private projectId: number | null = null;
   private charityId: number | null = null;
-
+  private projectName :string ='';
   constructor() {}
 
+  setProjectName(name:string):void{
+    this.projectName=name;
+  }
+  getProjectName():string |null{
+    return this.projectName;
+  }
   setProjectId(id: number): void {
     this.projectId = id;
   }
