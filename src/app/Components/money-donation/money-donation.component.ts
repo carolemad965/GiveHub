@@ -1,116 +1,136 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {  FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MoneyDonationService } from '../../Services/moneyDonationSevice/money-donation.service';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 import { SharedService } from '../../Services/sharedService/shared.service';
 import { DonorService } from '../../Services/donorService/donor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-money-donation',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, BlankNavbarComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    BlankNavbarComponent,
+  ],
   templateUrl: './money-donation.component.html',
-  styleUrls: ['./money-donation.component.css']
+  styleUrls: ['./money-donation.component.css'],
 })
 export class MoneyDonationComponent implements OnInit {
-  moneyDonation: any = {
-    donationDate: '',
-    donorId: '',
-    
-    projectId: '',
-    charityId: '',
-    amount: '',
-    paymentMethod: ''
-  };
+  donationForm: FormGroup;
+  projectName: string | null = '';
+  paymentMethod: string = 'visa';
+  projectId: number = 0;
+  donorId: number = 0;
+  userId: string = '';
 
   constructor(
     private donorService: DonorService,
     private authService: AuthService,
     private moneyDonationService: MoneyDonationService,
     private sharedService: SharedService,
-    
-  ) {}
-
-  donationForm: FormGroup = new FormGroup({
-    donationDate: new FormControl('', [Validators.required]),
-    donorId: new FormControl(0, [Validators.required]),
-   
-    projectId: new FormControl(''),
-    charityId: new FormControl(''),
-    amount: new FormControl(0, [Validators.required]),
-    paymentMethod: new FormControl('')
-  });
-
-  ngOnInit(): void {
-    const userId = this.authService.getUserId();
-    console.log(' donor id:', userId);
-    
-    if (userId) {
-      this.donorService.getDonorID(userId).subscribe({
-        next: (id: number) => {
-          this.moneyDonation.donorId = id;
-          this.donationForm.get('donorId')?.setValue(id); // Set donor ID in form control
-          console.log("donor id:", id);
-        },
-        error: (err: HttpErrorResponse) => {
-          console.error('Failed to get donor ID:', err);
-        }
-      });
-    }
-
-    const projectId = this.sharedService.getProjectId();
-    if (projectId !== null) {
-      this.moneyDonation.projectId = projectId;
-      this.donationForm.get('projectId')?.setValue(projectId); 
-      console.log('project iiid here:', projectId);
-    }
-
-    const charityId = this.sharedService.getCharityId();
-    if (charityId !== null) {
-      this.moneyDonation.charityId = charityId;
-      this.donationForm.get('charityId')?.setValue(charityId); 
-      console.log('charity iiid here:', charityId);
-    }
-
-   
+    private fb: FormBuilder,
+    private _Router: Router
+  ) {
+    this.donationForm = this.fb.group({
+      amount: [0, [Validators.required, Validators.min(0)]],
+      fullName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      organization: ['', Validators.required],
+      paymentMethod: ['', Validators.required],
+      projectId: ['', Validators.required],
+      donorId: ['', Validators.required],
+      charityId: ['', Validators.required],
+    });
   }
 
-
+  ngOnInit(): void {
+    this.userId = this.authService.getUserId() as string;
+    console.log('userId:', this.userId);
+    if (this.userId !== null) {
+      this.donorService.GetDonorDetails(this.userId).subscribe({
+        next: (res) => {
+          console.log('message :', res.message);
+          this.donationForm.get('email')?.setValue(res.message.email);
+          this.donationForm.get('fullName')?.setValue(res.message.userName);
+          this.projectName = this.sharedService.getProjectName();
+          this.donationForm.get('organization')?.setValue(this.projectName);
+          console.log('project Name:', this.projectName);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      console.error('User ID is null');
+    }
+    this.donationForm.controls['paymentMethod'].setValue(this.paymentMethod);
+    console.log(this.paymentMethod);
+    console.log('Amount :', this.donationForm.controls['amount'].value);
+    const amount = this.donationForm.controls['amount'].value;
+    this.donationForm.controls['amount'].setValue(amount);
+    this.projectId = this.sharedService.getProjectId() as number;
+    this.donationForm.controls['projectId'].setValue(this.projectId);
+    this.donorService.getDonorID(this.userId).subscribe({
+      next: (res) => {
+        console.log('donor id :', res);
+        this.donorId = res;
+        this.donationForm.controls['donorId'].setValue(this.donorId);
+      },
+    });
+    const charityId = this.sharedService.getCharityId();
+    this.donationForm.controls['charityId'].setValue(charityId);
+    console.log(this.donationForm);
+  }
 
   onSubmit() {
     if (this.donationForm.valid) {
-      const donationData = {
-        donationDate: this.donationForm.get('donationDate')?.value,
-        donorId: this.donationForm.get('donorId')?.value,
-        projectId: this.donationForm.get('projectId')?.value,
-        charityId: this.donationForm.get('charityId')?.value,
-        amount: this.donationForm.get('amount')?.value,
-        paymentMethod: this.donationForm.get('paymentMethod')?.value
-      };
-  
-      
-  
-      this.moneyDonationService.postMoneyDonation(donationData).subscribe({
+      const formData = new FormData();
+      formData.append('donationDate', new Date().toISOString());
+      formData.append('donorId', this.donationForm.controls['donorId'].value);
+      formData.append(
+        'projectId',
+        this.donationForm.controls['projectId'].value
+      );
+      formData.append(
+        'charityId',
+        this.donationForm.controls['charityId'].value
+      );
+      formData.append('amount', this.donationForm.controls['amount'].value);
+      formData.append(
+        'paymentMethod',
+        this.donationForm.controls['paymentMethod'].value
+      );
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+      this.moneyDonationService.postMoneyDonation(formData).subscribe({
         next: (response) => {
           console.log('Done', response.message);
-          console.log("donation data is ", donationData);
+          console.log('donation data is ', formData);
+          alert('Donation Done successfully Thank You');
+          this._Router.navigate(['donor']);
         },
-        error: (err: HttpErrorResponse) => {
-          if (err.status == 400) {
-            console.log('Error:', err.error);
-          }
-        }
+        error: (err) => {
+          console.log('Error:', err.error);
+        },
       });
     }
   }
-  
 
-//  => this part if we want to pass form data but in back end json return  (unsupported media type error)
-
-
+  //  => this part if we want to pass form data but in back end json return  (unsupported media type error)
 
   // onSubmit() {
   //   if (this.donationForm.valid) {
@@ -135,6 +155,4 @@ export class MoneyDonationComponent implements OnInit {
   //     });
   //   }
   // }
-
-  
 }

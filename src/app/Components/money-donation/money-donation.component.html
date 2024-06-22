@@ -1,109 +1,144 @@
 <app-blank-navbar></app-blank-navbar>
-<br>
-<br>
-<br>
-<br>
+<br />
+<br />
+<br />
+<br />
 <div class="container">
-    <h1>It's Giving Season!</h1>
-    <h2>Just a dollar could save a soul</h2>
-    <img src="assets/Images/moneyDonation.jpg" alt="Donation Banner" class="banner">
-    <form action="#" method="post">
-        <div class="section">
-            <label for="amount">Donate</label>
-            <input type="text" id="amount" name="amount" placeholder="USD">
+  <h1>It's Giving Season!</h1>
+  <h2>Just a dollar could save a soul</h2>
+  <img
+    src="assets/Images/moneyDonation.jpg"
+    alt="Donation Banner"
+    class="banner"
+  />
+  <form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+    <div class="section">
+      <label for="amount">Donate</label>
+      <input
+        type="number"
+        min="0"
+        id="amount"
+        class="text input-amount"
+        name="amount"
+        placeholder="USD"
+        formControlName="amount"
+      />
+    </div>
+    <div class="section">
+      <label for="payment-method">Payment Method</label>
+      <div class="row payment-method">
+        <div class="column">
+          <input
+            type="radio"
+            id="visa"
+            formControlName="paymentMethod"
+            name="paymentMethod"
+            value="visa"
+            [(ngModel)]="paymentMethod"
+          />
+          <label for="visa"
+            ><img src="assets/Images/visa.jpg" alt="Visa" class="payment-img"
+          /></label>
         </div>
-        <div class="section">
-            <h3>Credit Card Details</h3>
-            <div class="row">
-                <div class="column">
-                    <label for="cc-first-name">First Name</label>
-                    <input type="text" id="cc-first-name" name="cc-first-name">
-                </div>
-                <div class="column">
-                    <label for="cc-last-name">Last Name</label>
-                    <input type="text" id="cc-last-name" name="cc-last-name">
-                </div>
-            </div>
-            <div class="row">
-                <label for="cc-number">Credit Card Number</label>
-                <input type="text" id="cc-number" name="cc-number">
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="cc-cvv">Security Code</label>
-                    <input type="text" id="cc-cvv" name="cc-cvv">
-                </div>
-                <div class="column">
-                    <label for="cc-exp-month">Expiration Month</label>
-                    <select id="cc-exp-month" name="cc-exp-month">
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-                <div class="column">
-                    <label for="cc-exp-year">Expiration Year</label>
-                    <select id="cc-exp-year" name="cc-exp-year">
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                    </select>
-                </div>
-            </div>
+        <div class="column">
+          <input
+            type="radio"
+            id="mastercard"
+            formControlName="paymentMethod"
+            name="paymentMethod"
+            value="mastercard"
+            [(ngModel)]="paymentMethod"
+          />
+          <label for="mastercard"
+            ><img
+              src="assets/Images/MasterCard_Logo.svg.png"
+              alt="MasterCard"
+              class="payment-img"
+          /></label>
         </div>
-        <div class="section">
-            <label for="full-name">Full Name</label>
-            <div class="row">
-                <div class="column">
-                    <input type="text" id="first-name" name="first-name" placeholder="First Name">
-                </div>
-                <div class="column">
-                    <input type="text" id="last-name" name="last-name" placeholder="Last Name">
-                </div>
-            </div>
+        <div class="column">
+          <input
+            type="radio"
+            id="paypal"
+            formControlName="paymentMethod"
+            name="paymentMethod"
+            value="paypal"
+            [(ngModel)]="paymentMethod"
+          />
+          <label for="paypal"
+            ><img
+              src="assets/Images/paypal.png"
+              alt="PayPal"
+              class="payment-img"
+          /></label>
         </div>
-        <div class="section">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="example@example.com">
+      </div>
+      <div
+        *ngIf="
+          donationForm.get('paymentMethod')?.invalid &&
+          donationForm.get('paymentMethod')?.touched
+        "
+      >
+        Payment method is required
+      </div>
+    </div>
+    <div class="section">
+      <label for="full-name">Full Name</label>
+      <div class="row">
+        <div class="column">
+          <input
+            type="text"
+            readonly
+            id="full-name"
+            formControlName="fullName"
+            placeholder="Full Name"
+          />
+          <div
+            *ngIf="
+              donationForm.get('fullName')?.invalid &&
+              donationForm.get('fullName')?.touched
+            "
+          >
+            Full name is required
+          </div>
         </div>
-        <div class="section">
-            <label for="address">Donation Address</label>
-            <input type="text" id="address1" name="address1" placeholder="Street Address">
-            <input type="text" id="address2" name="address2" placeholder="Street Address Line 2">
-            <div class="row">
-                <div class="column">
-                    <input type="text" id="city" name="city" placeholder="City">
-                </div>
-                <div class="column">
-                    <input type="text" id="state" name="state" placeholder="State / Province">
-                </div>
-                <div class="column">
-                    <input type="text" id="postal-code" name="postal-code" placeholder="Postal / Zip Code">
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="section">
+      <label for="email">E-mail</label>
+      <input
+        type="email"
+        readonly
+        id="email"
+        formControlName="email"
+        placeholder="example@example.com"
+      />
+      <div
+        *ngIf="
+          donationForm.get('email')?.invalid &&
+          donationForm.get('email')?.touched
+        "
+      >
+        <div *ngIf="donationForm.get('email')?.errors?.['required']">
+          Email is required
         </div>
-        <div class="section">
-            <label for="organization">Organization</label>
-            <input type="text" id="organization" name="organization">
+        <div *ngIf="donationForm.get('email')?.errors?.['email']">
+          Invalid email format
         </div>
-        <div class="section">
-            <label for="fund">Which Fund?</label>
-            <select id="fund" name="fund">
-                <option value="">Please Select</option>
-                <!-- Add options here -->
-            </select>
-        </div>
-        <button type="submit" class="btn">Donate</button>
-    </form>
+      </div>
+    </div>
+    <div class="section">
+      <label for="organization">Project</label>
+      <input
+        type="text"
+        readonly
+        id="organization"
+        name="organization"
+        formControlName="organization"
+      />
+    </div>
+    <button type="submit" [disabled]="donationForm.invalid" class="btn">
+      Donate
+    </button>
+  </form>
 </div>

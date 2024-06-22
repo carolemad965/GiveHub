@@ -86,3 +86,42 @@ select {
 .btn:hover {
     background-color: #218838;
 }
+.payment-method .column {
+    display: flex;
+    align-items: center;
+  }
+  
+  .payment-method img {
+    width: 50px; /* Adjust the width as needed */
+    height: auto;
+    margin-left: 10px;
+  }
+  
+  .payment-method input[type="radio"] {
+    margin-right: 10px;
+  }
+  /* CSS for the input field */
+.input-amount {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  /* CSS for the section */
+  .section {
+    margin-bottom: 15px;
+  }
+  
+  /* CSS for the label */
+  .section label {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  

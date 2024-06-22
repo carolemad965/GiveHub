@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,11 @@ createDonor(donor:any){
 getDonorID(id:string)
   {
     return this._httpclient.get<number>(`https://localhost:44377/api/Donor/getDonorId/${id}`);
-
-
   }
-
+  GetDonorDetails(userId:string):Observable<any>
+  {
+    return this._httpclient.get<any>(`https://localhost:44377/api/Donor/GetDonorDetails/${userId}`);
+  }
 
   getDonorDetails(userId:string)
   {
