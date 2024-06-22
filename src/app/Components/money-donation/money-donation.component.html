@@ -12,16 +12,24 @@
     class="banner"
   />
   <form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+    <div class="donor-info my-3">
+        <div class="donor-details">
+            <p><strong>Donor Name:</strong> {{ donorName }}</p>
+            <p><strong>Donor Email:</strong> {{ donorEmail }}</p>
+        </div>
+        <p><strong>Project Name:</strong> {{ projectName }}</p>
+    </div>
     <div class="section">
       <label for="amount">Donate</label>
       <input
         type="number"
         min="0"
         id="amount"
-        class="text input-amount"
+        class="text input-amount form-control"
         name="amount"
         placeholder="USD"
         formControlName="amount"
+
       />
     </div>
     <div class="section">
@@ -82,63 +90,12 @@
         Payment method is required
       </div>
     </div>
-    <div class="section">
-      <label for="full-name">Full Name</label>
-      <div class="row">
-        <div class="column">
-          <input
-            type="text"
-            readonly
-            id="full-name"
-            formControlName="fullName"
-            placeholder="Full Name"
-          />
-          <div
-            *ngIf="
-              donationForm.get('fullName')?.invalid &&
-              donationForm.get('fullName')?.touched
-            "
-          >
-            Full name is required
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <label for="email">E-mail</label>
-      <input
-        type="email"
-        readonly
-        id="email"
-        formControlName="email"
-        placeholder="example@example.com"
-      />
-      <div
-        *ngIf="
-          donationForm.get('email')?.invalid &&
-          donationForm.get('email')?.touched
-        "
-      >
-        <div *ngIf="donationForm.get('email')?.errors?.['required']">
-          Email is required
-        </div>
-        <div *ngIf="donationForm.get('email')?.errors?.['email']">
-          Invalid email format
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <label for="organization">Project</label>
-      <input
-        type="text"
-        readonly
-        id="organization"
-        name="organization"
-        formControlName="organization"
-      />
-    </div>
-    <button type="submit" [disabled]="donationForm.invalid" class="btn">
+    <button type="submit" [disabled]="donationForm.invalid" class="btn tn-primary">
       Donate
     </button>
   </form>
 </div>
+<br>
+<br>
+<br>
+<app-footer></app-footer>

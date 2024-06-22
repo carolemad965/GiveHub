@@ -75,16 +75,18 @@ select {
 }
 
 .btn {
-    background-color: #28a745;
-    color: #fff;
-    padding: 10px;
+    background-color: hsla(134, 50%, 50%, 0.856);
+    color: #000000;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
 }
 
 .btn:hover {
-    background-color: #218838;
+    background-color: #1e7e34;
 }
 .payment-method .column {
     display: flex;
@@ -100,7 +102,7 @@ select {
   .payment-method input[type="radio"] {
     margin-right: 10px;
   }
-  /* CSS for the input field */
+
 .input-amount {
     width: 100%;
     padding: 10px;
@@ -124,4 +126,46 @@ select {
     margin-bottom: 5px;
     display: block;
   }
+
+
+  .donor-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    text-align: left;
+    margin-bottom: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.donor-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Align items with space between them */
+}
+
+.donor-details p {
+    margin: 10px 0;
+}
+
+.donor-info p {
+    margin: 10px 0;
+}
+
+
+.donor-details {
+    flex: 1; /* Allows this div to take up remaining space */
+}
+
+.donor-info p {
+    margin: 10px 0;
+}
+
+.form-control:focus {
+    border-color: hsla(134, 50%, 50%, 0.856);
+    box-shadow: 0 0 8px  hsla(134, 50%, 50%, 0.856);
+    outline: none;
+}
   

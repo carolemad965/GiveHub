@@ -15,6 +15,7 @@ import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 import { SharedService } from '../../Services/sharedService/shared.service';
 import { DonorService } from '../../Services/donorService/donor.service';
 import { Router } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-money-donation',
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     CommonModule,
     BlankNavbarComponent,
+    FooterComponent
   ],
   templateUrl: './money-donation.component.html',
   styleUrls: ['./money-donation.component.css'],
@@ -31,10 +33,12 @@ import { Router } from '@angular/router';
 export class MoneyDonationComponent implements OnInit {
   donationForm: FormGroup;
   projectName: string | null = '';
-  paymentMethod: string = 'visa';
+  paymentMethod: string = '';
   projectId: number = 0;
   donorId: number = 0;
   userId: string = '';
+  donorName: string = ''; 
+  donorEmail: string = ''; 
 
   constructor(
     private donorService: DonorService,
@@ -45,7 +49,7 @@ export class MoneyDonationComponent implements OnInit {
     private _Router: Router
   ) {
     this.donationForm = this.fb.group({
-      amount: [0, [Validators.required, Validators.min(0)]],
+      amount: ['', [Validators.required, Validators.min(0)]],
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       organization: ['', Validators.required],
@@ -60,9 +64,11 @@ export class MoneyDonationComponent implements OnInit {
     this.userId = this.authService.getUserId() as string;
     console.log('userId:', this.userId);
     if (this.userId !== null) {
-      this.donorService.GetDonorDetails(this.userId).subscribe({
+      this.donorService.getDonorDetails(this.userId).subscribe({
         next: (res) => {
           console.log('message :', res.message);
+          this.donorEmail=res.message.email;
+          this.donorName=res.message.userName;
           this.donationForm.get('email')?.setValue(res.message.email);
           this.donationForm.get('fullName')?.setValue(res.message.userName);
           this.projectName = this.sharedService.getProjectName();
