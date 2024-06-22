@@ -20,4 +20,12 @@ createDonor(donor:any){
   return this._httpclient.post(`https://localhost:44377/api/Donor`,donor);
 }
 
+getDonorID(id:string)
+  {
+    return this._httpclient.get<number>(`https://localhost:44377/api/Donor/getDonorId/${id}`);
+
+
+  }
+
+
 }

@@ -102,7 +102,7 @@ export class CharityAccountComponent {
           this._CharityService.addcharity(formData).subscribe({
             next: (response) => {
               console.log(response.message);
-        this._Router.navigate([`/charity/${response.message.charityId}`]);  // Assuming route structure
+        this._Router.navigate([`/login`]);  // Assuming route structure
             },
             error: (error) => {
               console.error('Error saving charity data:', error.error);

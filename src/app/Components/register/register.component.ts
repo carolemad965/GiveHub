@@ -70,7 +70,7 @@ export class RegisterComponent {
           this.isLoading = false;
           if(response.isPass==true)
             {
-              this._Router.navigate(['/login']);
+              this._Router.navigate(['/donoraccount']);
             }
             
         },

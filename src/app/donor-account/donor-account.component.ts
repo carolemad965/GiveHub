@@ -60,7 +60,7 @@ export class DonorAccountComponent {
             response => {
               this.isLoading = false;
            
-              this._Router.navigate(['/charities']);  // Adjust the route as needed
+              this._Router.navigate(['/login']);  // Adjust the route as needed
             },
             error => {
               this.isLoading = false;

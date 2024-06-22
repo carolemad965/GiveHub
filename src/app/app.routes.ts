@@ -28,6 +28,7 @@ import { DonorProfileComponent } from './Components/donor-profile/donor-profile.
 import { authGuard } from './Guards/auth.guard';
 
 import { DonorAccountComponent } from './donor-account/donor-account.component';
+import { MoneyDonationComponent } from './Components/money-donation/money-donation.component';
 
 
 export const routes: Routes = [
@@ -48,7 +49,8 @@ export const routes: Routes = [
       { path: 'charityAccount', component: CharityAccountComponent },
       { path: 'charity-details/:id', component: CharityDetailsComponent },
       { path: 'profile/:id', component: DonorProfileComponent }
-      ,{path:'donoraccount',component:DonorAccountComponent}
+      ,{path:'donoraccount',component:DonorAccountComponent},
+      {path :'moneyDonation',component:MoneyDonationComponent}
     ]
   },
   {

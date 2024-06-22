@@ -1,14 +1,13 @@
-
 <app-blank-navbar></app-blank-navbar>
 <br>
 <br>
 <br>
 
-<div class="mt-5" >
+<div class="mt-5">
   <div class="container" style="padding-bottom: 50px;">
     <div class="row">
       <div class="col-md-6">
-        <h1 style="width: 700; font-size: 50px;" >Projects Page</h1>
+        <h1 style="width: 700; font-size: 50px;">Projects Page</h1>
       </div>
       <div class="col-md-6">
         <p>Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
@@ -29,9 +28,11 @@
               <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
               <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
               <p class="card-text">State: {{ getStateString(project.state) }}</p>
-              <button class="donate-button">Donate Now</button>
+              <div class="d-flex justify-content-between">
+                <button class="donate-button custom-button flex-grow-1 mr-2" (click)="onMoneyDonate(project.id, project.charityId)">Money Donation</button>
+                <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId)">In-Kind Donation</button>
+              </div>
             </div>
-          
           </div>
         </div>
       </div>
