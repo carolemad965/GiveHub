@@ -8,8 +8,7 @@
             <input type="text" formControlName="userName" id="userName" class="form-control styled-input" [(ngModel)]="userData.userName" #InputName>
             <div class="alert alert-danger" *ngIf="logInForm.get('userName')?.errors && (logInForm.get('userName')?.touched || InputName.value.length > 0)">
               <p *ngIf="logInForm.get('userName')?.getError('required')">Name is required</p>
-              <p *ngIf="logInForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
-              <p *ngIf="logInForm.get('userName')?.getError('maxlength')">Name Max length is 20</p>
+            
             </div>
           </div>
   
@@ -18,7 +17,6 @@
             <input type="password" formControlName="password" id="password" class="form-control styled-input" [(ngModel)]="userData.password" #InputPassword>
             <div class="alert alert-danger" *ngIf="logInForm.get('password')?.errors && (logInForm.get('password')?.touched || InputPassword.value.length > 0)">
               <p *ngIf="logInForm.get('password')?.getError('required')">Password is required</p>
-              <p *ngIf="logInForm.get('password')?.getError('pattern')">Password is invalid</p>
             </div>
           </div>
   
