@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { NgIf } from '@angular/common';
 import { NavCharityRegisterComponent } from '../nav-charity-register/nav-charity-register.component';
+import { CharityService } from '../../Services/charityService/charity.service';
 
 @Component({
     selector: 'app-charity-register',
@@ -22,7 +23,7 @@ export class CharityRegisterComponent {
   };
   msgError: string = '';
   isLoading: boolean = false;
-  constructor(private _AuthService: AuthService, private _Router: Router,private _ngZone: NgZone) { }
+  constructor(private _AuthService: AuthService, private _Router: Router,private _ngZone: NgZone,private charityServics:CharityService) { }
   registerForm: FormGroup = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -63,6 +64,8 @@ export class CharityRegisterComponent {
   handleForm(): void {
     if (this.registerForm.valid) {
       this.isLoading = true;
+      localStorage.setItem('charityName', this.registerForm.get('userName')?.value);
+      console.log(localStorage.getItem('charityName'));
       console.log(this.registerForm.value);
       this._AuthService.setRegister(this.userData).subscribe({
         next: (response) => {
@@ -70,7 +73,11 @@ export class CharityRegisterComponent {
           this.isLoading = false;
           if(response.isPass==true)
             {
-              this._Router.navigate(['/logincharity']);
+            
+console.log(this.charityServics.getAccountID(response.message.userName));
+this.charityServics.getAccountID(response.message.userName);
+
+              this._Router.navigate(['/charityAccount']);
             }
             
         },

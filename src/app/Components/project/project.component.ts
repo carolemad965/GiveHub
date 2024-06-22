@@ -26,7 +26,9 @@ export class ProjectComponent {
     amountRaised:'0',
     imgPath :'',
     state:'Initiated',
-    charityId:''
+    charityId:'',
+    location:'',
+    category:''
   };
   id:number=0
   constructor(private _ProjectService: ProjectService, private _Router: Router,private charitySerice:CharityService,private authservice:AuthService) {}
@@ -55,6 +57,8 @@ export class ProjectComponent {
     description: new FormControl('', [Validators.required]),
     fundingGoal: new FormControl('', [Validators.required]),
     amountRaised: new FormControl(0, [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
     imgPath: new FormControl('', [Validators.required]),
     state: new FormControl(0, [Validators.required]),
      charityId: new FormControl('')
@@ -96,6 +100,8 @@ export class ProjectComponent {
     formData.append('description', this.projectForm.get('description')?.value);
     formData.append('fundingGoal', this.projectForm.get('fundingGoal')?.value);
     formData.append('amountRaised', this.projectForm.get('amountRaised')?.value);
+    formData.append('location', this.projectForm.get('location')?.value);
+    formData.append('category', this.projectForm.get('category')?.value);
     formData.append('imgPath', this.selectedFile); // Append the actual file
     formData.append('state', this.projectForm.get('state')?.value);
     formData.append('charityId', this.nweProj.charityId); // Include charityId

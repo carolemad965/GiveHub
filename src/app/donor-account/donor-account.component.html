@@ -1,0 +1,35 @@
+<div class="flex min-h-screen signup">
+  <div class="flex-1 items-center text-grey-darkest min-h-screen h-full p-6 sm:p-12 md:p-12 lg:p-20 flex">
+      <div class="w-full md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Form Section -->
+          <div>
+              <h1 class="mb-4 custom-title dntly_header">Add Charity Details</h1>
+              <form [formGroup]="donorForm" (ngSubmit)="onSubmit()" class="custom-form">
+                  <div class="form-floating mb-2 mt-2">
+                      <input type="text" formControlName="name" id="name" class="form-control styled-input" placeholder=" " [(ngModel)]="donorData.name">
+                      <label for="name">donor Name</label>
+                      <div class="text-danger" *ngIf="donorForm.get('name')?.errors && (donorForm.get('name')?.touched || donorForm.get('name')?.dirty)">
+                          <p *ngIf="donorForm.get('name')?.getError('required')">Name is required</p>
+                      </div>
+                  </div>
+                  <div class="form-floating mb-2 mt-2">
+                      <input type="file" formControlName="imgUrl" id="imgUrl" class="form-control styled-input" (change)="onFileChange($event)">
+                      <label for="imgUrl">Image Path</label>
+                      <div class="text-danger" *ngIf="donorForm.get('imgUrl')?.errors && (donorForm.get('imgUrl')?.touched || donorForm.get('imgUrl')?.dirty)">
+                          <p *ngIf="donorForm.get('imgUrl')?.getError('required')">Image Path is required</p>
+                      </div>
+                  </div>
+                  <button class="active-link btn btn-primary w-100 text-light mt-5 mb-5">
+                      <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+                      Create Project
+                  </button>
+                  <p class="text-danger" *ngIf="msgError">{{msgError}}</p>
+              </form>
+          </div>
+          <!-- Image Section -->
+          <div class="image-container">
+              <img src="assets/Images/cha.png" alt="donation Image" class="w-full h-auto">
+          </div>
+      </div>
+  </div>
+</div>

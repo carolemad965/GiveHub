@@ -11,15 +11,21 @@ import { Observable } from 'rxjs';
 export class AuthService {
   userData: any;
 
+  accountType: string | null = null;
+
   constructor(private _HttpClient: HttpClient, private _Router: Router) { }
+
 
   setRegister(userData: any): Observable<any> {
     return this._HttpClient.post(`https://localhost:44377/api/Account/register`, userData);
+
   }
 
   setLogIn(userData: any): Observable<any> {
-    return this._HttpClient.post(`https://localhost:44377/api/Account/log-in`, userData);
+    return this._HttpClient.post(`https://localhost:44377/api/Account/log-in`, userData)
   }
+
+ 
 
   decodeUserData(): void {
     const token = localStorage.getItem('eToken');
@@ -28,11 +34,16 @@ export class AuthService {
         const decodedToken: any = jwtDecode(token);
         this.userData = decodedToken;
         console.log('Decoded token:', decodedToken);
+         let userId = this.getUserId();
+      let userAccountType = this.getUserAccountType();
+      console.log(userId);
+      console.log(userAccountType);
       } catch (error) {
         console.error('Invalid token:', error);
       }
     } else {
       console.error('No token found in localStorage.');
+
     }
   }
 
@@ -48,8 +59,12 @@ export class AuthService {
   getUserAccountType(): string | null {
     const token = localStorage.getItem('eToken');
     if (token) {
+
+     // const decodedToken: JwtPayload & { [key: string]: any } = jwtDecode(token);
+      
       const decodedToken: any = jwtDecode(token);
       return decodedToken["AccountType"] || null;
+console.log(token);
     }
     return null;
   }

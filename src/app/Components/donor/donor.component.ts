@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../Services/projectService/project.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
+import { SharedService } from '../../Services/sharedService/shared.service';
 
 enum ProjectState {
   Initiated,
@@ -14,7 +16,7 @@ enum ProjectState {
 @Component({
   selector: 'app-donor',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,BlankNavbarComponent, RouterOutlet],
   templateUrl: './donor.component.html',
   styleUrls: ['./donor.component.css']
 })
@@ -23,7 +25,7 @@ export class DonorComponent implements OnInit {
   currentPage: number = 1;
   PagesAvailable: boolean = true;
 
-  constructor(private _projectService: ProjectService) {}
+  constructor(private _projectService: ProjectService, private sharedService:SharedService, private router:Router) {}
 
   ngOnInit(): void {
     this.getProjects(this.currentPage);
@@ -73,5 +75,27 @@ export class DonorComponent implements OnInit {
       default:
         return 'Unknown';
     }
+  }
+
+  // onDonateNow(projectId: number, charityId: number): void {
+  //   this.sharedService.setProjectId(projectId);
+  //   this.sharedService.setCharityId(charityId);
+    
+  //   this.router.navigate(['/moneyDonation']);
+  // }
+
+
+  onMoneyDonate(projectId: number, projecttitle: string ,charityId: number): void {
+    this.sharedService.setProjectId(projectId);
+    this.sharedService.setProjectName(projecttitle)
+    this.sharedService.setCharityId(charityId);
+    this.router.navigate(['/moneyDonation']);
+  }
+
+  onInKindDonate(projectId: number, charityId: number, projectName:string): void {
+    this.sharedService.setProjectId(projectId);
+    this.sharedService.setCharityId(charityId);
+    this.sharedService.setProjectName(projectName);
+    this.router.navigate(['/inkindDonation']);
   }
 }

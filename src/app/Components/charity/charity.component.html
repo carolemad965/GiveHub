@@ -1,10 +1,36 @@
-<div class="container mt-5">
+<app-nav-with-search class="m-5"></app-nav-with-search>
+<br><br>
+<div class="container mt-5 mb-5">
   <div class="row">
     <div class="col">
-      <h1 style="font-size: 50px;">Projects of Our Charity</h1>
+      <h1 style="font-size: 50px;" class="mb-5">Projects of Our Charity</h1>
     </div>
   </div>
-
+  <!-- <div class="s003">
+    <form>
+      <div class="inner-form">
+        <div class="input-field first-wrap">
+          <div class="input-select">
+            <select data-trigger="" name="choices-single-defaul">
+              <option placeholder="">Category</option>
+              <option>Location</option>
+              <option>Budget</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-field second-wrap">
+          <input id="search" type="text"  />
+        </div>
+        <div class="input-field third-wrap">
+          <button class="btn-search" type="button">
+            <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div> -->
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let project of projects">
       <div class="card h-100">
@@ -15,21 +41,27 @@
           <p class="card-text">Description: {{ project.description }}</p>
           <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
           <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
+          <p class="card-text">Location: {{ project.location }}</p>
+          <p class="card-text">Category: {{ project.category }}</p>
           <p class="card-text">Status: {{ getStatusString(project.state) }}</p>
-
           <img *ngIf="project.imgUrl" class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
+          <!-- <button class="donate-button ">Donate Now</button> -->
+
         </div>
       </div>
     </div>
   </div>
+</div>
 
- 
-  
-  <div class="row">
-    <div class="col">
-      <a [routerLink]="['/project']" class="btn btn-dark">Add New Project</a>
-    </div>
-  </div>
-
-
+<div class="pagination-container mt-5 mb-5">
+  <nav aria-label="Project pagination">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage - 1)" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="!PagesAvailable">
+        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>
