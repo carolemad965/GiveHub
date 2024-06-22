@@ -7,6 +7,8 @@ export class SharedService {
   private projectId: number | null = null;
   private charityId: number | null = null;
 
+  private projectName: string | null = null;
+
   constructor() {}
 
   setProjectId(id: number): void {
@@ -23,5 +25,13 @@ export class SharedService {
 
   getCharityId(): number | null {
     return this.charityId;
+  }
+
+  setProjectName(name: string): void {
+    this.projectName= name;
+  }
+
+  getProjectName(): string | null {
+    return this.projectName;
   }
 }

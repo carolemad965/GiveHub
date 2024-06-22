@@ -1,109 +1,54 @@
 <app-blank-navbar></app-blank-navbar>
 <br>
 <br>
-<br>
-<br>
+
+
 <div class="container">
-    <h1>It's Giving Season!</h1>
-    <h2>Just a dollar could save a soul</h2>
-    <img src="assets/Images/nkind donation.jpg" alt="Donation Banner" class="banner">
-    <form action="#" method="post">
-        <div class="section">
-            <label for="amount">Donate</label>
-            <input type="text" id="amount" name="amount" placeholder="USD">
-        </div>
-        <div class="section">
-            <h3>Credit Card Details</h3>
-            <div class="row">
-                <div class="column">
-                    <label for="cc-first-name">First Name</label>
-                    <input type="text" id="cc-first-name" name="cc-first-name">
+    <div class="content">
+        <div class="form-section">
+            <h1>It's Giving Season!</h1>
+           
+            <div class="donor-info">
+                <div class="donor-details">
+                    <p><strong>Donor Name:</strong> {{ donorName }}</p>
+                    <p><strong>Donor Email:</strong> {{ donorEmail }}</p>
                 </div>
-                <div class="column">
-                    <label for="cc-last-name">Last Name</label>
-                    <input type="text" id="cc-last-name" name="cc-last-name">
-                </div>
+                <p><strong>Project Name:</strong> {{ projectName }}</p>
             </div>
-            <div class="row">
-                <label for="cc-number">Credit Card Number</label>
-                <input type="text" id="cc-number" name="cc-number">
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="cc-cvv">Security Code</label>
-                    <input type="text" id="cc-cvv" name="cc-cvv">
+            
+          
+            
+            <form [formGroup]="donationForm" (ngSubmit)="onSubmit()" class="donation-form">
+                <div class="form-group">
+                    <label for="donationDate">Donation Date</label>
+                    <input type="date" id="donationDate" formControlName="donationDate" class="form-control">
+                    <div *ngIf="donationForm.get('donationDate')?.invalid && donationForm.get('donationDate')?.touched" class="text-danger">
+                        Donation Date is required.
+                    </div>
                 </div>
-                <div class="column">
-                    <label for="cc-exp-month">Expiration Month</label>
-                    <select id="cc-exp-month" name="cc-exp-month">
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
+                <div class="input-group">
+                    <div class="form-group half-width">
+                        <label for="itemDescription">Item Description</label>
+                        <input type="text" id="itemDescription" formControlName="itemDescription" class="form-control">
+                        <div *ngIf="donationForm.get('itemDescription')?.invalid && donationForm.get('itemDescription')?.touched" class="text-danger">
+                            Item Description is required.
+                        </div>
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" formControlName="quantity" class="form-control">
+                        <div *ngIf="donationForm.get('quantity')?.invalid && donationForm.get('quantity')?.touched" class="text-danger">
+                            Quantity is required and must be greater than 0.
+                        </div>
+                    </div>
                 </div>
-                <div class="column">
-                    <label for="cc-exp-year">Expiration Year</label>
-                    <select id="cc-exp-year" name="cc-exp-year">
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                    </select>
-                </div>
-            </div>
+                <button type="submit" class="btn btn-primary " [disabled]="donationForm.invalid">Donate</button>
+            </form>
         </div>
-        <div class="section">
-            <label for="full-name">Full Name</label>
-            <div class="row">
-                <div class="column">
-                    <input type="text" id="first-name" name="first-name" placeholder="First Name">
-                </div>
-                <div class="column">
-                    <input type="text" id="last-name" name="last-name" placeholder="Last Name">
-                </div>
-            </div>
+        <div class="image-section">
+            <img src="assets/Images/nkind donation.jpg" alt="Donation Banner" class="banner">
         </div>
-        <div class="section">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="example@example.com">
-        </div>
-        <div class="section">
-            <label for="address">Donation Address</label>
-            <input type="text" id="address1" name="address1" placeholder="Street Address">
-            <input type="text" id="address2" name="address2" placeholder="Street Address Line 2">
-            <div class="row">
-                <div class="column">
-                    <input type="text" id="city" name="city" placeholder="City">
-                </div>
-                <div class="column">
-                    <input type="text" id="state" name="state" placeholder="State / Province">
-                </div>
-                <div class="column">
-                    <input type="text" id="postal-code" name="postal-code" placeholder="Postal / Zip Code">
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <label for="organization">Organization</label>
-            <input type="text" id="organization" name="organization">
-        </div>
-        <div class="section">
-            <label for="fund">Which Fund?</label>
-            <select id="fund" name="fund">
-                <option value="">Please Select</option>
-                <!-- Add options here -->
-            </select>
-        </div>
-        <button type="submit" class="btn">Donate</button>
-    </form>
+    </div>
 </div>
+
+<app-footer></app-footer>

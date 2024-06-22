@@ -28,4 +28,9 @@ getDonorID(id:string)
   }
 
 
+  getDonorDetails(userId:string)
+  {
+    return this._httpclient.get<string>(`https://localhost:44377/api/Donor/GetDonorDetails/${userId}`);
+  }
+
 }

@@ -91,9 +91,10 @@ export class DonorComponent implements OnInit {
     this.router.navigate(['/moneyDonation']);
   }
 
-  onInKindDonate(projectId: number, charityId: number): void {
+  onInKindDonate(projectId: number, charityId: number, projectName:string): void {
     this.sharedService.setProjectId(projectId);
     this.sharedService.setCharityId(charityId);
-   // this.router.navigate(['/inKindDonation']);
+    this.sharedService.setProjectName(projectName);
+    this.router.navigate(['/inkindDonation']);
   }
 }

@@ -30,7 +30,7 @@
               <p class="card-text">State: {{ getStateString(project.state) }}</p>
               <div class="d-flex justify-content-between">
                 <button class="donate-button custom-button flex-grow-1 mr-2" (click)="onMoneyDonate(project.id, project.charityId)">Money Donation</button>
-                <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId)">In-Kind Donation</button>
+                <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId, project.title)">In-Kind Donation</button>
               </div>
             </div>
           </div>

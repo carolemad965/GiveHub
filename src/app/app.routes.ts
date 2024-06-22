@@ -52,7 +52,7 @@ export const routes: Routes = [
       { path: 'profile/:id', component: DonorProfileComponent }
       ,{path:'donoraccount',component:DonorAccountComponent},
       {path :'moneyDonation',component:MoneyDonationComponent},
-      {path:'InkindDonation',component:InkindDonationComponent}
+      {path:'inkindDonation',component:InkindDonationComponent}
     ]
   },
   {
