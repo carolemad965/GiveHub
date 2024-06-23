@@ -13,4 +13,5 @@ export class CategoryService {
   {
     return this.httpClient.get(`https://localhost:44377/api/Category`);
   }
+  
 }

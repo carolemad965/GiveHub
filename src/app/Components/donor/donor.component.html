@@ -3,52 +3,65 @@
 <br>
 <br>
 
-<div class="mt-5">
-  <div class="container" style="padding-bottom: 50px;">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 style="width: 700; font-size: 50px;">Projects Page</h1>
-      </div>
-      <div class="col-md-6">
-        <p>Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
-      </div>
+<div class="container" style="padding-bottom: 50px;">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 style="font-weight: 700; font-size: 50px;">Projects Page</h1>
+    </div>
+    <div class="col-md-6">
+      <p>Our customizable donation pages and peer-to-peer fundraising campaigns are the perfect tools to add to your online fundraising arsenal.</p>
     </div>
   </div>
-  <div style="background-color: rgba(229, 234, 235, 0.447);">
-    <div class="container" style="padding-top: 20px;">
-      <div class="row">
-        <div class="col-md-4 mb-4" *ngFor="let project of projects; let last = last">
-          <div class="card" [ngClass]="{'last-card': last}">
-            <div class="card-header">
-              <h5 class="card-title">{{ project.title }}</h5>
-            </div>
-            <div class="card-body">
-              <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
-              <p class="card-text">{{ project.description }}</p>
-              <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
-              <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
-              <p class="card-text">State: {{ getStateString(project.state) }}</p>
-              <p class="card-text">Category: {{ project.categoryName }}</p>
-              <div class="d-flex justify-content-between">
-                <button class="donate-button custom-button flex-grow-1 mr-2" (click)="onMoneyDonate(project.id,project.title,project.charityId)">Money Donation</button>
-                <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId, project.title)">In-Kind Donation</button>
+
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="categoryId">Category</label>
+        <select id="categoryId" class="form-control" (change)="onCategoryChange($event)">
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div style="background-color: rgba(229, 234, 235, 0.447);">
+        <div class="container" style="padding-top: 20px;">
+          <div class="row">
+            <div class="col-md-4 mb-4" *ngFor="let project of projects; let last = last">
+              <div class="card" [ngClass]="{'last-card': last}">
+                <div class="card-header">
+                  <h5 class="card-title">{{ project.title }}</h5>
+                </div>
+                <div class="card-body">
+                  <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
+                  <p class="card-text">{{ project.description }}</p>
+                  <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
+                  <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
+                  <p class="card-text">State: {{ getStateString(project.state) }}</p>
+                  <p class="card-text">Category: {{ project.categoryName }}</p>
+                  <div class="d-flex justify-content-between">
+                    <button class="donate-button custom-button flex-grow-1 mr-2" (click)="onMoneyDonate(project.id, project.title, project.charityId)">Money Donation</button>
+                    <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId, project.title)">In-Kind Donation</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="pagination-container mt-5 mb-5">
+        <nav aria-label="Project pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage - 1)" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item" [class.disabled]="!PagesAvailable">
+              <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage + 1)">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
-</div>
-<div class="pagination-container mt-5 mb-5">
-  <nav aria-label="Project pagination">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="currentPage === 1">
-        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage - 1)" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
-      <li class="page-item" [class.disabled]="!PagesAvailable">
-        <a class="page-link" href="javascript:void(0);" (click)="onPageChange(currentPage + 1)">Next</a>
-      </li>
-    </ul>
-  </nav>
 </div>
