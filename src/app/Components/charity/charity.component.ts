@@ -14,7 +14,7 @@ enum ProjectState {
 @Component({
   selector: 'app-charity',
   standalone: true,
-  imports: [CommonModule, RouterModule,NavWithSearchComponent],
+  imports: [CommonModule, RouterModule,NavWithSearchComponent,BlankNavbarComponent],
   templateUrl: './charity.component.html',
   styleUrl: './charity.component.css'
 })

@@ -1,4 +1,4 @@
-<app-nav-with-search class="m-5"></app-nav-with-search>
+<app-blank-navbar class="m-5"></app-blank-navbar>
 <br><br>
 <div class="container mt-5 mb-5">
   <div class="row">
@@ -42,7 +42,7 @@
           <p class="card-text">Funding Goal: {{ project.fundingGoal }}</p>
           <p class="card-text">Amount Raised: {{ project.amountRaised }}</p>
           <p class="card-text">Location: {{ project.location }}</p>
-          <p class="card-text">Category: {{ project.category }}</p>
+          <p class="card-text">Category: {{ project.categoryName }}</p>
           <p class="card-text">Status: {{ getStatusString(project.state) }}</p>
           <img *ngIf="project.imgUrl" class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
           <!-- <button class="donate-button ">Donate Now</button> -->

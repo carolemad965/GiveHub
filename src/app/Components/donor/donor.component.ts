@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 import { SharedService } from '../../Services/sharedService/shared.service';
+import { CategoryService } from '../../Services/categoryService/category.service';
+import { NavWithSearchComponent } from '../nav-with-search/nav-with-search.component';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../../Pipes/search.pipe';
 
 enum ProjectState {
   Initiated,
@@ -16,48 +20,72 @@ enum ProjectState {
 @Component({
   selector: 'app-donor',
   standalone: true,
-  imports: [CommonModule, RouterModule,BlankNavbarComponent, RouterOutlet],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BlankNavbarComponent,
+    RouterOutlet,
+    NavWithSearchComponent,
+    FormsModule,
+    SearchPipe
+  ],
   templateUrl: './donor.component.html',
   styleUrls: ['./donor.component.css']
 })
 export class DonorComponent implements OnInit {
   projects: any[] = [];
-  currentPage: number = 1;
-  PagesAvailable: boolean = true;
+  categories: any[] = [];
+  selectedCategoryName: string = '';
+  searchTerm: string = '';
 
-  constructor(private _projectService: ProjectService, private sharedService:SharedService, private router:Router) {}
+  constructor(
+    private _projectService: ProjectService,
+    private sharedService: SharedService,
+    private router: Router,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
-    this.getProjects(this.currentPage);
-  }
-
-  getProjects(page: number): void {
-    this._projectService.getProjectsByPage(page).subscribe({
-      next: (response) => {
-        console.log(response);
-        if (response.message.length > 0) {
-          this.projects = response.message;
-        
-          this.PagesAvailable = response.message.length === 3; 
-        } else {
-          this.PagesAvailable = false;
-        }
+    this.getProjects();
+    this.categoryService.getCategories().subscribe({
+      next: (res: any) => {
+        this.categories = res.message;
       },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
+      error: (error) => {
+        console.error('Failed to fetch categories:', error);
       }
     });
+  }
+
+  getProjects(): void {
+    if (this.selectedCategoryName) {
+      this._projectService.getProjectsByCategory(this.selectedCategoryName).subscribe({
+        next: (response) => {
+          this.projects = response.message;
+        },
+        error: (err) => {
+          console.error('Error fetching projects:', err);
+        }
+      });
+    } else {
+      this._projectService.getAllProjects().subscribe({
+        next: (response) => {
+          this.projects = response.message;
+        },
+        error: (err) => {
+          console.error('Error fetching projects:', err);
+        }
+      });
+    }
   }
 
   getFullImageUrl(relativePath: string): string {
     return `https://localhost:44377${relativePath}`;
   }
 
-  onPageChange(page: number): void {
-    if (page > 0) {
-      this.currentPage = page;
-      this.getProjects(page);
-    }
+  onCategoryChange(event: Event): void {
+    this.selectedCategoryName = (event.target as HTMLSelectElement).value;
+    this.getProjects();
   }
 
   getStateString(state: ProjectState): string {
@@ -77,25 +105,63 @@ export class DonorComponent implements OnInit {
     }
   }
 
-  // onDonateNow(projectId: number, charityId: number): void {
-  //   this.sharedService.setProjectId(projectId);
-  //   this.sharedService.setCharityId(charityId);
-    
-  //   this.router.navigate(['/moneyDonation']);
-  // }
-
-
-  onMoneyDonate(projectId: number, projecttitle: string ,charityId: number): void {
+  onMoneyDonate(projectId: number, projectTitle: string, charityId: number): void {
     this.sharedService.setProjectId(projectId);
-    this.sharedService.setProjectName(projecttitle)
+    this.sharedService.setProjectName(projectTitle);
     this.sharedService.setCharityId(charityId);
     this.router.navigate(['/moneyDonation']);
   }
 
-  onInKindDonate(projectId: number, charityId: number, projectName:string): void {
+  onInKindDonate(projectId: number, charityId: number, projectName: string): void {
     this.sharedService.setProjectId(projectId);
     this.sharedService.setCharityId(charityId);
     this.sharedService.setProjectName(projectName);
     this.router.navigate(['/inkindDonation']);
+  }
+
+  getProjectsbyminfundinggoal(){
+    this._projectService.getProjectsbyminfundinggoal().subscribe({
+      next:(response)=>{
+        this.projects = response.message;
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    })
+  }
+
+  getProjectsbyfundinggoalrange(){
+    this._projectService.getProjectsbyfundinggoalrange().subscribe({
+      next:(response)=>{
+        this.projects = response.message;
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    })
+  }
+
+
+  getProjectbymaxfundinggoal(){
+    this._projectService.getProjectbymaxfundinggoal().subscribe({
+      next:(response)=>{
+        this.projects = response.message;
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    })
+  }
+
+
+  onFundingGoalChange(event: any) {
+    const selectedValue = event.target.value;
+    if (selectedValue === 'min') {
+      this.getProjectsbyminfundinggoal();
+    } else if (selectedValue === 'range') {
+      this.getProjectsbyfundinggoalrange();
+    } else if (selectedValue === 'max') {
+      this.getProjectbymaxfundinggoal();
+    }
   }
 }
