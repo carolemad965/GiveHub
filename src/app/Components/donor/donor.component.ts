@@ -5,6 +5,9 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 import { SharedService } from '../../Services/sharedService/shared.service';
 import { CategoryService } from '../../Services/categoryService/category.service';
+import { NavWithSearchComponent } from '../nav-with-search/nav-with-search.component';
+import { FormsModule, NgModel } from '@angular/forms';
+import { SearchPipe } from '../../Pipes/search.pipe';
 
 enum ProjectState {
   Initiated,
@@ -17,7 +20,8 @@ enum ProjectState {
 @Component({
   selector: 'app-donor',
   standalone: true,
-  imports: [CommonModule, RouterModule, BlankNavbarComponent, RouterOutlet],
+  imports: [CommonModule, RouterModule, BlankNavbarComponent,
+     RouterOutlet,NavWithSearchComponent,FormsModule,SearchPipe],
   templateUrl: './donor.component.html',
   styleUrls: ['./donor.component.css']
 })
@@ -27,6 +31,7 @@ export class DonorComponent implements OnInit {
   PagesAvailable: boolean = true;
   categories: any[] = []; 
   selectedCategoryName: string = '';
+  searchTerm:string='';
 
   constructor(
     private _projectService: ProjectService,
