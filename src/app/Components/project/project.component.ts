@@ -34,7 +34,10 @@ export class ProjectComponent {
   };
   id:number=0
   categories: any[] = []; 
-  constructor(private _ProjectService: ProjectService,
+
+
+  constructor(
+     private _ProjectService: ProjectService,
      private _Router: Router,
      private charityService:CharityService,
      private authservice:AuthService,
@@ -88,6 +91,8 @@ export class ProjectComponent {
     }
 
   }
+
+
 
   range(size: number) {
     return Array.from({ length: size }, (_, i) => i);
