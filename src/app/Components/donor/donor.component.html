@@ -45,6 +45,18 @@
           <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
         </select>
       </div>
+
+      <div class="form-group">
+        <label for="fundingGoal">Budget</label>
+        <select id="fundingGoal" class="form-control" (change)="onFundingGoalChange($event)">
+          <option value="">Select Budget Range</option>
+          <option value="min">Less than 1000</option>
+          <option value="range">1000 to 5000</option>
+          <option value="max">More than 5000</option>
+        </select>
+      </div>
+
+
     </div>
     <div class="col-md-9">
       <div style="background-color: rgba(229, 234, 235, 0.447);">
@@ -63,10 +75,15 @@
                   <p class="card-text">State: {{ getStateString(project.state) }}</p>
                   <p class="card-text">Category: {{ project.categoryName }}</p>
                   <p class="card-text">Location: {{ project.location }}</p>
-                  <div class="d-flex justify-content-between">
-                    <button class="donate-button custom-button flex-grow-1 mr-2" (click)="onMoneyDonate(project.id, project.title, project.charityId)">Money Donation</button>
-                    <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId, project.title)">In-Kind Donation</button>
+                  <div *ngIf="project.state !== 1" class="d-flex justify-content-between">
+                    <button class="donate-button custom-button flex-grow-1 mr-2" (click)="onMoneyDonate(project.id, project.title, project.charityId)">
+                      Money Donation
+                    </button>
+                    <button class="donate-button custom-button flex-grow-1 ml-2" (click)="onInKindDonate(project.id, project.charityId, project.title)">
+                      In-Kind Donation
+                    </button>
                   </div>
+                  
                 </div>
               </div>
             </div>

@@ -118,4 +118,50 @@ export class DonorComponent implements OnInit {
     this.sharedService.setProjectName(projectName);
     this.router.navigate(['/inkindDonation']);
   }
+
+  getProjectsbyminfundinggoal(){
+    this._projectService.getProjectsbyminfundinggoal().subscribe({
+      next:(response)=>{
+        this.projects = response.message;
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    })
+  }
+
+  getProjectsbyfundinggoalrange(){
+    this._projectService.getProjectsbyfundinggoalrange().subscribe({
+      next:(response)=>{
+        this.projects = response.message;
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    })
+  }
+
+
+  getProjectbymaxfundinggoal(){
+    this._projectService.getProjectbymaxfundinggoal().subscribe({
+      next:(response)=>{
+        this.projects = response.message;
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    })
+  }
+
+
+  onFundingGoalChange(event: any) {
+    const selectedValue = event.target.value;
+    if (selectedValue === 'min') {
+      this.getProjectsbyminfundinggoal();
+    } else if (selectedValue === 'range') {
+      this.getProjectsbyfundinggoalrange();
+    } else if (selectedValue === 'max') {
+      this.getProjectbymaxfundinggoal();
+    }
+  }
 }
