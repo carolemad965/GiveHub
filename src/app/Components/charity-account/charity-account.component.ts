@@ -66,8 +66,7 @@ export class CharityAccountComponent {
       // Subscribe to the getAccountID method
       this._CharityService.getAccountID(charityName).subscribe(
         (accountId: any) => {
-          console.log("The iddddddddddddddd",accountId.message);
-          // After successfully getting the account ID, proceed with the rest of the form submission logic
+          
           const charityData = {
             name: this.charityForm.get('name')?.value,
             description: this.charityForm.get('description')?.value,
@@ -103,7 +102,7 @@ export class CharityAccountComponent {
           this._CharityService.addcharity(formData).subscribe({
             next: (response) => {
               console.log(response.message);
-        this._Router.navigate([`/charity/${response.message.charityId}`]);  // Assuming route structure
+        this._Router.navigate([`/login`]);  // Assuming route structure
             },
             error: (error) => {
               console.error('Error saving charity data:', error.error);

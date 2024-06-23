@@ -1,0 +1,101 @@
+<app-blank-navbar></app-blank-navbar>
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+  <h1>It's Giving Season!</h1>
+  <h2>Just a dollar could save a soul</h2>
+  <img
+    src="assets/Images/moneyDonation.jpg"
+    alt="Donation Banner"
+    class="banner"
+  />
+  <form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+    <div class="donor-info my-3">
+        <div class="donor-details">
+            <p><strong>Donor Name:</strong> {{ donorName }}</p>
+            <p><strong>Donor Email:</strong> {{ donorEmail }}</p>
+        </div>
+        <p><strong>Project Name:</strong> {{ projectName }}</p>
+    </div>
+    <div class="section">
+      <label for="amount">Donate</label>
+      <input
+        type="number"
+        min="0"
+        id="amount"
+        class="text input-amount form-control"
+        name="amount"
+        placeholder="USD"
+        formControlName="amount"
+
+      />
+    </div>
+    <div class="section">
+      <label for="payment-method">Payment Method</label>
+      <div class="row payment-method">
+        <div class="column">
+          <input
+            type="radio"
+            id="visa"
+            formControlName="paymentMethod"
+            name="paymentMethod"
+            value="visa"
+            [(ngModel)]="paymentMethod"
+          />
+          <label for="visa"
+            ><img src="assets/Images/visa.jpg" alt="Visa" class="payment-img"
+          /></label>
+        </div>
+        <div class="column">
+          <input
+            type="radio"
+            id="mastercard"
+            formControlName="paymentMethod"
+            name="paymentMethod"
+            value="mastercard"
+            [(ngModel)]="paymentMethod"
+          />
+          <label for="mastercard"
+            ><img
+              src="assets/Images/MasterCard_Logo.svg.png"
+              alt="MasterCard"
+              class="payment-img"
+          /></label>
+        </div>
+        <div class="column">
+          <input
+            type="radio"
+            id="paypal"
+            formControlName="paymentMethod"
+            name="paymentMethod"
+            value="paypal"
+            [(ngModel)]="paymentMethod"
+          />
+          <label for="paypal"
+            ><img
+              src="assets/Images/paypal.png"
+              alt="PayPal"
+              class="payment-img"
+          /></label>
+        </div>
+      </div>
+      <div
+        *ngIf="
+          donationForm.get('paymentMethod')?.invalid &&
+          donationForm.get('paymentMethod')?.touched
+        "
+      >
+        Payment method is required
+      </div>
+    </div>
+    <button type="submit" [disabled]="donationForm.invalid" class="btn tn-primary">
+      Donate
+    </button>
+  </form>
+</div>
+<br>
+<br>
+<br>
+<app-footer></app-footer>

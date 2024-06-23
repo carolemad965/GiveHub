@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ProjectService {
 
   constructor(private _httpClient:HttpClient) { }
+  
   getAllProjects():Observable<any>
   {
     return this._httpClient.get(`https://localhost:44377/api/project`);
@@ -24,5 +25,11 @@ export class ProjectService {
   getProjectsByPage(page: number):Observable<any>
   {
    return this._httpClient.get(`https://localhost:44377/api/project/page?page=${page}`);
+  }
+
+ getProjectsByCategory(categoryName:string):Observable<any>
+ {
+  return this._httpClient.get(`https://localhost:44377/api/project/category/${categoryName}`);
  }
+
 }
