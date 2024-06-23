@@ -6,7 +6,7 @@ import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 import { SharedService } from '../../Services/sharedService/shared.service';
 import { CategoryService } from '../../Services/categoryService/category.service';
 import { NavWithSearchComponent } from '../nav-with-search/nav-with-search.component';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../../Pipes/search.pipe';
 
 enum ProjectState {
@@ -20,28 +20,33 @@ enum ProjectState {
 @Component({
   selector: 'app-donor',
   standalone: true,
-  imports: [CommonModule, RouterModule, BlankNavbarComponent,
-     RouterOutlet,NavWithSearchComponent,FormsModule,SearchPipe],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BlankNavbarComponent,
+    RouterOutlet,
+    NavWithSearchComponent,
+    FormsModule,
+    SearchPipe
+  ],
   templateUrl: './donor.component.html',
   styleUrls: ['./donor.component.css']
 })
 export class DonorComponent implements OnInit {
   projects: any[] = [];
-  currentPage: number = 1;
-  PagesAvailable: boolean = true;
-  categories: any[] = []; 
+  categories: any[] = [];
   selectedCategoryName: string = '';
-  searchTerm:string='';
+  searchTerm: string = '';
 
   constructor(
     private _projectService: ProjectService,
-    private sharedService: SharedService, 
+    private sharedService: SharedService,
     private router: Router,
     private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
-    this.getProjects(this.currentPage);
+    this.getProjects();
     this.categoryService.getCategories().subscribe({
       next: (res: any) => {
         this.categories = res.message;
@@ -52,35 +57,20 @@ export class DonorComponent implements OnInit {
     });
   }
 
-  getProjects(page: number): void {
+  getProjects(): void {
     if (this.selectedCategoryName) {
-
-
       this._projectService.getProjectsByCategory(this.selectedCategoryName).subscribe({
         next: (response) => {
-          console.log('selected category is...',response.message);
-
-          //pagination here
-          if (response.message.length > 0) {
-            this.projects = response.message;
-            this.PagesAvailable = response.message.length === 3;
-          } else {
-            this.PagesAvailable = false;
-          }
+          this.projects = response.message;
         },
         error: (err) => {
           console.error('Error fetching projects:', err);
         }
       });
     } else {
-      this._projectService.getProjectsByPage(page).subscribe({
+      this._projectService.getAllProjects().subscribe({
         next: (response) => {
-          if (response.message.length > 0) {
-            this.projects = response.message;
-            this.PagesAvailable = response.message.length === 3;
-          } else {
-            this.PagesAvailable = false;
-          }
+          this.projects = response.message;
         },
         error: (err) => {
           console.error('Error fetching projects:', err);
@@ -93,16 +83,9 @@ export class DonorComponent implements OnInit {
     return `https://localhost:44377${relativePath}`;
   }
 
-  onPageChange(page: number): void {
-    if (page > 0) {
-      this.currentPage = page;
-      this.getProjects(page);
-    }
-  }
-
   onCategoryChange(event: Event): void {
     this.selectedCategoryName = (event.target as HTMLSelectElement).value;
-    this.getProjects(this.currentPage);
+    this.getProjects();
   }
 
   getStateString(state: ProjectState): string {
