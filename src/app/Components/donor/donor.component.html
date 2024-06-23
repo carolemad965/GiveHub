@@ -45,6 +45,18 @@
           <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
         </select>
       </div>
+
+      <div class="form-group">
+        <label for="fundingGoal">Budget</label>
+        <select id="fundingGoal" class="form-control" (change)="onFundingGoalChange($event)">
+          <option value="">Select Budget Range</option>
+          <option value="min">Less than 1000</option>
+          <option value="range">1000 to 5000</option>
+          <option value="max">More than 5000</option>
+        </select>
+      </div>
+
+
     </div>
     <div class="col-md-9">
       <div style="background-color: rgba(229, 234, 235, 0.447);">

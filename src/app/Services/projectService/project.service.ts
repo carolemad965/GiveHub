@@ -32,4 +32,19 @@ export class ProjectService {
   return this._httpClient.get(`https://localhost:44377/api/project/category/${categoryName}`);
  }
 
+ getProjectsbyminfundinggoal():Observable<any>
+ {
+   return this._httpClient.get(`https://localhost:44377/api/project/MINI-funding-goal`);
+ }
+ 
+ getProjectsbyfundinggoalrange():Observable<any>
+ {
+   return this._httpClient.get(`https://localhost:44377/api/project/funding-goal-range`);
+ }
+ 
+ getProjectbymaxfundinggoal():Observable<any>
+ {
+   return this._httpClient.get(`https://localhost:44377/api/project/MAX-funding-goal`);
+ }
+
 }
