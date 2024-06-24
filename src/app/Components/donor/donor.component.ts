@@ -162,6 +162,9 @@ export class DonorComponent implements OnInit {
       this.getProjectsbyfundinggoalrange();
     } else if (selectedValue === 'max') {
       this.getProjectbymaxfundinggoal();
+    } else if(selectedValue == 'all'){
+      this.getProjects();
     }
+
   }
 }
