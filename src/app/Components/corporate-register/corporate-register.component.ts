@@ -5,7 +5,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { NgIf } from '@angular/common';
 import { NavCorporateRegisterComponent } from '../nav-corporate-register/nav-corporate-register.component';
-
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 @Component({
     selector: 'app-corporate-register',
     templateUrl: './corporate-register.component.html',
@@ -22,7 +23,9 @@ export class CorporateRegisterComponent {
   };
   msgError: string = '';
   isLoading: boolean = false;
-  constructor(private _AuthService: AuthService, private _Router: Router,private _ngZone: NgZone) { }
+  constructor(private _AuthService: AuthService, private _Router: Router,private _ngZone: NgZone
+    ,public dialog: MatDialog
+  ) { }
   registerForm: FormGroup = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -69,6 +72,7 @@ export class CorporateRegisterComponent {
           this.isLoading = false;
           if(response.isPass==true)
             {
+              this.openSuccessDialog();
               this._Router.navigate(['/login']);
             }
             
@@ -88,6 +92,14 @@ export class CorporateRegisterComponent {
     else {
       this.registerForm.markAllAsTouched();
     }
+  }
+
+
+  openSuccessDialog(): void {
+    this.dialog.open(SuccessDialogComponent, {
+      width: '400px',
+      height: '230px'
+    });
   }
 
 }
