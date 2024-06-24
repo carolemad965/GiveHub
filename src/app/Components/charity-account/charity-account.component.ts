@@ -4,11 +4,12 @@ import { CharityService } from '../../Services/charityService/charity.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CommonModule } from '@angular/common';
+import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 
 @Component({
   selector: 'app-charity-account',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,BlankNavbarComponent],
   templateUrl: './charity-account.component.html',
   styleUrls: ['./charity-account.component.css']  // Changed to styleUrls
 })
