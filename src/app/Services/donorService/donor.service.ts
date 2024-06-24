@@ -31,8 +31,15 @@ getDonorID(id:string)
     return this._httpclient.get<string>(`https://localhost:44377/api/Donor/GetDonorDetails/${userId}`);
   }
 
+
   getdonorByID(id:number):Observable<any>{
     return this._httpclient.get(`https://localhost:44377/api/Donor/${id}`);
   }
 
 }
+
+
+
+
+}
+

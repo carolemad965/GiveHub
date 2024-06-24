@@ -1,9 +1,12 @@
+<app-blank-navbar class="m-5"></app-blank-navbar>
+<br><br>
 <div class="flex min-h-screen signup">
+  <div class="row h-100">
   <div class="flex-1 items-center text-grey-darkest min-h-screen h-full p-6 sm:p-12 md:p-12 lg:p-20 flex">
     <div class="w-full md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Form Section -->
       <div>
-        <h1 class="mb-4 custom-title dntly_header">Add Charity Details</h1>
+        <h1 class="mb-4 custom-title dntly_header ">Add Charity Details</h1>
         <form [formGroup]="charityForm" (ngSubmit)="onSubmit()" class="custom-form">
           <div class="form-floating mb-2 mt-2">
             <input type="text" formControlName="name" readonly id="name" class="form-control styled-input" placeholder=" " [(ngModel)]="charityData.name">
@@ -33,7 +36,7 @@
               <p *ngIf="charityForm.get('imgUrl')?.getError('required')">Image Path is required</p>
             </div>
           </div>
-          <button class="active-link btn btn-primary w-100 text-light mt-5 mb-5">
+          <button class=" btn btn-primary  mt-5 mb-5">
             <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
             Create Charity
         </button>
@@ -42,8 +45,9 @@
       </div>
       <!-- Image Section -->
       <div class="image-container">
-        <img src="assets/Images/cha.png" alt="Charity Image" class="w-full h-auto">
+        <img src="./assets/Images/charityAccount.png" alt="Charity Image" class="img-fluid w-100 mb-5 ms-5 rounded shadow-lg">
       </div>
     </div>
   </div>
+</div>
 </div>
