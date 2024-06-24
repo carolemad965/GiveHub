@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-picture">
+                <img [src]="getFullImageUrl(donor.
+                profileImg
+                )" alt="Profile Picture">
+            </div>
+            <div class="profile-info">
+              <h2>{{ donor.name }}</h2>
+                <p>Fdate Joined:{{donor.dateJoined}}</p>
+         
+                <div class="social-icons">
+                  <i class="fa-brands fa-facebook"></i>
+                  <i class="fa-solid fa-x"></i>
+                  <i class="fa-brands fa-linkedin"></i>
+                  <i class="fa-brands fa-instagram"></i>
+                
+                </div>
+                
+               
+            </div>
+        </header>
+        <main>
+            <section class="donations">
+                <h2>My Donation History</h2>
+               
+                
+            </section>
+            <section class="badges">
+                <h2 class="badgetitle">My Badges</h2>
+                <div class="badge">
+                    <img src="assets/Images/2.jpg" alt="Badge">
+                    <p>HubSpot Partner</p>
+                </div>
+                <div class="badge">
+                    <img src="assets/Images/31.png" alt="Badge">
+                    <p>Buffer Certification</p>
+                </div>
+                <div class="badge">
+                    <img src="assets/Images/boy.png" alt="Badge">
+                    <p>Google Analytics</p>
+                </div>
+                <!-- Add more badges as needed -->
+            </section>
+        </main>
+    </div>
+</body>
+</html>

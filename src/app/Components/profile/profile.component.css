@@ -1,0 +1,153 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background: #b3b8b3;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture img {
+  border-radius: 50%;
+  width: 300px;
+}
+
+.profile-info {
+  flex-grow: 1;
+  padding-left: 20px;
+  /* text-align: center; */
+}
+
+.profile-info h1 {
+  margin: 0;
+  color: #333;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  color: #777;
+}
+
+.follow-btn {
+  background-color: #0073b1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.follow-btn:hover {
+  background-color: #005f8c;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+}
+
+.stat {
+  margin-left: 20px;
+  text-align: center;
+}
+
+.stat span {
+  display: block;
+  font-size: 20px;
+  color: #333;
+}
+
+.stat p {
+  margin: 0;
+  color: #777;
+}
+
+main {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.skills, .bio, .donations, .badges {
+  margin-top: 20px;
+}
+
+.skills h2, .bio h2, .donations h2, .badges h2 {
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+.skill {
+  background: #f1c40f;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.donations {
+  text-align: center;
+}
+
+.donation {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+}
+
+.badges {
+  text-align: center;
+}
+
+.badges h2 {
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+}
+
+.badge img {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.badge p {
+  margin-top: 5px;
+  color: #777;
+}
+
+.writing-source, .donation {
+  margin-top: 10px;
+}
+
+.writing-source h3, .donation h3 {
+  margin: 0;
+  color: #0073b1;
+}
+
+.writing-source p, .donation p {
+  margin: 0;
+  color: #777;
+}
