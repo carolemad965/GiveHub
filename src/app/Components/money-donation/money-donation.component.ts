@@ -16,6 +16,8 @@ import { SharedService } from '../../Services/sharedService/shared.service';
 import { DonorService } from '../../Services/donorService/donor.service';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ThanksDialogComponent } from '../thanks-dialog/thanks-dialog.component';
 
 @Component({
   selector: 'app-money-donation',
@@ -46,7 +48,8 @@ export class MoneyDonationComponent implements OnInit {
     private moneyDonationService: MoneyDonationService,
     private sharedService: SharedService,
     private fb: FormBuilder,
-    private _Router: Router
+    private _Router: Router,
+    public dialog: MatDialog
   ) {
     this.donationForm = this.fb.group({
       amount: ['', [Validators.required, Validators.min(0)]],
@@ -126,7 +129,8 @@ export class MoneyDonationComponent implements OnInit {
         next: (response) => {
           console.log('Done', response.message);
           console.log('donation data is ', formData);
-          alert('Donation Done successfully Thank You');
+          this.openThanksDialog();
+         // alert('Donation Done successfully Thank You');
           this._Router.navigate(['donor']);
         },
         error: (err) => {
@@ -136,6 +140,13 @@ export class MoneyDonationComponent implements OnInit {
     }
   }
 
+
+  openThanksDialog(): void {
+    this.dialog.open(ThanksDialogComponent, {
+      width: '400px',
+      height: '200px'
+    });
+  }
   //  => this part if we want to pass form data but in back end json return  (unsupported media type error)
 
   // onSubmit() {
