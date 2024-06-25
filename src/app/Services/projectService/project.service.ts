@@ -26,6 +26,7 @@ export class ProjectService {
   {
    return this._httpClient.get(`https://localhost:44377/api/project/page?page=${page}`);
   }
+  
 
  getProjectsByCategory(categoryName:string):Observable<any>
  {
