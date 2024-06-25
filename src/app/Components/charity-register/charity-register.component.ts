@@ -101,7 +101,7 @@ export class CharityRegisterComponent {
   openSuccessDialog(): void {
     this.dialog.open(SuccessDialogComponent, {
       width: '400px',
-      height: '230px'
+      height: '260px'
     });
   }
 

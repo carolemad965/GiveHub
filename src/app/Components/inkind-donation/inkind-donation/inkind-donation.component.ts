@@ -8,13 +8,11 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../footer/footer.component';
-import {  Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-inkind-donation',
   standalone: true,
-  imports: [BlankNavbarComponent, FormsModule, CommonModule, ReactiveFormsModule,FooterComponent],
+  imports: [BlankNavbarComponent, FormsModule, CommonModule, ReactiveFormsModule, FooterComponent],
   templateUrl: './inkind-donation.component.html',
   styleUrl: './inkind-donation.component.css'
 })
@@ -24,21 +22,20 @@ export class InkindDonationComponent {
   donorEmail: string | null = null;
   projectName: string | null = null;
 
-  inKindDonation:any = {
-    donationDate :'',
-    donorId:'',
-    projectId:'',
-    charityId:'',
-    itemDescription:'',
-    quantity:''
+  inKindDonation: any = {
+    donationDate: '',
+    donorId: '',
+    projectId: '',
+    charityId: '',
+    itemDescription: '',
+    quantity: ''
   }
 
   constructor(
     private donorService:DonorService,
     private authService:AuthService,
     private inkindDonationService:InkindDonationService,
-    private sharedService:SharedService,
-    private router:Router
+    private sharedService:SharedService
 
   ){}
 
@@ -46,17 +43,17 @@ export class InkindDonationComponent {
   donationForm: FormGroup = new FormGroup({
     donationDate: new FormControl('', [Validators.required]),
     donorId: new FormControl(0, [Validators.required]),
-   
+
     projectId: new FormControl(''),
     charityId: new FormControl(''),
-    itemDescription: new FormControl('',[Validators.required]),
+    itemDescription: new FormControl('', [Validators.required]),
     quantity: new FormControl('', [Validators.required])
-    
+
   });
 
 
 
- ngOnInit(): void {
+  ngOnInit(): void {
     const userId = this.authService.getUserId();
     if (userId) {
       this.donorService.getDonorDetails(userId).subscribe({
@@ -87,12 +84,12 @@ export class InkindDonationComponent {
     }
 
     this.projectName = this.sharedService.getProjectName();
-    console.log('project name is....',this.projectName);
+    console.log('project name is....', this.projectName);
 
     const projectId = this.sharedService.getProjectId();
     if (projectId !== null) {
       this.donationForm.get('projectId')?.setValue(projectId);
-   
+
 
       console.log("donor id:", projectId);
     }
@@ -105,7 +102,7 @@ export class InkindDonationComponent {
   }
 
 
-  
+
   onSubmit() {
     if (this.donationForm.valid) {
       const donationData = {
@@ -116,16 +113,14 @@ export class InkindDonationComponent {
         itemDescription: this.donationForm.get('itemDescription')?.value,
         quantity: this.donationForm.get('quantity')?.value
       };
-  
-      
-  
+
+
+
       this.inkindDonationService.postInKindDonation(donationData).subscribe({
         next: (response) => {
           console.log('Done', response.message);
           console.log("donation data is ", donationData);
-          alert("Done");
-          this.router.navigate(['donor']);
-
+          alert("Done")
         },
         error: (err: HttpErrorResponse) => {
           if (err.status == 400) {
@@ -135,7 +130,4 @@ export class InkindDonationComponent {
       });
     }
   }
-
-
-  
 }

@@ -23,7 +23,7 @@ export class RegisterComponent {
         email: '',
         accountType: 'donor'
     };
-    msgError: string = '';
+    msgError: string | null = null;
     isLoading: boolean = false;
 
     constructor(private _AuthService: AuthService, private _Router: Router, private _ngZone: NgZone, public dialog: MatDialog) { }
@@ -70,6 +70,9 @@ export class RegisterComponent {
                         this.openSuccessDialog();
                         this._Router.navigate(['/donoraccount']);
                     }
+                    else{
+                       this.msgError = response.message.toString();
+                    }
                 },
                 error: (err: HttpErrorResponse) => {
                     this.isLoading = false;
@@ -88,7 +91,7 @@ export class RegisterComponent {
     openSuccessDialog(): void {
         this.dialog.open(SuccessDialogComponent, {
             width: '400px',
-            height: '230px'
+            height: '260px'
         });
     }
 
