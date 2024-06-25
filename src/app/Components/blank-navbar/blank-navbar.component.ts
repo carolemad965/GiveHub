@@ -17,6 +17,7 @@ export class BlankNavbarComponent implements OnInit {
 
   ngOnInit() {
     this.accountType = this._AuthService.getUserAccountType();
+    console.log('accccount type is', this.accountType);
 
   }
   logOutUser():void{
