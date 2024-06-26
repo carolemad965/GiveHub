@@ -63,7 +63,7 @@ export class CharityAccountComponent {
   onSubmit(): void {
     if (this.charityForm.valid && this.selectedFile) {
       const charityName = this.charityForm.get('name')?.value;
-  
+  console.log(charityName);
       // Subscribe to the getAccountID method
       this._CharityService.getAccountID(charityName).subscribe(
         (accountId: any) => {

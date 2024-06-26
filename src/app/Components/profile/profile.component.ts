@@ -17,6 +17,7 @@ export class ProfileComponent {
   donorName:string=""
 
   moneyDonation:any=null;
+  inkindDonation:any=null;
   constructor(private donorService:DonorService,private route:ActivatedRoute,private DonationService:DonationService)
   {
 
@@ -62,7 +63,7 @@ export class ProfileComponent {
     this.DonationService.getInkindDonationByDonorID(id).subscribe(
 
       (res:any)=>{
-        this.moneyDonation=res.message;
+        this.inkindDonation=res.message;
       },
       (error)=>{
         console.error('Error fetching donor:', error);
