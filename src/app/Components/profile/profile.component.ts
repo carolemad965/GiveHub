@@ -3,10 +3,11 @@ import { DonorService } from '../../Services/donorService/donor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DonationService } from '../../Services/donationService/donation.service';
 import { error } from 'console';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ProfileComponent],
+  imports: [CommonModule,ProfileComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'] 
 })
@@ -46,6 +47,7 @@ export class ProfileComponent {
 
 (res:any)=>{
   this.moneyDonation=res.message;
+  console.log(this.moneyDonation);
 },
 (error)=>{
   console.error('Error fetching donor:', error);

@@ -4,36 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    
 </head>
 <body>
     <div class="container">
         <header>
             <div class="profile-picture">
-                <img [src]="getFullImageUrl(donor.
-                profileImg
-                )" alt="Profile Picture">
+                <img [src]="getFullImageUrl(donor.profileImg)" alt="Profile Picture">
             </div>
             <div class="profile-info">
-              <h2>{{ donor.name }}</h2>
-                <p>Fdate Joined:{{donor.dateJoined}}</p>
-         
+                <h2>{{ donor.name }}</h2>
+                <p>Date Joined: {{ donor.dateJoined }}</p>
                 <div class="social-icons">
-                  <i class="fa-brands fa-facebook"></i>
-                  <i class="fa-solid fa-x"></i>
-                  <i class="fa-brands fa-linkedin"></i>
-                  <i class="fa-brands fa-instagram"></i>
-                
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-solid fa-x"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                    <i class="fa-brands fa-instagram"></i>
                 </div>
-                
-               
             </div>
         </header>
         <main>
             <section class="donations">
                 <h2>My Donation History</h2>
-               
-                
+                <div class="donation-history">
+                    <h3>Monetary Donations</h3>
+                    <div *ngFor="let donation of moneyDonation" class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img [src]="getFullImageUrl(donation.projectImage)" class="card-img" alt="Project Image">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ donation.projectName }}</h3>
+                                    <p class="card-text">Donation Date: {{ donation.donationDate}}</p>
+                                    <p class="card-text">Charity: {{ donation.charityName }}</p>
+                                    <p class="card-text">Amount: ${{ donation.amount }}</p>
+                                    <p class="card-text">Payment Method: {{ donation.paymentMethod }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="donation-history">
+                    <h3>In-Kind Donations</h3>
+                    <!-- Example donation record -->
+                    <p>Donation of clothes to ABC Shelter on 02/01/2023</p>
+                    <!-- Add more in-kind donation records here -->
+                </div>
             </section>
             <section class="badges">
                 <h2 class="badgetitle">My Badges</h2>
@@ -49,7 +65,7 @@
                     <img src="assets/Images/boy.png" alt="Badge">
                     <p>Google Analytics</p>
                 </div>
-                <!-- Add more badges as needed -->
+            
             </section>
         </main>
     </div>
