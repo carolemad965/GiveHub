@@ -90,7 +90,12 @@
                    
                 </li>
 
+
+                <a class="nav-link " *ngIf="accountType === 'donor'" [routerLink]="['/donorprofile', accountId]" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Your profile
+                  </a>
                 <li>
+
                   </li>
                 
             </ul>
