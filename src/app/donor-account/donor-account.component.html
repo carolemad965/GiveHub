@@ -5,7 +5,7 @@
     <div class="w-full md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Form Section -->
       <div>
-        <h1 class="mb-4 custom-title dntly_header">Add Donor Details</h1>
+        <h1 class="mb-4 custom-title dntly_header">Make Your Profile</h1>
         <form [formGroup]="donorForm" (ngSubmit)="onSubmit()" class="custom-form">
             <div class="form-floating mb-2 mt-2">
                 <input type="text" formControlName="name" readonly id="name" class="form-control styled-input" placeholder=" " [(ngModel)]="donorData.name">
@@ -23,7 +23,7 @@
             </div>
             <button class="btn btn-primary  mt-3 mb-3">
                 <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
-                Create Project
+                Create Profile
             </button>
             <p class="text-danger" *ngIf="msgError">{{msgError}}</p>
         </form>
