@@ -12,7 +12,7 @@
         <h1 class="mb-4 custom-title dntly_header">Add Donor Details</h1>
         <form [formGroup]="donorForm" (ngSubmit)="onSubmit()" class="custom-form">
             <div class="form-floating mb-2 mt-2">
-                <input type="text" formControlName="name" id="name" class="form-control styled-input" placeholder=" " [(ngModel)]="donorData.name">
+                <input type="text" formControlName="name" readonly id="name" class="form-control styled-input" placeholder=" " [(ngModel)]="donorData.name">
                 <label for="name">donor Name</label>
                 <div class="text-danger" *ngIf="donorForm.get('name')?.errors && (donorForm.get('name')?.touched || donorForm.get('name')?.dirty)">
                     <p *ngIf="donorForm.get('name')?.getError('required')">Name is required</p>

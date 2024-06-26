@@ -68,6 +68,7 @@ export class RegisterComponent {
                     this.isLoading = false;
                     if (response.isPass == true) {
                         this.openSuccessDialog();
+                        localStorage.setItem('donorName', this.registerForm.get('userName')?.value);
                         this._Router.navigate(['/donoraccount']);
                     }
                 },
