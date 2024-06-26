@@ -70,8 +70,8 @@
                                     <a [routerLink]="['/project']" *ngIf="accountType=='charityOrganization'" class="dropdown-item dropdown-item-custom">Add New Project</a>
 
                                     <a class="dropdown-item dropdown-item-custom" href="#">Custom Donation Forms</a>
-                                    <a class="dropdown-item dropdown-item-custom" *ngIf="accountType === 'donner' || accountType === 'corporate'" [routerLink]="['/donor']">Donation Pages</a>
-                                    <a class="dropdown-item dropdown-item-custom" *ngIf="accountType === 'donner' || accountType === 'corporate'" [routerLink]="['/charities']">Charities</a>
+                                    <a class="dropdown-item dropdown-item-custom" *ngIf="accountType === 'donor'" [routerLink]="['/donor']">Donation Pages</a>
+                                    <a class="dropdown-item dropdown-item-custom" *ngIf="accountType === 'donor' " [routerLink]="['/charities']">Charities</a>
 
                                     <a class="dropdown-item dropdown-item-custom" href="#">Peer to Peer Fundraising</a>
                                     <a class="dropdown-item dropdown-item-custom" href="#">Recurring Donations</a>

@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="s003">
+    <div class="s003">
     <form>
       <div class="inner-form">
         <div class="input-field first-wrap">
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="input-field second-wrap">
-          <input id="search" type="text" [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search by location..." (ngModelChange)="getProjects()"/>
+          <input id="search" type="text" [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search by location..." (ngModelChange)="getProjects()">
         </div>
         <div class="input-field third-wrap">
           <button class="btn-search" type="button">
@@ -37,35 +37,44 @@
   </div>
   
   <div class="row mt-5">
+
+    
     <div class="col-md-3">
-      <div class="form-group">
-        <label for="categoryId">Category</label>
-        <select id="categoryId" class="form-control" (change)="onCategoryChange($event)">
-          <option value="">All Categories</option>
-          <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="fundingGoal">Budget</label>
-        <select id="fundingGoal" class="form-control" (change)="onFundingGoalChange($event)">
-          <option value="all">Select Budget Range</option>
-          <option value="min">Less than 1000</option>
-          <option value="range">1000 to 5000</option>
-          <option value="max">More than 5000</option>
-        </select>
-      </div>
-
-
+     
+       
+          <h2 class="card-title">Filter Options</h2>
+          <div class="form-group">
+            <label for="categoryId">Category</label>
+            <select id="categoryId" class="form-control" (change)="onFiltersChange()" [(ngModel)]="selectedCategoryName">
+              <option value="">All Categories</option>
+              <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="fundingGoal">Budget Range</label>
+            <select id="fundingGoal" class="form-control" (change)="onFiltersChange()" [(ngModel)]="selectedBudget">
+              <option value="">Select Budget Range</option>
+              <option value="min">Less than 1000</option>
+              <option value="range">1000 to 5000</option>
+              <option value="max">More than 5000</option>
+            </select>
+          </div>
+      
+    
     </div>
+
+
+
+
     <div class="col-md-9">
       <div style="background-color: rgba(229, 234, 235, 0.447);">
         <div class="container" style="padding-top: 20px;">
           <div class="row">
-            <div  class="col-md-4 mb-4" *ngFor="let project of projects | search: searchTerm; let last = last">
+            <div class="col-md-4 mb-4" *ngFor="let project of filteredProjects; let last = last">
               <div class="card" [ngClass]="{'last-card': last}">
                 <div class="card-header">
-                  <h5 class="card-title">{{ project.title }}</h5>
+                  <h2 class="card-title">{{ project.title }}</h2>
                 </div>
                 <div class="card-body">
                   <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
@@ -83,7 +92,6 @@
                       In-Kind Donation
                     </button>
                   </div>
-                  
                 </div>
               </div>
             </div>
