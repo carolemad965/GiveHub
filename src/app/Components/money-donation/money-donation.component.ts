@@ -144,7 +144,7 @@ export class MoneyDonationComponent implements OnInit {
   openThanksDialog(): void {
     this.dialog.open(ThanksDialogComponent, {
       width: '400px',
-      height: '200px'
+      height: '230px'
     });
   }
   //  => this part if we want to pass form data but in back end json return  (unsupported media type error)

@@ -15,7 +15,7 @@ import { BlankNavbarComponent } from '../Components/blank-navbar/blank-navbar.co
 export class DonorAccountComponent {
   selectedFile: File | null = null;
   donorData = {
-    name: '',
+    name: localStorage.getItem('donorName') ?? '',
     imgUrl: '',
   };
   isLoading = false;
@@ -26,7 +26,7 @@ export class DonorAccountComponent {
     imgUrl: new FormControl('', [Validators.required]),
   });
 
-  constructor(private _Router: Router, private donorService: DonorService) {}
+  constructor(private _Router: Router, private donorService: DonorService)  {}
  
   onFileChange(event: any): void {
     if (event.target.files.length > 0) {

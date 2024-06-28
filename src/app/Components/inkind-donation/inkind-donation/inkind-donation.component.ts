@@ -9,7 +9,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../footer/footer.component';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ThanksDialogComponent } from '../../thanks-dialog/thanks-dialog.component';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-inkind-donation',
   standalone: true,
@@ -33,12 +36,14 @@ export class InkindDonationComponent {
   }
 
   constructor(
-    private donorService: DonorService,
-    private authService: AuthService,
-    private inkindDonationService: InkindDonationService,
-    private sharedService: SharedService,
-    public dialog: MatDialog
-  ) { }
+    private donorService:DonorService,
+    private authService:AuthService,
+    private inkindDonationService:InkindDonationService,
+    private sharedService:SharedService,
+    public dialog: MatDialog,
+    private router:Router
+
+  ){}
 
 
   donationForm: FormGroup = new FormGroup({
@@ -121,8 +126,10 @@ export class InkindDonationComponent {
         next: (response) => {
           console.log('Done', response.message);
           console.log("donation data is ", donationData);
+          //alert("Done")
           this.openThanksDialog();
-          // alert("Done")
+          // alert('Donation Done successfully Thank You');
+           this.router.navigate(['donor']);
         },
         error: (err: HttpErrorResponse) => {
           if (err.status == 400) {
@@ -138,7 +145,7 @@ export class InkindDonationComponent {
   openThanksDialog(): void {
     this.dialog.open(ThanksDialogComponent, {
       width: '400px',
-      height: '200px'
+      height: '230px'
     });
   }
 }

@@ -35,8 +35,10 @@ enum ProjectState {
 export class DonorComponent implements OnInit {
   projects: any[] = [];
   categories: any[] = [];
+  filteredProjects: any[] = [];
   selectedCategoryName: string = '';
   searchTerm: string = '';
+  selectedBudget: string = '';
 
   constructor(
     private _projectService: ProjectService,
@@ -44,6 +46,7 @@ export class DonorComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService
   ) {}
+
 
   ngOnInit(): void {
     this.getProjects();
@@ -56,27 +59,42 @@ export class DonorComponent implements OnInit {
       }
     });
   }
-
   getProjects(): void {
-    if (this.selectedCategoryName) {
-      this._projectService.getProjectsByCategory(this.selectedCategoryName).subscribe({
-        next: (response) => {
-          this.projects = response.message;
-        },
-        error: (err) => {
-          console.error('Error fetching projects:', err);
-        }
-      });
-    } else {
-      this._projectService.getAllProjects().subscribe({
-        next: (response) => {
-          this.projects = response.message;
-        },
-        error: (err) => {
-          console.error('Error fetching projects:', err);
-        }
-      });
-    }
+    this._projectService.getAllProjects().subscribe({
+      next: (response) => {
+        this.projects = response.message;
+        this.applyFilters(); 
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    });
+  }
+  
+
+  applyFilters(): void {
+    this.filteredProjects = this.projects.filter(project => {
+      const categoryMatch = !this.selectedCategoryName || project.categoryName === this.selectedCategoryName;
+      let budgetMatch = true;
+  
+      if (this.selectedBudget === 'min') {
+        budgetMatch = project.fundingGoal < 1000;
+      } else if (this.selectedBudget === 'range') {
+        budgetMatch = project.fundingGoal >= 1000 && project.fundingGoal <= 5000;
+      } else if (this.selectedBudget === 'max') {
+        budgetMatch = project.fundingGoal > 5000;
+      }
+  
+      const searchTermMatch = !this.searchTerm || 
+        project.location.toLowerCase().includes(this.searchTerm.toLowerCase());
+  
+      return categoryMatch && budgetMatch && searchTermMatch;
+    });
+  }
+  
+
+  onFiltersChange(): void {
+    this.applyFilters();
   }
 
   getFullImageUrl(relativePath: string): string {
@@ -119,52 +137,52 @@ export class DonorComponent implements OnInit {
     this.router.navigate(['/inkindDonation']);
   }
 
-  getProjectsbyminfundinggoal(){
-    this._projectService.getProjectsbyminfundinggoal().subscribe({
-      next:(response)=>{
-        this.projects = response.message;
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    })
-  }
+  // getProjectsbyminfundinggoal(){
+  //   this._projectService.getProjectsbyminfundinggoal().subscribe({
+  //     next:(response)=>{
+  //       this.projects = response.message;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   })
+  // }
 
-  getProjectsbyfundinggoalrange(){
-    this._projectService.getProjectsbyfundinggoalrange().subscribe({
-      next:(response)=>{
-        this.projects = response.message;
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    })
-  }
-
-
-  getProjectbymaxfundinggoal(){
-    this._projectService.getProjectbymaxfundinggoal().subscribe({
-      next:(response)=>{
-        this.projects = response.message;
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    })
-  }
+  // getProjectsbyfundinggoalrange(){
+  //   this._projectService.getProjectsbyfundinggoalrange().subscribe({
+  //     next:(response)=>{
+  //       this.projects = response.message;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   })
+  // }
 
 
-  onFundingGoalChange(event: any) {
-    const selectedValue = event.target.value;
-    if (selectedValue === 'min') {
-      this.getProjectsbyminfundinggoal();
-    } else if (selectedValue === 'range') {
-      this.getProjectsbyfundinggoalrange();
-    } else if (selectedValue === 'max') {
-      this.getProjectbymaxfundinggoal();
-    } else if(selectedValue == 'all'){
-      this.getProjects();
-    }
+  // getProjectbymaxfundinggoal(){
+  //   this._projectService.getProjectbymaxfundinggoal().subscribe({
+  //     next:(response)=>{
+  //       this.projects = response.message;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   })
+  // }
 
-  }
+
+  // onFundingGoalChange(event: any) {
+  //   const selectedValue = event.target.value;
+  //   if (selectedValue === 'min') {
+  //     this.getProjectsbyminfundinggoal();
+  //   } else if (selectedValue === 'range') {
+  //     this.getProjectsbyfundinggoalrange();
+  //   } else if (selectedValue === 'max') {
+  //     this.getProjectbymaxfundinggoal();
+  //   } else if(selectedValue == 'all'){
+  //     this.getProjects();
+  //   }
+
+  // }
 }
