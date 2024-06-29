@@ -3,11 +3,9 @@
   font-weight: 700;
 }
 
-.search-form {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.text-center p {
+  font-size: 1rem;
+  color: #666;
 }
 
 .inner-form {
@@ -23,99 +21,184 @@
   display: flex;
   align-items: center;
   flex: 1;
+  position: relative;
 }
 
-.input-select select {
-  width: 100%;
-  padding: 10px 15px;
-  border: none;
-  background-color: #fff;
-  border-right: 1px solid #ddd;
-  border-radius: 8px 0 0 8px; 
-}
-
-.input-select select:focus {
-  border-color: #77d986;
-}
-
-#search {
+.input-field input {
   flex: 1;
-  padding: 10px 15px;
+  padding: 8px 10px;
   border: none;
-  background-color: #fff;
-  border-radius: 0;
-}
-
-#search:focus {
-  outline: none;
+  border-radius: 8px;
+  width: 100%;
 }
 
 .btn-search {
-  /* background-color: #77d986; */
-  color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 0 8px 8px 0;
+  position: absolute;
+  right: 10px;
   cursor: pointer;
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
-.btn-search:hover {
-  background-color: #66c77b;
+.btn-search svg {
+  width: 20px;
+  height: 20px;
+}
+
+.filter-select {
+  border: 1px solid #77d986;
+  border-radius: 8px;
+  padding: 8px 30px 8px 10px;
+  font-size: 1rem;
+  color: #333;
+  margin-right: 10px;
+  flex: 1;
+  appearance: none;
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 9l8 8 8-8"/></svg>') no-repeat right 10px center;
+  background-size: 12px 12px;
+}
+
+.filter-select:focus {
+  background-color: white;
+  outline: none;
+  border-color: #77d986;
 }
 
 .project-list {
-  background-color: rgba(229, 234, 235, 0.447);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.project-card {
+  flex: 1 1 calc(33.333% - 20px);
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card {
+  border: none;
   border-radius: 10px;
-  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: linear-gradient(145deg, #f3f3f3, #e2e2e2);
 }
 
-.project-item {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 20px;
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.project-item:last-child {
-  border-bottom: none;
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.project-header {
-  background-color: #77d986;
-  color: white;
-  padding: 1px;
-  border-radius: 5px;
+.card:hover .card-img-top {
+  transform: scale(1.05);
 }
 
-.project-body {
-  padding-top: 10px;
+.card-body {
+  padding: 20px;
+  background: white;
+  border-radius: 0 0 10px 10px;
 }
 
-.project-body p {
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
-.donate-button {
-  background-color: hsla(134, 50%, 50%, 0.856);
-  color: white;
-  padding: 10px;
+.card-text {
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(145deg, #77d986, #66c776);
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.donate-button:hover {
-  background-color: #77d986;
-  box-shadow: 0 0 10px rgba(119, 217, 134, 0.8); 
+  color: white;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-
-.filter-sidebar {
-  position: sticky;
-  top: 20px; 
+.btn-primary:hover {
+  background-color: #66c776;
+  box-shadow: 0 4px 8px rgba(102, 199, 118, 0.5);
 }
 
+.btn-secondary {
+  background: linear-gradient(145deg, #666, #555);
+  border: none;
+  color: white;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
 
+.btn-secondary:hover {
+  background-color: #555;
+  box-shadow: 0 4px 8px rgba(85, 85, 85, 0.5);
+}
 
- 
+/* Additional Styles for Special Design */
+.card-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.project-card .btn {
+  margin-top: 10px;
+}
+.custom-progress-bar {
+  background: linear-gradient(90deg, rgba(119, 217, 134, 1) 0%, rgba(67, 160, 71, 1) 100%);
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.progress {
+  border-radius: 20px;
+  background-color: #e9ecef;
+  overflow: hidden;
+  height: 20px;
+  position: relative;
+}
+.amount-raised-label {
+  left: 0;
+}
+
+.goal-label {
+  right: 0;
+}
+
