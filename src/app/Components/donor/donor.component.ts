@@ -185,4 +185,11 @@ export class DonorComponent implements OnInit {
   //   }
 
   // }
+
+
+  getProgressPercentage(amountRaised: number, fundingGoal: number): number {
+    return (amountRaised / fundingGoal) * 100;
+  }
+  
+  
 }
