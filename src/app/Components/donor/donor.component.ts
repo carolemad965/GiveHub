@@ -39,6 +39,8 @@ export class DonorComponent implements OnInit {
   selectedCategoryName: string = '';
   searchTerm: string = '';
   selectedBudget: string = '';
+  currentPage: number = 1;
+  PagesAvailable: boolean = true;
 
   constructor(
     private _projectService: ProjectService,
@@ -59,10 +61,18 @@ export class DonorComponent implements OnInit {
       }
     });
   }
+
   getProjects(): void {
-    this._projectService.getAllProjects().subscribe({
+    this._projectService.getProjectsByPage(this.currentPage).subscribe({
       next: (response) => {
-        this.projects = response.message;
+        console.log(response);
+        if (response.message.length > 0) {
+          this.projects = response.message;
+          this.filteredProjects = this.projects;
+          this.PagesAvailable = response.message.length === 6; // Adjust based on actual page size logic
+        } else {
+          this.PagesAvailable = false;
+        }
         this.applyFilters();
       },
       error: (err) => {
@@ -71,6 +81,12 @@ export class DonorComponent implements OnInit {
     });
   }
 
+  onPageChange(page: number): void {
+    if (page > 0 ) {
+      this.currentPage = page;
+      this.getProjects();
+    }
+  }
 
   applyFilters(): void {
     this.filteredProjects = this.projects.filter(project => {
@@ -91,6 +107,7 @@ export class DonorComponent implements OnInit {
       return categoryMatch && budgetMatch && searchTermMatch;
     });
   }
+
 
 
   onFiltersChange(): void {
@@ -137,6 +154,9 @@ export class DonorComponent implements OnInit {
     this.router.navigate(['/inkindDonation']);
   }
 
+  onSearchTermChange(): void {
+    this.getProjects();
+  }
   // getProjectsbyminfundinggoal(){
   //   this._projectService.getProjectsbyminfundinggoal().subscribe({
   //     next:(response)=>{

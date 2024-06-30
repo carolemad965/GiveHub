@@ -227,3 +227,24 @@
   font-weight: bold;
   padding-right: 10px; /* Adjust padding as needed */
 }
+
+
+/* Pagination Styles */
+.pagination-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #ddd;
+}
+
+.pagination .page-item .page-link {
+  color: #77d986;
+  border-radius: 50%;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #77d986;
+  color: white;
+}

@@ -45,7 +45,7 @@ export class CharityComponent {
         if (response.message.length > 0) {
           this.projects = response.message;
         
-          this.PagesAvailable = response.message.length === 3; 
+          this.PagesAvailable = response.message.length === 6; 
         } else {
           this.PagesAvailable = false;
         }
