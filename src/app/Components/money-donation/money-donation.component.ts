@@ -18,6 +18,9 @@ import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ThanksDialogComponent } from '../thanks-dialog/thanks-dialog.component';
+import { PaypalButtonComponent } from '../paypal-button/paypal-button.component';
+
+
 
 @Component({
   selector: 'app-money-donation',
@@ -27,7 +30,8 @@ import { ThanksDialogComponent } from '../thanks-dialog/thanks-dialog.component'
     ReactiveFormsModule,
     CommonModule,
     BlankNavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PaypalButtonComponent
   ],
   templateUrl: './money-donation.component.html',
   styleUrls: ['./money-donation.component.css'],
@@ -35,7 +39,7 @@ import { ThanksDialogComponent } from '../thanks-dialog/thanks-dialog.component'
 export class MoneyDonationComponent implements OnInit {
   donationForm: FormGroup;
   projectName: string | null = '';
-  paymentMethod: string = '';
+  paymentMethod: string = 'paypal';
   projectId: number = 0;
   donorId: number = 0;
   userId: string = '';
@@ -56,7 +60,7 @@ export class MoneyDonationComponent implements OnInit {
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       organization: ['', Validators.required],
-      paymentMethod: ['', Validators.required],
+      paymentMethod: ['paypal'],
       projectId: ['', Validators.required],
       donorId: ['', Validators.required],
       charityId: ['', Validators.required],
@@ -87,7 +91,6 @@ export class MoneyDonationComponent implements OnInit {
     }
     this.donationForm.controls['paymentMethod'].setValue(this.paymentMethod);
     console.log(this.paymentMethod);
-    console.log('Amount :', this.donationForm.controls['amount'].value);
     const amount = this.donationForm.controls['amount'].value;
     this.donationForm.controls['amount'].setValue(amount);
     this.projectId = this.sharedService.getProjectId() as number;
@@ -104,6 +107,11 @@ export class MoneyDonationComponent implements OnInit {
     console.log(this.donationForm);
   }
 
+  onAmountChange(event: any): void {
+    const newAmount = event.target.value;
+    localStorage.setItem('Amount', newAmount);
+    //console.log('New Amount set to:', localStorage.getItem('Amount'));
+  }
   onSubmit() {
     if (this.donationForm.valid) {
       const formData = new FormData();
