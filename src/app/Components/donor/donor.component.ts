@@ -45,7 +45,7 @@ export class DonorComponent implements OnInit {
     private sharedService: SharedService,
     private router: Router,
     private categoryService: CategoryService
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
@@ -63,20 +63,20 @@ export class DonorComponent implements OnInit {
     this._projectService.getAllProjects().subscribe({
       next: (response) => {
         this.projects = response.message;
-        this.applyFilters(); 
+        this.applyFilters();
       },
       error: (err) => {
         console.error('Error fetching projects:', err);
       }
     });
   }
-  
+
 
   applyFilters(): void {
     this.filteredProjects = this.projects.filter(project => {
       const categoryMatch = !this.selectedCategoryName || project.categoryName === this.selectedCategoryName;
       let budgetMatch = true;
-  
+
       if (this.selectedBudget === 'min') {
         budgetMatch = project.fundingGoal < 1000;
       } else if (this.selectedBudget === 'range') {
@@ -84,14 +84,14 @@ export class DonorComponent implements OnInit {
       } else if (this.selectedBudget === 'max') {
         budgetMatch = project.fundingGoal > 5000;
       }
-  
-      const searchTermMatch = !this.searchTerm || 
+
+      const searchTermMatch = !this.searchTerm ||
         project.location.toLowerCase().includes(this.searchTerm.toLowerCase());
-  
+
       return categoryMatch && budgetMatch && searchTermMatch;
     });
   }
-  
+
 
   onFiltersChange(): void {
     this.applyFilters();
@@ -187,9 +187,11 @@ export class DonorComponent implements OnInit {
   // }
 
 
+  // Assuming this method is in your Angular component
   getProgressPercentage(amountRaised: number, fundingGoal: number): number {
     return (amountRaised / fundingGoal) * 100;
   }
-  
-  
+
+
+
 }

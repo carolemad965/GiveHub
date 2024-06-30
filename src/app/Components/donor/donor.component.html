@@ -57,17 +57,25 @@
               <img class="card-img-top" [src]="getFullImageUrl(project.imgUrl)" alt="Project Image">
               <div class="card-body">
                 <h5 class="card-title">{{ project.title }}</h5>
-                
-                <!-- Progress Bar with Labels -->
+
+                <!-- Labels Above the Progress Bar -->
+                <div class="progress-labels-above d-flex justify-content-between mb-1">
+                  <span>Amount Raised</span>
+                  <span> Goal</span>
+                </div>
+
+                <!-- Progress Bar with Values Inside -->
                 <div class="progress my-2 position-relative">
-                  <div class="progress-bar custom-progress-bar" role="progressbar" [style.width.%]="getProgressPercentage(project.amountRaised, project.fundingGoal)" 
-                       [attr.aria-valuenow]="project.amountRaised" aria-valuemin="0" [attr.aria-valuemax]="project.fundingGoal"></div>
-                  <div class="progress-labels d-flex justify-content-between position-absolute w-100" style="top: 0; left: 0;">
-                    <span class="ml-2">{{ project.amountRaised }} Amount Raised</span>
-                    <span class="mr-2">{{ project.fundingGoal }} Goal</span>
+                  <span class="progress-value-left "  [style.width.%]="getProgressPercentage(project.amountRaised, project.fundingGoal)"
+                  [attr.aria-valuenow]="project.amountRaised" aria-valuemin="0"
+                  [attr.aria-valuemax]="project.fundingGoal">{{ project.amountRaised }}</span>
+                  <div class="progress-bar custom-progress-bar" [style.width.%]="getProgressPercentage(project.amountRaised, project.fundingGoal)">
                   </div>
+                  <span class="progress-value-right">{{ project.fundingGoal }}</span>
                 </div>
                 
+                
+
                 <p class="card-text"><strong>Charity Name:</strong> {{ project.charityName }}</p>
                 <p class="card-text"><strong>State:</strong> {{ getStateString(project.state) }}</p>
                 <p class="card-text"><strong>Category:</strong> {{ project.categoryName }}</p>

@@ -4,10 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DonationService } from '../../Services/donationService/donation.service';
 import { error } from 'console';
 import { CommonModule } from '@angular/common';
+import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule,ProfileComponent],
+  imports: [CommonModule,ProfileComponent,BlankNavbarComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'] 
 })
