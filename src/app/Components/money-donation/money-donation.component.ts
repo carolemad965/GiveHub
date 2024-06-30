@@ -147,29 +147,4 @@ export class MoneyDonationComponent implements OnInit {
       height: '230px'
     });
   }
-  //  => this part if we want to pass form data but in back end json return  (unsupported media type error)
-
-  // onSubmit() {
-  //   if (this.donationForm.valid) {
-  //     const formData = new FormData();
-  //     formData.append('donationDate', this.donationForm.get('donationDate')?.value);
-  //     formData.append('amount', this.donationForm.get('amount')?.value);
-  //     formData.append('paymentMethod', this.donationForm.get('paymentMethod')?.value);
-  //     formData.append('charityId', this.donationForm.get('charityId')?.value);
-  //     formData.append('projectId', this.donationForm.get('projectId')?.value);
-
-  //     console.log("Form Data:", formData);
-
-  //     this.moneyDonationService.postMoneyDonation(formData).subscribe({
-  //       next: (response) => {
-  //         console.log('Donation successful:', response.message);
-  //       },
-  //       error: (err: HttpErrorResponse) => {
-  //         if (err.status == 400) {
-  //           console.log('error iiiis',err.error);
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
 }
