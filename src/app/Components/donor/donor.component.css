@@ -140,7 +140,6 @@
 }
 
 .btn-primary {
-  background: linear-gradient(145deg, #77d986, #66c776);
   border: none;
   color: white;
   transition: background-color 0.3s, box-shadow 0.3s;
@@ -152,14 +151,13 @@
 }
 
 .btn-secondary {
-  background: linear-gradient(145deg, #666, #555);
   border: none;
   color: white;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .btn-secondary:hover {
-  background-color: #555;
+  color: white;
   box-shadow: 0 4px 8px rgba(85, 85, 85, 0.5);
 }
 
