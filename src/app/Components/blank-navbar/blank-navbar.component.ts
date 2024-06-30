@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Renderer2,AfterViewInit, ElementRef} from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DonorService } from '../../Services/donorService/donor.service';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
     selector: 'app-blank-navbar',
     templateUrl: './blank-navbar.component.html',
     styleUrl: './blank-navbar.component.css',
     standalone: true,
-    imports: [RouterLinkActive, RouterModule, CommonModule, RouterLink]
+    imports: [RouterLinkActive, RouterModule, CommonModule, RouterLink,HomeComponent]
 })
 export class BlankNavbarComponent implements OnInit {
   accountType: string | null = null;
   accountId: number | null = null;
 
 
-  constructor(private _AuthService:AuthService, private donorService:DonorService){}
+  constructor(private _AuthService:AuthService, private donorService:DonorService
+    ,private renderer: Renderer2 ,private el: ElementRef
+  ){}
 
   ngOnInit() {
     this.accountType = this._AuthService.getUserAccountType();
@@ -46,6 +49,17 @@ export class BlankNavbarComponent implements OnInit {
     this._AuthService.logOut();
   }
 
- 
+  ngAfterViewInit(): void {
+    const teamFundraisingLink = this.el.nativeElement.querySelector('#teamFundraisingLink');
+    const teamSection = document.querySelector('#our-expert-team'); // Use document instead of this.el.nativeElement
+
+    if (teamFundraisingLink && teamSection) {
+      this.renderer.listen(teamFundraisingLink, 'click', () => {
+        teamSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    } else {
+      console.error('Required elements not found');
+    }
+  }
 }
 

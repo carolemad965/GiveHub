@@ -173,12 +173,12 @@ body {
 }
 
 /* Team Section */
-#team {
+#our-expert-team {
   padding: 50px 0;
   background-color: #fff;
 }
 
-#team .section-title h2 {
+#our-expert-team .section-title h2 {
   font-size: 2rem;
   font-weight: bold;
   color: #333;
@@ -189,12 +189,12 @@ body {
   margin-bottom: 20px;
 }
 
-#team .section-title p {
+#our-expert-team .section-title p {
   font-size: 0.9rem;
   color: #666;
 }
 
-#team .member {
+#our-expert-team .member {
   position: relative;
   overflow: hidden;
   border-radius: 15px;
@@ -202,13 +202,13 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-#team .member img {
+#our-expert-team .member img {
   width: 100%;
   height: auto;
   transition: transform 0.4s ease;
 }
 
-#team .member-info {
+#our-expert-team .member-info {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -220,27 +220,27 @@ body {
   transition: opacity 0.3s ease-in-out;
 }
 
-#team .member-info-content h4 {
+#our-expert-team .member-info-content h4 {
   font-size: 18px;
   font-weight: bold;
   color: #fff;
   margin-bottom: 5px;
 }
 
-#team .member-info-content span {
+#our-expert-team .member-info-content span {
   font-size: 14px;
   color: #ccc;
 }
 
-#team .member:hover {
+#our-expert-team .member:hover {
   transform: scale(1.05);
 }
 
-#team .member:hover img {
+#our-expert-team .member:hover img {
   transform: scale(1.1);
 }
 
-#team .member:hover .member-info {
+#our-expert-team .member:hover .member-info {
   opacity: 1;
 }
 
