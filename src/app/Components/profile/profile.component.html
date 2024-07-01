@@ -159,7 +159,7 @@
                             <tr *ngFor="let donation of inkindDonation">
                                 <td><img [src]="getFullImageUrl(donation.projectImage)" alt="Project Image"></td>
                                 <td>{{ donation.projectName }}</td>
-                                <td>{{ donation.donationDate }}</td>
+                                <td>{{ donation.donationDate | date:'longDate' }}</td>
                                 <td>{{ donation.charityName }}</td>
                                 <td>{{ donation.quantity }}</td>
                             </tr>
