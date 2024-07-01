@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ThanksDialogComponent } from '../../thanks-dialog/thanks-dialog.component';
 import { Router } from '@angular/router';
+import { InkindThanksDialogComponent } from '../../inkind-thanks-dialog/inkind-thanks-dialog.component';
 
 @Component({
   selector: 'app-inkind-donation',
@@ -143,7 +144,7 @@ export class InkindDonationComponent {
 
 
   openThanksDialog(): void {
-    this.dialog.open(ThanksDialogComponent, {
+    this.dialog.open(InkindThanksDialogComponent, {
       width: '400px',
       height: '230px'
     });
