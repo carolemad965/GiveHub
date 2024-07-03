@@ -35,15 +35,20 @@ enum ProjectState {
 export class DonorComponent implements OnInit {
   projects: any[] = [];
   categories: any[] = [];
+  filteredProjects: any[] = [];
   selectedCategoryName: string = '';
   searchTerm: string = '';
+  selectedBudget: string = '';
+  currentPage: number = 1;
+  PagesAvailable: boolean = true;
 
   constructor(
     private _projectService: ProjectService,
     private sharedService: SharedService,
     private router: Router,
     private categoryService: CategoryService
-  ) {}
+  ) { }
+
 
   ngOnInit(): void {
     this.getProjects();
@@ -58,25 +63,55 @@ export class DonorComponent implements OnInit {
   }
 
   getProjects(): void {
-    if (this.selectedCategoryName) {
-      this._projectService.getProjectsByCategory(this.selectedCategoryName).subscribe({
-        next: (response) => {
+    this._projectService.getProjectsByPage(this.currentPage).subscribe({
+      next: (response) => {
+        console.log(response);
+        if (response.message.length > 0) {
           this.projects = response.message;
-        },
-        error: (err) => {
-          console.error('Error fetching projects:', err);
+          this.filteredProjects = this.projects;
+          this.PagesAvailable = response.message.length === 6; // Adjust based on actual page size logic
+        } else {
+          this.PagesAvailable = false;
         }
-      });
-    } else {
-      this._projectService.getAllProjects().subscribe({
-        next: (response) => {
-          this.projects = response.message;
-        },
-        error: (err) => {
-          console.error('Error fetching projects:', err);
-        }
-      });
+        this.applyFilters();
+      },
+      error: (err) => {
+        console.error('Error fetching projects:', err);
+      }
+    });
+  }
+
+  onPageChange(page: number): void {
+    if (page > 0 ) {
+      this.currentPage = page;
+      this.getProjects();
     }
+  }
+
+  applyFilters(): void {
+    this.filteredProjects = this.projects.filter(project => {
+      const categoryMatch = !this.selectedCategoryName || project.categoryName === this.selectedCategoryName;
+      let budgetMatch = true;
+
+      if (this.selectedBudget === 'min') {
+        budgetMatch = project.fundingGoal < 1000;
+      } else if (this.selectedBudget === 'range') {
+        budgetMatch = project.fundingGoal >= 1000 && project.fundingGoal <= 5000;
+      } else if (this.selectedBudget === 'max') {
+        budgetMatch = project.fundingGoal > 5000;
+      }
+
+      const searchTermMatch = !this.searchTerm ||
+        project.location.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+      return categoryMatch && budgetMatch && searchTermMatch;
+    });
+  }
+
+
+
+  onFiltersChange(): void {
+    this.applyFilters();
   }
 
   getFullImageUrl(relativePath: string): string {
@@ -119,49 +154,64 @@ export class DonorComponent implements OnInit {
     this.router.navigate(['/inkindDonation']);
   }
 
-  getProjectsbyminfundinggoal(){
-    this._projectService.getProjectsbyminfundinggoal().subscribe({
-      next:(response)=>{
-        this.projects = response.message;
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    })
+  onSearchTermChange(): void {
+    this.getProjects();
+  }
+  // getProjectsbyminfundinggoal(){
+  //   this._projectService.getProjectsbyminfundinggoal().subscribe({
+  //     next:(response)=>{
+  //       this.projects = response.message;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   })
+  // }
+
+  // getProjectsbyfundinggoalrange(){
+  //   this._projectService.getProjectsbyfundinggoalrange().subscribe({
+  //     next:(response)=>{
+  //       this.projects = response.message;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   })
+  // }
+
+
+  // getProjectbymaxfundinggoal(){
+  //   this._projectService.getProjectbymaxfundinggoal().subscribe({
+  //     next:(response)=>{
+  //       this.projects = response.message;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   })
+  // }
+
+
+  // onFundingGoalChange(event: any) {
+  //   const selectedValue = event.target.value;
+  //   if (selectedValue === 'min') {
+  //     this.getProjectsbyminfundinggoal();
+  //   } else if (selectedValue === 'range') {
+  //     this.getProjectsbyfundinggoalrange();
+  //   } else if (selectedValue === 'max') {
+  //     this.getProjectbymaxfundinggoal();
+  //   } else if(selectedValue == 'all'){
+  //     this.getProjects();
+  //   }
+
+  // }
+
+
+  // Assuming this method is in your Angular component
+  getProgressPercentage(amountRaised: number, fundingGoal: number): number {
+    return (amountRaised / fundingGoal) * 100;
   }
 
-  getProjectsbyfundinggoalrange(){
-    this._projectService.getProjectsbyfundinggoalrange().subscribe({
-      next:(response)=>{
-        this.projects = response.message;
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    })
-  }
 
 
-  getProjectbymaxfundinggoal(){
-    this._projectService.getProjectbymaxfundinggoal().subscribe({
-      next:(response)=>{
-        this.projects = response.message;
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    })
-  }
-
-
-  onFundingGoalChange(event: any) {
-    const selectedValue = event.target.value;
-    if (selectedValue === 'min') {
-      this.getProjectsbyminfundinggoal();
-    } else if (selectedValue === 'range') {
-      this.getProjectsbyfundinggoalrange();
-    } else if (selectedValue === 'max') {
-      this.getProjectbymaxfundinggoal();
-    }
-  }
 }

@@ -16,6 +16,11 @@ import { SharedService } from '../../Services/sharedService/shared.service';
 import { DonorService } from '../../Services/donorService/donor.service';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ThanksDialogComponent } from '../thanks-dialog/thanks-dialog.component';
+import { PaypalButtonComponent } from '../paypal-button/paypal-button.component';
+
+
 
 @Component({
   selector: 'app-money-donation',
@@ -25,7 +30,8 @@ import { FooterComponent } from '../footer/footer.component';
     ReactiveFormsModule,
     CommonModule,
     BlankNavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PaypalButtonComponent
   ],
   templateUrl: './money-donation.component.html',
   styleUrls: ['./money-donation.component.css'],
@@ -33,7 +39,7 @@ import { FooterComponent } from '../footer/footer.component';
 export class MoneyDonationComponent implements OnInit {
   donationForm: FormGroup;
   projectName: string | null = '';
-  paymentMethod: string = '';
+  paymentMethod: string = 'paypal';
   projectId: number = 0;
   donorId: number = 0;
   userId: string = '';
@@ -46,14 +52,15 @@ export class MoneyDonationComponent implements OnInit {
     private moneyDonationService: MoneyDonationService,
     private sharedService: SharedService,
     private fb: FormBuilder,
-    private _Router: Router
+    private _Router: Router,
+    public dialog: MatDialog
   ) {
     this.donationForm = this.fb.group({
       amount: ['', [Validators.required, Validators.min(0)]],
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       organization: ['', Validators.required],
-      paymentMethod: ['', Validators.required],
+      paymentMethod: ['paypal'],
       projectId: ['', Validators.required],
       donorId: ['', Validators.required],
       charityId: ['', Validators.required],
@@ -84,7 +91,6 @@ export class MoneyDonationComponent implements OnInit {
     }
     this.donationForm.controls['paymentMethod'].setValue(this.paymentMethod);
     console.log(this.paymentMethod);
-    console.log('Amount :', this.donationForm.controls['amount'].value);
     const amount = this.donationForm.controls['amount'].value;
     this.donationForm.controls['amount'].setValue(amount);
     this.projectId = this.sharedService.getProjectId() as number;
@@ -101,6 +107,11 @@ export class MoneyDonationComponent implements OnInit {
     console.log(this.donationForm);
   }
 
+  onAmountChange(event: any): void {
+    const newAmount = event.target.value;
+    localStorage.setItem('Amount', newAmount);
+    //console.log('New Amount set to:', localStorage.getItem('Amount'));
+  }
   onSubmit() {
     if (this.donationForm.valid) {
       const formData = new FormData();
@@ -126,7 +137,8 @@ export class MoneyDonationComponent implements OnInit {
         next: (response) => {
           console.log('Done', response.message);
           console.log('donation data is ', formData);
-          alert('Donation Done successfully Thank You');
+          this.openThanksDialog();
+         // alert('Donation Done successfully Thank You');
           this._Router.navigate(['donor']);
         },
         error: (err) => {
@@ -136,29 +148,11 @@ export class MoneyDonationComponent implements OnInit {
     }
   }
 
-  //  => this part if we want to pass form data but in back end json return  (unsupported media type error)
 
-  // onSubmit() {
-  //   if (this.donationForm.valid) {
-  //     const formData = new FormData();
-  //     formData.append('donationDate', this.donationForm.get('donationDate')?.value);
-  //     formData.append('amount', this.donationForm.get('amount')?.value);
-  //     formData.append('paymentMethod', this.donationForm.get('paymentMethod')?.value);
-  //     formData.append('charityId', this.donationForm.get('charityId')?.value);
-  //     formData.append('projectId', this.donationForm.get('projectId')?.value);
-
-  //     console.log("Form Data:", formData);
-
-  //     this.moneyDonationService.postMoneyDonation(formData).subscribe({
-  //       next: (response) => {
-  //         console.log('Donation successful:', response.message);
-  //       },
-  //       error: (err: HttpErrorResponse) => {
-  //         if (err.status == 400) {
-  //           console.log('error iiiis',err.error);
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
+  openThanksDialog(): void {
+    this.dialog.open(ThanksDialogComponent, {
+      width: '400px',
+      height: '230px'
+    });
+  }
 }

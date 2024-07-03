@@ -3,18 +3,19 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { DonorService } from '../Services/donorService/donor.service';
 import { CommonModule } from '@angular/common';
+import { BlankNavbarComponent } from '../Components/blank-navbar/blank-navbar.component';
 
 @Component({
   selector: 'app-donor-account',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,BlankNavbarComponent],
   templateUrl: './donor-account.component.html',
   styleUrls: ['./donor-account.component.css']
 })
 export class DonorAccountComponent {
   selectedFile: File | null = null;
   donorData = {
-    name: '',
+    name: localStorage.getItem('donorName') ?? '',
     imgUrl: '',
   };
   isLoading = false;
@@ -25,7 +26,7 @@ export class DonorAccountComponent {
     imgUrl: new FormControl('', [Validators.required]),
   });
 
-  constructor(private _Router: Router, private donorService: DonorService) {}
+  constructor(private _Router: Router, private donorService: DonorService)  {}
  
   onFileChange(event: any): void {
     if (event.target.files.length > 0) {

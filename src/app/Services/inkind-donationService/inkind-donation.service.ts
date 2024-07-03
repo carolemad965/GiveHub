@@ -16,5 +16,11 @@ export class InkindDonationService {
 
   }
 
+  getIKindDonationWithCharityId(id:number)
+  {
+    
+      return this._httpClient.get<number>(`https://localhost:44377/api/InKindDonation/charity/${id}`);
+    
+  }
  
 }

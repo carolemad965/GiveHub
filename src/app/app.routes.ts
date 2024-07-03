@@ -20,16 +20,14 @@ import { HomecharityComponent } from './Components/homecharity/homecharity.compo
 import { LogincharityComponent } from './Components/logincharity/logincharity.component';
 
 import { CharityDetailsComponent } from './Components/charity-details/charity-details.component';
-
 import { CharityAccountComponent } from './Components/charity-account/charity-account.component';
-
-
-import { DonorProfileComponent } from './Components/donor-profile/donor-profile.component';
 import { authGuard } from './Guards/auth.guard';
 
 import { DonorAccountComponent } from './donor-account/donor-account.component';
 import { MoneyDonationComponent } from './Components/money-donation/money-donation.component';
 import { InkindDonationComponent } from './Components/inkind-donation/inkind-donation/inkind-donation.component';
+import { ProfileComponent } from './Components/profile/profile.component';
+import { ReportComponent } from './Components/report/report.component';
 
 
 export const routes: Routes = [
@@ -49,10 +47,11 @@ export const routes: Routes = [
       { path: 'charities', component: CharitiesComponent, canActivate: [authGuard] },
       { path: 'charityAccount', component: CharityAccountComponent },
       { path: 'charity-details/:id', component: CharityDetailsComponent },
-      { path: 'profile/:id', component: DonorProfileComponent }
-      ,{path:'donoraccount',component:DonorAccountComponent},
+      {path:'donoraccount',component:DonorAccountComponent},
       {path :'moneyDonation',component:MoneyDonationComponent},
-      {path:'inkindDonation',component:InkindDonationComponent}
+      {path:'inkindDonation',component:InkindDonationComponent},
+      {path:"donorprofile/:id",component:ProfileComponent},
+      {path:'report/:id',component:ReportComponent}
     ]
   },
   {

@@ -29,57 +29,14 @@
         name="amount"
         placeholder="USD"
         formControlName="amount"
-
+        (change)="onAmountChange($event)"
       />
     </div>
     <div class="section">
       <label for="payment-method">Payment Method</label>
       <div class="row payment-method">
-        <div class="column">
-          <input
-            type="radio"
-            id="visa"
-            formControlName="paymentMethod"
-            name="paymentMethod"
-            value="visa"
-            [(ngModel)]="paymentMethod"
-          />
-          <label for="visa"
-            ><img src="assets/Images/visa.jpg" alt="Visa" class="payment-img"
-          /></label>
-        </div>
-        <div class="column">
-          <input
-            type="radio"
-            id="mastercard"
-            formControlName="paymentMethod"
-            name="paymentMethod"
-            value="mastercard"
-            [(ngModel)]="paymentMethod"
-          />
-          <label for="mastercard"
-            ><img
-              src="assets/Images/MasterCard_Logo.svg.png"
-              alt="MasterCard"
-              class="payment-img"
-          /></label>
-        </div>
-        <div class="column">
-          <input
-            type="radio"
-            id="paypal"
-            formControlName="paymentMethod"
-            name="paymentMethod"
-            value="paypal"
-            [(ngModel)]="paymentMethod"
-          />
-          <label for="paypal"
-            ><img
-              src="assets/Images/paypal.png"
-              alt="PayPal"
-              class="payment-img"
-          /></label>
-        </div>
+       <!-- <app-paypal-button [amount]="donationForm.controls['Amount'].value"></app-paypal-button> -->
+       <app-paypal-button></app-paypal-button> 
       </div>
       <div
         *ngIf="

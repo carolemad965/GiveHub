@@ -53,11 +53,11 @@
                         <input type="hidden" formControlName="accountType" id="accountType" class="form-control"
                             [(ngModel)]="userData.accountType">
                     </div>
+                    <p class="text-danger" *ngIf="msgError">{{msgError}}</p>
                     <button class="active-link btn btn-primary w-100 text-light mt-5 mb-5">
                         <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
                         Register
                     </button>
-                    <p class="text-danger" *ngIf="msgError">{{msgError}}</p>
                 </form>
 
                 <div class="mt-3">

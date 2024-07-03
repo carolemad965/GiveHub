@@ -4,11 +4,12 @@ import { CharityService } from '../../Services/charityService/charity.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CommonModule } from '@angular/common';
+import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 
 @Component({
   selector: 'app-charity-account',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,BlankNavbarComponent],
   templateUrl: './charity-account.component.html',
   styleUrls: ['./charity-account.component.css']  // Changed to styleUrls
 })
@@ -62,7 +63,7 @@ export class CharityAccountComponent {
   onSubmit(): void {
     if (this.charityForm.valid && this.selectedFile) {
       const charityName = this.charityForm.get('name')?.value;
-  
+  console.log(charityName);
       // Subscribe to the getAccountID method
       this._CharityService.getAccountID(charityName).subscribe(
         (accountId: any) => {
