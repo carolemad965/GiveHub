@@ -231,7 +231,6 @@ body {
   font-size: 14px;
   color: #ccc;
 }
-
 #our-expert-team .member:hover {
   transform: scale(1.05);
 }
@@ -338,3 +337,4 @@ body {
   background-color: #66c774;
   transform: translateY(-3px);
 }
+
