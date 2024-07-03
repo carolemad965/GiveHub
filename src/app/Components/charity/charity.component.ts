@@ -26,41 +26,52 @@ export class CharityComponent {
 
   ngOnInit(): void {
     this._route.paramMap.subscribe(params => {
-      this.charityId = Number(params.get('id')); 
-      if (this.charityId !== null) {
-        this.getProjects(this.currentPage);
+      this.charityId = Number(params.get('id'));
+      console.log('charity id ==> ',this.charityId) 
+     
+        
+       this._projectService.getAllprojectForCharityId(this.charityId).subscribe({
+        next:(res)=>{
+          console.log('respossss =>',res);
+          this.projects = res.message
+        },
+        error:(err) => {
+              console.error('Error fetching projects:', err);
+               }
+       })
     
-      }
+      
     });
     
   }
   getFullImageUrl(relativePath: string): string {
     return `https://localhost:44377${relativePath}`;
   }
-  getProjects(page: number): void {
-    this._projectService.getProjectsByPage(page).subscribe({
-      next: (response) => {
-        console.log(response);
-        if (response.message.length > 0) {
-          this.projects = response.message;
+  
+  // getProjects(page: number): void {
+  //   this._projectService.getProjectsByPage(page).subscribe({
+  //     next: (response) => {
+  //       console.log(response);
+  //       if (response.message.length > 0) {
+  //         this.projects = response.message;
         
-          this.PagesAvailable = response.message.length === 6; 
-        } else {
-          this.PagesAvailable = false;
-        }
-      },
-      error: (err) => {
-        console.error('Error fetching projects:', err);
-      }
-    });
-  }
+  //         this.PagesAvailable = response.message.length === 6; 
+  //       } else {
+  //         this.PagesAvailable = false;
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching projects:', err);
+  //     }
+  //   });
+  // }
 
-  onPageChange(page: number): void {
-    if (page > 0) {
-      this.currentPage = page;
-      this.getProjects(page);
-    }
-  }
+  // onPageChange(page: number): void {
+  //   if (page > 0) {
+  //     this.currentPage = page;
+  //     this.getProjects(page);
+  //   }
+  // }
   getStatusString(state: ProjectState): string {
     switch (state) {
       case ProjectState.Initiated:

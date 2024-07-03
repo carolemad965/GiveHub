@@ -27,6 +27,7 @@ import { DonorAccountComponent } from './donor-account/donor-account.component';
 import { MoneyDonationComponent } from './Components/money-donation/money-donation.component';
 import { InkindDonationComponent } from './Components/inkind-donation/inkind-donation/inkind-donation.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { ReportComponent } from './Components/report/report.component';
 
 
 export const routes: Routes = [
@@ -45,11 +46,12 @@ export const routes: Routes = [
       { path: 'project', component: ProjectComponent, canActivate: [authGuard] },
       { path: 'charities', component: CharitiesComponent, canActivate: [authGuard] },
       { path: 'charityAccount', component: CharityAccountComponent },
-      { path: 'charity-details/:id', component: CharityDetailsComponent }
-      ,{path:'donoraccount',component:DonorAccountComponent},
+      { path: 'charity-details/:id', component: CharityDetailsComponent },
+      {path:'donoraccount',component:DonorAccountComponent},
       {path :'moneyDonation',component:MoneyDonationComponent},
-      {path:'inkindDonation',component:InkindDonationComponent}
-      ,{path:"donorprofile/:id",component:ProfileComponent}
+      {path:'inkindDonation',component:InkindDonationComponent},
+      {path:"donorprofile/:id",component:ProfileComponent},
+      {path:'report/:id',component:ReportComponent}
     ]
   },
   {
