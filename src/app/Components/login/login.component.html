@@ -15,9 +15,7 @@
         <div class="form-floating mb-2 mt-2">
           <input type="password" formControlName="password" id="password" class="form-control styled-input" placeholder="" (blur)="onBlur('password')">
           <label for="password">Password</label>
-          <div class="alert alert-danger" *ngIf="passwordTouched && logInForm.get('password')?.errors">
-            <p *ngIf="logInForm.get('password')?.getError('required')">Password is required</p>
-          </div>
+          
         </div>
         <button [disabled]="logInForm.invalid" class="active-link custom-button">
           <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
