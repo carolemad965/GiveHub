@@ -9,6 +9,14 @@ import { InkindDonationService } from '../../Services/inkind-donationService/ink
 import { MoneyDonationService } from '../../Services/moneyDonationSevice/money-donation.service';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
 
+enum ProjectState {
+  Initiated,
+  Completed,
+  InProgress,
+
+  Canceled
+}
+
 @Component({
   selector: 'app-report',
   standalone: true,
@@ -16,6 +24,7 @@ import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
+
 export class ReportComponent {
   charityId: number | null = null;
   charity: any = null;
@@ -54,6 +63,9 @@ export class ReportComponent {
 
 
 
+
+
+
   fundingVsAmountRaisedChart = new Chart({
     chart: {
       type: 'column'
@@ -85,31 +97,60 @@ export class ReportComponent {
 
   kindDonationChart = new Chart({
     chart: {
-      type: 'pie'
+      type: 'line'
     },
     title: {
-      text: 'Kind Donations'
+      text: 'In-Kind Donations'
+    },
+    xAxis: {
+      categories: [],
+      crosshair: true
+    },
+    tooltip: {
+      shared: true
     },
     series: [{
-      type: 'pie',
-      name: 'Kind Donations',
+      type: 'line',
+      name: 'In-Kind Donations',
       data: []
     }]
   });
 
   moneyDonationChart = new Chart({
     chart: {
-      type: 'pie'
+      type: 'line'
     },
     title: {
       text: 'Money Donations'
     },
+    xAxis: {
+      categories: [],
+      crosshair: true
+    },
+    tooltip: {
+      shared: true
+    },
     series: [{
-      type: 'pie',
+      type: 'line',
       name: 'Money Donations',
       data: []
     }]
   });
+
+  projectStatePieChart = new Chart({
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: 'Projects by State'
+    },
+    series: [{
+      type: 'pie',
+      name: 'Projects by State',
+      data: []
+    }]
+  });
+
 
   constructor(
     private charityService: CharityService,
@@ -138,6 +179,7 @@ export class ReportComponent {
       this.projectService.getAllprojectForCharityId(this.charityId).subscribe({
         next: (res: any) => {
           this.projects = res.message;
+          console.log('project res info ==>', this.projects);
           this.numberOfProjects = res.message.length;
           console.log('number of projects is ==>', this.numberOfProjects);
 
@@ -145,6 +187,8 @@ export class ReportComponent {
           this.updateFundingVsAmountRaisedChart();
           this.updateKindDonationChart();
           this.updateMoneyDonationChart();
+          this.updateProjectStatePieChart();
+
         },
         error: (err) => {
           console.error('Error fetching projects:', err);
@@ -202,7 +246,6 @@ export class ReportComponent {
     });
   }
 
-
   updateFundingVsAmountRaisedChart() {
     const projectTitles = this.projects.map(project => project.title);
     const fundingGoals = this.projects.map(project => project.fundingGoal);
@@ -239,51 +282,60 @@ export class ReportComponent {
       }]
     });
   }
-
   updateKindDonationChart() {
     if (this.charityId !== null) {
       this.inkindDonationService.getIKindDonationWithCharityId(this.charityId).subscribe({
         next: (res: any) => {
           const inkindDonations = res.message;
 
-
-          const donationData = inkindDonations.map((donation: any) => ({
+          const inkindDonationData = inkindDonations.map((donation: any) => ({
             name: donation.projectName,
-            value: donation.quantity,
-            description: donation.itemDescription
+            y: donation.quantity,
+            description: donation.itemDescription,
+            donorName: donation.donorName
           }));
 
-          console.log('inkinddonation', inkindDonations);
+         
+          const categories = inkindDonationData.map((d: any) => d.name);
 
           this.kindDonationChart = new Chart({
             chart: {
-              type: 'pie'
+              type: 'line'
             },
             title: {
               text: 'In-Kind Donations Distribution'
             },
+            xAxis: {
+              categories: categories,
+              crosshair: true
+            },
             tooltip: {
-              pointFormat: '{series.name}: <b>{point.name}</b><br>Quantity: <b>{point.y}</b><br>Description: <b>{point.description}</b>'
+              shared: true,
+              pointFormat: 'Donor: {point.donorName}' 
+                 
             },
             plotOptions: {
-              pie: {
+              line: {
                 dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b><br>Quantity: {point.y}<br>Description: {point.description}'
-                }
+                  //formatter: function () {
+                   // const point = this.point as any; 
+                   // return `<b>Amout: ${this.y}</b><br>Donor: ${point.donorName}`;
+                  //}
+
+                },
+                enableMouseTracking: true
               }
             },
             series: [{
-              type: 'pie',
-              name: 'Donations',
-              data: donationData.map((data: any, index: number) => ({
-                name: data.name,
-                y: data.value,
-                description: data.description,
-                color: index % 2 === 0 ? '#50B848' : '#008000'
-              }))
+              type: 'line',
+              name: 'In-Kind Donations',
+              data: inkindDonationData.map((d: any) => ({
+                y: d.y,
+                donorName: d.donorName
+              })),
+              color: '#50B848'
             }]
-
           });
         },
         error: (err) => {
@@ -300,42 +352,47 @@ export class ReportComponent {
         next: (res: any) => {
           const moneyDonations = res.message;
 
-
-          const donationData = moneyDonations.map((donation: any) => ({
+          const moneyDonationData = moneyDonations.map((donation: any) => ({
             name: donation.projectName,
-            y: donation.amount
+            y: donation.amount,
+            donorName: donation.donorName
           }));
 
-          console.log('moneyDonations', moneyDonations);
+          const categories = moneyDonationData.map((d: any) => d.name);
 
           this.moneyDonationChart = new Chart({
             chart: {
-              type: 'pie'
+              type: 'line'
             },
             title: {
               text: 'Money Donations Distribution'
             },
+            xAxis: {
+              categories: categories,
+              crosshair: true
+            },
             tooltip: {
-              pointFormat: '{series.name}: <b>{point.name}</b><br>Amount: <b>{point.y}</b>'
+              shared: true,
+              pointFormat: 'Donor: {point.donorName}' 
             },
             plotOptions: {
-              pie: {
+              line: {
                 dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b>: {point.y}'
-                }
+                 
+                },
+                enableMouseTracking: true
               }
             },
             series: [{
-              type: 'pie',
-              name: 'Donations',
-              data: donationData.map((data: any, index: number) => ({
-                name: data.name,
-                y: data.y,
-                color: index % 2 === 0 ? '#50B848' : '#008000'
-              }))
+              type: 'line',
+              name: 'Money Donations',
+              data: moneyDonationData.map((d: any) => ({
+                y: d.y,
+                donorName: d.donorName
+              })),
+              color: '#008000'
             }]
-
           });
         },
         error: (err) => {
@@ -345,7 +402,58 @@ export class ReportComponent {
     }
   }
 
+  updateProjectStatePieChart() {
+    if (this.projects.length === 0) {
+      return;
+    }
 
+    const stateCounts: any = {
+      [ProjectState.Initiated]: 0,
+      [ProjectState.Completed]: 0,
+      [ProjectState.InProgress]: 0,
+
+      [ProjectState.Canceled]: 0
+    };
+
+    this.projects.forEach(project => {
+      stateCounts[project.state]++;
+    });
+
+    const stateData = Object.keys(stateCounts).map((stateKey: string) => ({
+      name: ProjectState[stateKey as keyof typeof ProjectState],
+      y: stateCounts[stateKey]
+    }));
+
+
+    this.getProjectStatePieChart(stateData);
+  }
+
+  getProjectStatePieChart(data: any[]) {
+    const shadesOfGreen = ['#90ee90', '#03c03c', '#006400', '#177245']; 
+  
+    this.projectStatePieChart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Total Projects by Project State'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}</b>'
+      },
+      plotOptions: {
+        pie: {
+          colors: shadesOfGreen 
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Number of Projects',
+        data: data,
+      }]
+    });
+  }
+  
   printReport() {
     window.print();
   }
