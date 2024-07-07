@@ -31,7 +31,7 @@ import { ReportComponent } from './Components/report/report.component';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'homeauth', pathMatch: 'full' },
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   {
     path: '', component: AuthLayoutComponent, children: [
       { path: 'homeauth', component: HomeAuthComponent },

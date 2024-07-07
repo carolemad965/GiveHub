@@ -5,6 +5,7 @@ import { DonationService } from '../../Services/donationService/donation.service
 import { error } from 'console';
 import { CommonModule } from '@angular/common';
 import { BlankNavbarComponent } from '../blank-navbar/blank-navbar.component';
+import { AwardedBadgeService } from '../../Services/awardedBadgeService/awarded-badge.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -16,10 +17,11 @@ export class ProfileComponent {
 
   donor:any=null;
   donorName:string=""
-
+badges:any=[];
+donorid:number=0;
   moneyDonation:any=null;
   inkindDonation:any=null;
-  constructor(private donorService:DonorService,private route:ActivatedRoute,private DonationService:DonationService)
+  constructor(private donorService:DonorService,private route:ActivatedRoute,private DonationService:DonationService,private awardBadgeService:AwardedBadgeService)
   {
 
   }
@@ -33,16 +35,20 @@ export class ProfileComponent {
 
       this.donorService.getdonorByID(id).subscribe(
         (res: any) => {
-          this.donor = res.message; // Assuming res is of type Donor
+          this.donor = res.message; 
          this.donorName=res.message.name;
-          console.log(res);
+         this.donorid=res.message.donorId;
+         console.log("donor id is",this.donor.id)
+         // console.log(res);
         },
         (error) => {
           console.error('Error fetching donor:', error);
-          // Handle the error gracefully (e.g., display an error message)
+      
         }
       );
 
+
+ 
 
       
     this.DonationService.getmoneyDonationByDonorID(id).subscribe(
@@ -73,9 +79,17 @@ export class ProfileComponent {
       
       
           );
+          
+    this.awardBadgeService.getBadgesByUserID(id).subscribe(
+
+      (res:any)=>{
+        this.badges=res.message
+        console.log("the badges are",this.badges);
+      }
+    )
+  
 
     });
-
 
 
 
