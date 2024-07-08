@@ -1,42 +1,3 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #eeeeee;">
-    <img src="./assets/Images/GiveHub_BigLogo.png" width="100" height="50">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" routerLink="home" routerLinkActive="active-link">Home</a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <ul class="navbar-nav mr-auto">
-            <li class="cursor">
-                <a class="nav-link"><i class="fab fa-instagram"></i> </a>
-            </li>
-            <li class="cursor">
-                <a class="nav-link"><i class="fab fa-facebook"></i> </a>
-            </li>
-            <li class="cursor">
-                <a class="nav-link"><i class="fab fa-twitter"></i> </a>
-            </li>
-            <li class="cursor">
-                <a class="nav-link"><i class="fab fa-linkedin-in"></i> </a>
-            </li>
-            <li class="cursor">
-                <a class="nav-link"><i class="fab fa-youtube"></i> </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link cursor" routerLinkActive="active-link" (click)="logOutUser()">Logout</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
- -->
 
 
 <nav class="navbar navbar-expand-lg fixed-top  p-3">
@@ -73,20 +34,9 @@
                                         [routerLink]="['/donor']">Donation Pages</a>
                                     <a class="dropdown-item dropdown-item-custom" *ngIf="accountType === 'donor' "
                                         [routerLink]="['/charities']">Charities</a>
-                                    <a class="dropdown-item dropdown-item-custom" href="#">Recurring Donations</a>
-
+                                  
                                 </div>
-                                <div class="col-md dropdown-column">
-                                    <h6 class="dropdown-header-custom">Solutions</h6>
-                                    <a class="dropdown-item dropdown-item-custom" href="#">Integrations</a>
-                                    <a class="dropdown-item dropdown-item-custom" href="#">Donor Insights & Donation
-                                        Data</a>
-                                    <!-- Navigation link in your template -->
-                                    <a id="teamFundraisingLink" class="nav-link dropdown-item-custom">Team
-                                        Fundraising</a>
-
-
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ a.nav-link
 .dropdown-item-custom {
     position: relative;
     display: block;
-    width: 100%;
+    width: 50%;
     padding: 0.25rem 1rem;
     clear: both;
     font-weight: 400;
