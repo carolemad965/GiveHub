@@ -23,6 +23,7 @@ export class RegisterComponent {
         email: '',
         accountType: 'donor'
     };
+    isArabic=true;
     msgError: string | null = null;
     isLoading: boolean = false;
 
