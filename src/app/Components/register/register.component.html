@@ -11,7 +11,7 @@
                             placeholder=" " [(ngModel)]="userData.userName" #InputName>
                         <label for="userName">User Name</label>
                         <div class="text-danger "
-                            *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)">
+                            *ngIf="registerForm.get('userName')?.errors && (registerForm.get('userName')?.touched || InputName.value.length > 0)"[attr.dir]="isArabic ? 'rtl' : 'ltr'">
                             <p *ngIf="registerForm.get('userName')?.getError('required')">Name is required</p>
                             <p *ngIf="registerForm.get('userName')?.getError('minlength')">Name Min length is 3</p>
                             <p *ngIf="registerForm.get('userName')?.getError('maxlength')">Name Max length is 20</p>

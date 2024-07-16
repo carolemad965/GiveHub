@@ -12,7 +12,7 @@ export class DonorService {
 getAccountID(name:string)
 {
   let id=this._httpclient.get<string>(`https://localhost:44377/api/Donor/getAccountID/${name}`);
-   console.log("the id is ",id)
+  
     return id;
 
 }
